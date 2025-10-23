@@ -1,0 +1,3 @@
+C:/Users/1663m/OneDrive - ISEC/Ambiente de Trabalho/fac/2º A/1ºS/POO/TP/2526_POO_TP/cmake-build-debug/CMakeFiles/2526_POO_TP.dir
+C:/Users/1663m/OneDrive - ISEC/Ambiente de Trabalho/fac/2º A/1ºS/POO/TP/2526_POO_TP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/1663m/OneDrive - ISEC/Ambiente de Trabalho/fac/2º A/1ºS/POO/TP/2526_POO_TP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
