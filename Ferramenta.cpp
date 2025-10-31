@@ -6,6 +6,7 @@
 
 Ferramenta::Ferramenta(const string &nome, int id) : nomeFerr(nome), id_ferramenta(id) {}
 
+
 Regador::Regador(const string &nomeFerr, int id_ferramenta, int qtd_agua) : Ferramenta(nomeFerr, id_ferramenta)
 {
 	capacidade = qtd_agua;
@@ -20,4 +21,10 @@ void Regador::usar()
 	capacidade = capacidade - dose;
 	if (capacidade <= 0)
 		Regador::~Regador();
+}
+
+
+Adubo::~Adubo() : Ferramenta(nomeFerr, id_ferramenta)
+{
+	capacidade = capacidade;
 }

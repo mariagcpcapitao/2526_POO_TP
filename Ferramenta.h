@@ -34,6 +34,16 @@ private:
 	int dose = Settings::Regador::dose;
 };
 
-class
+class Adubo : public Ferramenta
+{
+public:
+	Adubo(const string &nomeFerr, int id_ferramenta, int capacidade);
+	virtual void usar() override;
+
+	~Adubo() override;
+private:
+	int capacidade = Settings::Adubo::capacidade;
+	int dose = Settings::Adubo::dose;
+};
 
 #endif //FERRAMENTAS_H
