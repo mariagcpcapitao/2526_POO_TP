@@ -31,6 +31,9 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
     if (cmd == "compra") return validarCompra(palavras);
     if (cmd == "lplantas") return listarPlantas(palavras);
     if (cmd == "lferr") return listarFerramentas(palavras);
+    if (cmd == "pega") return validarPega(palavras);
+    if (cmd == "larga") return validarLarga(palavras);
+    if (cmd == "sai") return validarSai(palavras);
     if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
 
     std::cout << "Erro: comando desconhecido.\n";
@@ -93,7 +96,8 @@ bool GestorComandos::validarAvanca(const std::vector<string>& palavras) {
         std::cout << "Erro: avanca tem no maximo 1 parametro.\n";
         return false;
     }
-    if (palavras.size() == 2) {
+
+    if (palavras.size() == 2){
         try {
             int n = std::stoi(palavras[1]);
             if (n <= 0) throw std::invalid_argument("n invalido");
@@ -133,5 +137,42 @@ bool GestorComandos::listarFerramentas(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: Listar todas as ferramentas\n";
+    return true;
+}
+bool GestorComandos::validarLarga(const std::vector<string>& palavras) {
+    if (palavras.size() != 1) {
+        std::cout << "Para largar a ferramenta só precisas de uma palavra.\n";
+        return false;
+    }
+    std::cout << "Comando valido: Largar a ferramenta que tem na mao\n";
+    return true;
+}
+bool GestorComandos::validarPega(const std::vector<string>& palavras) {
+    if (palavras.size() == 1) {
+        std::cout << "Erro: Eu sei que e para pegar mas em qual ferramenta?\n";
+        return false;
+    }
+    if (palavras.size() > 2) {
+        std::cout << "Erro: pega tem no maximo 1 parametro.\n";
+        return false;
+    }
+    if (palavras.size() == 2) {
+        try {
+            int n = std::stoi(palavras[1]);//se o stoi nao conseguir converter pq nao é um num valido manda um std::invalid_argument tbm
+            if (n <= 0) throw std::invalid_argument("n invalido");
+        } catch (...) {
+            std::cout << "Erro: parametro invalido em pega.\n";
+            return false;
+        }
+    }
+    std::cout << "Comando valido: pega na ferramenta de ID ...\n";
+    return true;
+}
+bool GestorComandos::validarSai(const std::vector<string>& palavras) {
+    if (palavras.size() != 1) {
+        std::cout << "Para sair so precisas de uma palavra.\n";
+        return false;
+    }
+    std::cout << "Comando valido: O jardineiro vai embora... \n";
     return true;
 }

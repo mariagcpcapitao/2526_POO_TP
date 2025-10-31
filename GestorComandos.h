@@ -29,7 +29,9 @@ private:
     bool validarCompra(const std::vector<string>& palavras);
     bool listarPlantas(const std::vector<string>& palavras);
     bool listarFerramentas(const std::vector<string>& palavras);
-
+    bool validarLarga(const std::vector<string>& palavras);
+    bool validarPega(const std::vector<string>& palavras);
+    bool validarSai(const std::vector<string>& palavras);
 };
 
 #endif //GESTORCOMANDOS_H
