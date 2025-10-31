@@ -124,19 +124,19 @@ CMakeFiles/2526_POO_TP.dir/Plantas.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/2526_POO_TP.dir/Plantas.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Plantas.cpp" -o CMakeFiles\2526_POO_TP.dir\Plantas.cpp.s
 
-CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj: CMakeFiles/2526_POO_TP.dir/flags.make
-CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj: C:/Users/luana/CLionProjects/2\ ano/2526_POO_TP/Ferramentas.cpp
-CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj: CMakeFiles/2526_POO_TP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj -MF CMakeFiles\2526_POO_TP.dir\Ferramentas.cpp.obj.d -o CMakeFiles\2526_POO_TP.dir\Ferramentas.cpp.obj -c "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramentas.cpp"
+CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj: CMakeFiles/2526_POO_TP.dir/flags.make
+CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj: C:/Users/luana/CLionProjects/2\ ano/2526_POO_TP/Ferramenta.cpp
+CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj: CMakeFiles/2526_POO_TP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj -MF CMakeFiles\2526_POO_TP.dir\Ferramenta.cpp.obj.d -o CMakeFiles\2526_POO_TP.dir\Ferramenta.cpp.obj -c "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramenta.cpp"
 
-CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramentas.cpp" > CMakeFiles\2526_POO_TP.dir\Ferramentas.cpp.i
+CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramenta.cpp" > CMakeFiles\2526_POO_TP.dir\Ferramenta.cpp.i
 
-CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramentas.cpp" -o CMakeFiles\2526_POO_TP.dir\Ferramentas.cpp.s
+CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\luana\CLionProjects\2 ano\2526_POO_TP\Ferramenta.cpp" -o CMakeFiles\2526_POO_TP.dir\Ferramenta.cpp.s
 
 CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj: CMakeFiles/2526_POO_TP.dir/flags.make
 CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj: C:/Users/luana/CLionProjects/2\ ano/2526_POO_TP/Jardineiro.cpp
@@ -172,7 +172,7 @@ CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.s: cmake_force
 "CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj" \
 "CMakeFiles/2526_POO_TP.dir/Solo.cpp.obj" \
 "CMakeFiles/2526_POO_TP.dir/Plantas.cpp.obj" \
-"CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj" \
+"CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj" \
 "CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj" \
 "CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj"
 
@@ -183,7 +183,7 @@ CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.s: cmake_force
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Solo.cpp.obj
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Plantas.cpp.obj
-2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj
+2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj
 2526_POO_TP.exe: CMakeFiles/2526_POO_TP.dir/build.make

@@ -128,29 +128,29 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/build
 .PHONY : 2526_POO_TP/fast
 
-Ferramentas.obj: Ferramentas.cpp.obj
-.PHONY : Ferramentas.obj
+Ferramenta.obj: Ferramenta.cpp.obj
+.PHONY : Ferramenta.obj
 
 # target to build an object file
-Ferramentas.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj
-.PHONY : Ferramentas.cpp.obj
+Ferramenta.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj
+.PHONY : Ferramenta.cpp.obj
 
-Ferramentas.i: Ferramentas.cpp.i
-.PHONY : Ferramentas.i
+Ferramenta.i: Ferramenta.cpp.i
+.PHONY : Ferramenta.i
 
 # target to preprocess a source file
-Ferramentas.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.i
-.PHONY : Ferramentas.cpp.i
+Ferramenta.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.i
+.PHONY : Ferramenta.cpp.i
 
-Ferramentas.s: Ferramentas.cpp.s
-.PHONY : Ferramentas.s
+Ferramenta.s: Ferramenta.cpp.s
+.PHONY : Ferramenta.s
 
 # target to generate assembly for a file
-Ferramentas.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.s
-.PHONY : Ferramentas.cpp.s
+Ferramenta.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.s
+.PHONY : Ferramenta.cpp.s
 
 GestorComandos.obj: GestorComandos.cpp.obj
 .PHONY : GestorComandos.obj
@@ -305,9 +305,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 2526_POO_TP
-	@echo ... Ferramentas.obj
-	@echo ... Ferramentas.i
-	@echo ... Ferramentas.s
+	@echo ... Ferramenta.obj
+	@echo ... Ferramenta.i
+	@echo ... Ferramenta.s
 	@echo ... GestorComandos.obj
 	@echo ... GestorComandos.i
 	@echo ... GestorComandos.s

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/luana/CLionProjects/2 ano/2526_POO_TP/Ferramentas.cpp" "CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj" "gcc" "CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj.d"
+  "C:/Users/luana/CLionProjects/2 ano/2526_POO_TP/Ferramenta.cpp" "CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj" "gcc" "CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj.d"
   "C:/Users/luana/CLionProjects/2 ano/2526_POO_TP/GestorComandos.cpp" "CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj" "gcc" "CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj.d"
   "C:/Users/luana/CLionProjects/2 ano/2526_POO_TP/Jardim.cpp" "CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj" "gcc" "CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj.d"
   "C:/Users/luana/CLionProjects/2 ano/2526_POO_TP/Jardineiro.cpp" "CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj" "gcc" "CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj.d"
