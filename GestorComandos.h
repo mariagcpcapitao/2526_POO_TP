@@ -9,22 +9,25 @@
 #include <sstream>
 #include <iostream>
 #include <cctype>
+using namespace std;
+using std::string;
 
 class GestorComandos {
 public:
-    void processarComando(const std::string& linha);
+    void processarComando(const string& linha);
 
 private:
-    std::vector<std::string> dividir(const std::string& linha);
+    std::vector<string> dividir(const string& linha);
     //Validação geral
-    bool validarComando(const std::vector<std::string>& tokens);
+    bool validarComando(const std::vector<string>& palavras);
 
     // Funções de validação específicas
-    bool validarJardim(const std::vector<std::string>& tokens);
-    bool validarPlanta(const std::vector<std::string>& tokens);
-    bool validarColhe(const std::vector<std::string>& tokens);
-    bool validarAvanca(const std::vector<std::string>& tokens);
-    bool validarCompra(const std::vector<std::string>& tokens);
+    bool validarJardim(const std::vector<string>& palavras);
+    bool validarPlanta(const std::vector<string>& palavras);
+    bool validarColhe(const std::vector<string>& palavras);
+    bool validarAvanca(const std::vector<string>& palavras);
+    bool validarCompra(const std::vector<string>& palavras);
+    bool listarPlantas(const std::vector<string>& palavras);
 };
 
 #endif //GESTORCOMANDOS_H
