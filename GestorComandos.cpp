@@ -3,6 +3,9 @@
 //
 
 #include "GestorComandos.h"
+
+#include "Jardim.h"
+
 std::vector<string> GestorComandos::dividir(const string& linha) {
     std::istringstream iss(linha);
     std::vector<string> palavras;
@@ -40,13 +43,13 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
     return false;
 }
 bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
+    int linhas = std::stoi(palavras[1]);
+    int colunas = std::stoi(palavras[2]);
     if (palavras.size() != 3) {
         std::cout << "Erro: jardim requer 2 parametros.\n";
         return false;
     }
     try {
-        int linhas = std::stoi(palavras[1]);
-        int colunas = std::stoi(palavras[2]);
         if (linhas <= 0 || colunas <= 0 || linhas > 26 || colunas > 26)
             throw std::out_of_range("fora de limites");
     } catch (...) {
@@ -54,6 +57,7 @@ bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: jardim " << palavras[1] << " " << palavras[2] << "\n";
+    new Jardim(2, 3, linhas, colunas);
     return true;
 }
 

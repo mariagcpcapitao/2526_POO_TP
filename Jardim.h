@@ -5,4 +5,18 @@
 #ifndef JARDIM_H
 #define JARDIM_H
 
+class Jardim
+{
+	int agua = 0;
+	int nutrientes = 0;
+public:
+	Jardim(int agua, int nutrientes, int l, int c);
+	void mostraJardim() const;
+
+	~Jardim();
+private:
+	int linhas;
+	int colunas;
+
+};
 #endif //JARDIM_H

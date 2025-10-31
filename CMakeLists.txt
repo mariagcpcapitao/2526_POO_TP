@@ -10,8 +10,8 @@ add_executable(2526_POO_TP main.cpp
         Solo.h
         Plantas.cpp
         Plantas.h
-        Ferramentas.cpp
-        Ferramentas.h
+        Ferramenta.cpp
+        Ferramenta.h
         Jardineiro.cpp
         Jardineiro.h
         GestorComandos.cpp
