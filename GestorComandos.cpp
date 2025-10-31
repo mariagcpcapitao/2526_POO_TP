@@ -30,6 +30,7 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
     if (cmd == "avanca") return validarAvanca(palavras);
     if (cmd == "compra") return validarCompra(palavras);
     if (cmd == "lplantas") return listarPlantas(palavras);
+    if (cmd == "lferr") return listarFerramentas(palavras);
     if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
 
     std::cout << "Erro: comando desconhecido.\n";
@@ -124,5 +125,13 @@ bool GestorComandos::listarPlantas(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: Listar todas as plantas\n";
+    return true;
+}
+bool GestorComandos::listarFerramentas(const std::vector<string>& palavras) {
+    if (palavras.size() != 1) {
+        std::cout << "Para listar as ferramentas só precisas de uma palavra.\n";
+        return false;
+    }
+    std::cout << "Comando valido: Listar todas as ferramentas\n";
     return true;
 }
