@@ -1,11 +1,9 @@
-//
-// Created by 1663m on 29/10/2025.
-//
+
 
 #include "GestorComandos.h"
 
-#include "Jardim.h"
 
+int criado =0;
 std::vector<string> GestorComandos::dividir(const string& linha) {
     std::istringstream iss(linha);
     std::vector<string> palavras;
@@ -26,21 +24,50 @@ void GestorComandos::processarComando(const string& linha) {
 
 bool GestorComandos::validarComando(const std::vector<string>& palavras) {
     string cmd = palavras[0];
+    if (criado == 0) {
+        if (cmd == "jardim") return validarJardim(palavras);
+        if (cmd == "recupera")return validarRecupera(palavras);
+    }
+    else {
+        if (cmd == "planta") return validarPlanta(palavras);
+        if (cmd == "lplanta") return validarPlanta(palavras);
+        if (cmd == "colhe") return validarColhe(palavras);
+        if (cmd == "avanca") return validarAvanca(palavras);
+        if (cmd == "compra") return validarCompra(palavras);
+        if (cmd == "lplantas") return listarPlantas(palavras);
+        if (cmd == "lferr") return listarFerramentas(palavras);
+        if (cmd == "pega") return validarPega(palavras);
+        if (cmd == "larga") return validarLarga(palavras);
+        if (cmd == "sai") return validarSai(palavras);
+        if (cmd == "grava") return validarGrava(palavras);
+        if (cmd == "apaga")return validarApaga(palavras);
+        if (cmd == "executa")return validarExecuta(palavras);
+        if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
+    }
+    if (criado==0)
+        std::cout << "Erro: Para fazeres o que quer  que seja precisas de um jardim...\n";
+    else
+        std::cout << "Erro: comando desconhecido.\n";
 
-    if (cmd == "jardim") return validarJardim(palavras);
-    if (cmd == "planta") return validarPlanta(palavras);
-    if (cmd == "colhe") return validarColhe(palavras);
-    if (cmd == "avanca") return validarAvanca(palavras);
-    if (cmd == "compra") return validarCompra(palavras);
-    if (cmd == "lplantas") return listarPlantas(palavras);
-    if (cmd == "lferr") return listarFerramentas(palavras);
-    if (cmd == "pega") return validarPega(palavras);
-    if (cmd == "larga") return validarLarga(palavras);
-    if (cmd == "sai") return validarSai(palavras);
-    if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
-
-    std::cout << "Erro: comando desconhecido.\n";
     return false;
+}
+bool GestorComandos::validarPosicao(const string& pos, int linhas, int colunas) {
+    if (pos.size() != 2 || !islower(pos[0]) || !islower(pos[1])) {
+        std::cout << "Erro: formato de posicao invalido.\n";
+        return false;
+    }
+
+    // Converte letras em índices
+    int linha = pos[0] - 'a';
+    int coluna = pos[1] - 'a';
+
+    if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas) {
+        std::cout << "Erro: posição fora dos limites do jardim ("
+                  << linhas << "x" << colunas << ").\n";
+        return false;
+    }
+
+    return true;
 }
 bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
     int linhas = std::stoi(palavras[1]);
@@ -57,7 +84,9 @@ bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: jardim " << palavras[1] << " " << palavras[2] << "\n";
-    new Jardim(2, 3, linhas, colunas);
+    Jardim* j = new Jardim(100, 50, linhas, colunas);
+    setJardim(j);
+    criado =1;
     return true;
 }
 
@@ -67,11 +96,8 @@ bool GestorComandos::validarPlanta(const std::vector<string>& palavras) {
         return false;
     }
     string pos = palavras[1];
-    if (pos.size() != 2 || !isalpha(pos[0]) || !isalpha(pos[1]) ||
-        !islower(pos[0]) || !islower(pos[1])) {
-        std::cout << "Erro: posicao invalida.\n";
+    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
         return false;
-    }
     char tipo = palavras[2][0];
     if (string("crex").find(tipo) == string::npos) {
         std::cout << "Erro: tipo de planta inválido (usa c, r, e ou x).\n";
@@ -80,17 +106,26 @@ bool GestorComandos::validarPlanta(const std::vector<string>& palavras) {
     std::cout << "Comando valido: planta " << pos << " " << tipo << "\n";
     return true;
 }
-
-bool GestorComandos::validarColhe(const std::vector<string>& palavras) {
+bool GestorComandos::validarLPlanta(const std::vector<string>& palavras) {
     if (palavras.size() != 2) {
         std::cout << "Erro: colhe requer uma posicao.\n";
         return false;
     }
     string pos = palavras[1];
-    if (pos.size() != 2 || !islower(pos[0]) || !islower(pos[1])) {
-        std::cout << "Erro: posicao invalida.\n";
+    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+        return false;
+    std::cout << "Comando valido: colhe " << pos << "\n";
+    return true;
+}
+bool GestorComandos::validarColhe(const std::vector<string>& palavras) {
+    if (palavras.size() != 2) {
+        std::cout << "Erro: colhe requer as coordenadas.\n";
         return false;
     }
+    string pos = palavras[1];
+    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+        return false;
+
     std::cout << "Comando valido: colhe " << pos << "\n";
     return true;
 }
@@ -162,7 +197,7 @@ bool GestorComandos::validarPega(const std::vector<string>& palavras) {
     }
     if (palavras.size() == 2) {
         try {
-            int n = std::stoi(palavras[1]);//se o stoi nao conseguir converter pq nao é um num valido manda um std::invalid_argument tbm
+            int n = std::stoi(palavras[1]);//se o stoi nao conseguir converter porque nao é um num valido manda um std::invalid_argument tambem
             if (n <= 0) throw std::invalid_argument("n invalido");
         } catch (...) {
             std::cout << "Erro: parametro invalido em pega.\n";
@@ -178,5 +213,66 @@ bool GestorComandos::validarSai(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: O jardineiro vai embora... \n";
+    return true;
+}
+bool GestorComandos::validarGrava(const std::vector<string>& palavras) {
+    if (palavras.size() == 1) {
+        std::cout << "Erro: Eu sei que e para gravar mas que nome queres?\n";
+        return false;
+    }
+    if (palavras.size() > 2) {
+        std::cout << "Erro: grava tem no maximo 1 parametro.\n";
+        return false;
+    }
+    if (palavras.size() == 2) {
+        //ver se o nome nao existe???
+    }
+    std::cout << "Comando valido: grava o jardim no ficheiro "<<palavras[1]<<".txt ...\n";
+    return true;
+}
+bool GestorComandos::validarRecupera(const std::vector<string>& palavras) {
+    if (palavras.size() == 1) {
+        std::cout << "Erro: Eu sei que e para recuperar mas qual das copias queres?\n";
+        return false;
+    }
+    if (palavras.size() > 2) {
+        std::cout << "Erro: recupera tem no maximo 1 parametro.\n";
+        return false;
+    }
+    if (palavras.size() == 2) {
+        //ver se o nome nao existe???
+    }
+    criado =1;
+    std::cout << "Comando valido: recuperar o jardim do ficheiro "<<palavras[1]<<".txt ...\n";
+    return true;
+}
+bool GestorComandos::validarApaga(const std::vector<string>& palavras) {
+    if (palavras.size() == 1) {
+        std::cout << "Erro: Eu sei que e para apagar mas qual?\n";
+        return false;
+    }
+    if (palavras.size() > 2) {
+        std::cout << "Erro: apaga tem no maximo 1 parametro.\n";
+        return false;
+    }
+    if (palavras.size() == 2) {
+        //ver se o nome existe???
+    }
+    std::cout << "Comando valido: apaga o ficheiro "<<palavras[1]<<".txt ...\n";
+    return true;
+}
+bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
+    if (palavras.size() == 1) {
+        std::cout << "Erro: Eu sei que e para executar mas o que?\n";
+        return false;
+    }
+    if (palavras.size() > 2) {
+        std::cout << "Erro: executa tem no maximo 1 parametro.\n";
+        return false;
+    }
+    if (palavras.size() == 2) {
+        //ver se o ficheiro existe??
+    }
+    std::cout << "Comando valido: executar os comandos do ficheiro "<<palavras[1]<<".txt ...\n";
     return true;
 }

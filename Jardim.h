@@ -12,6 +12,8 @@ class Jardim
 public:
 	Jardim(int agua, int nutrientes, int l, int c);
 	void mostraJardim() const;
+	int getLinhas() const;
+	int getColunas() const;
 
 	~Jardim();
 private:

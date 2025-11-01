@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "2526_POO_TP",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "2526_POO_TP::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-2526_POO_TP-Debug-7dbebaae84b6d5eec2d2.json",
+					"name" : "2526_POO_TP",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/1663m/OneDrive - ISEC/Ambiente de Trabalho/fac/2\u00ba A/1\u00baS/POO/TP/2526_POO_TP/cmake-build-debug",
+		"source" : "C:/Users/1663m/OneDrive - ISEC/Ambiente de Trabalho/fac/2\u00ba A/1\u00baS/POO/TP/2526_POO_TP"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

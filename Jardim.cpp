@@ -10,6 +10,6 @@ using namespace std;
 Jardim::Jardim(int agua, int nutrientes, int l, int c) : agua(agua), nutrientes(nutrientes), linhas(l), colunas(c)
 {
 	cout << "Construindo Jardim " << linhas << " " << colunas << endl;
-
-
 }
+int Jardim::getLinhas() const{ return linhas; }
+int Jardim::getColunas() const{ return colunas; }

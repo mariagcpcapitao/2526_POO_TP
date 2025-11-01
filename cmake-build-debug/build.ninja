@@ -73,8 +73,8 @@ build CMakeFiles/2526_POO_TP.dir/Plantas.cpp.obj: CXX_COMPILER__2526_POO_TP_unsc
   OBJECT_DIR = CMakeFiles\2526_POO_TP.dir
   OBJECT_FILE_DIR = CMakeFiles\2526_POO_TP.dir
 
-build CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj: CXX_COMPILER__2526_POO_TP_unscanned_Debug C$:/Users/1663m/OneDrive$ -$ ISEC/Ambiente$ de$ Trabalho/fac/2º$ A/1ºS/POO/TP/2526_POO_TP/Ferramentas.cpp || cmake_object_order_depends_target_2526_POO_TP
-  DEP_FILE = CMakeFiles\2526_POO_TP.dir\Ferramentas.cpp.obj.d
+build CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj: CXX_COMPILER__2526_POO_TP_unscanned_Debug C$:/Users/1663m/OneDrive$ -$ ISEC/Ambiente$ de$ Trabalho/fac/2º$ A/1ºS/POO/TP/2526_POO_TP/Ferramenta.cpp || cmake_object_order_depends_target_2526_POO_TP
+  DEP_FILE = CMakeFiles\2526_POO_TP.dir\Ferramenta.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\2526_POO_TP.dir
   OBJECT_FILE_DIR = CMakeFiles\2526_POO_TP.dir
@@ -91,6 +91,12 @@ build CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj: CXX_COMPILER__2526_POO_
   OBJECT_DIR = CMakeFiles\2526_POO_TP.dir
   OBJECT_FILE_DIR = CMakeFiles\2526_POO_TP.dir
 
+build CMakeFiles/2526_POO_TP.dir/Simulacao.cpp.obj: CXX_COMPILER__2526_POO_TP_unscanned_Debug C$:/Users/1663m/OneDrive$ -$ ISEC/Ambiente$ de$ Trabalho/fac/2º$ A/1ºS/POO/TP/2526_POO_TP/Simulacao.cpp || cmake_object_order_depends_target_2526_POO_TP
+  DEP_FILE = CMakeFiles\2526_POO_TP.dir\Simulacao.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\2526_POO_TP.dir
+  OBJECT_FILE_DIR = CMakeFiles\2526_POO_TP.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target 2526_POO_TP
@@ -99,7 +105,7 @@ build CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj: CXX_COMPILER__2526_POO_
 #############################################
 # Link the executable 2526_POO_TP.exe
 
-build 2526_POO_TP.exe: CXX_EXECUTABLE_LINKER__2526_POO_TP_Debug CMakeFiles/2526_POO_TP.dir/main.cpp.obj CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj CMakeFiles/2526_POO_TP.dir/Solo.cpp.obj CMakeFiles/2526_POO_TP.dir/Plantas.cpp.obj CMakeFiles/2526_POO_TP.dir/Ferramentas.cpp.obj CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj
+build 2526_POO_TP.exe: CXX_EXECUTABLE_LINKER__2526_POO_TP_Debug CMakeFiles/2526_POO_TP.dir/main.cpp.obj CMakeFiles/2526_POO_TP.dir/Jardim.cpp.obj CMakeFiles/2526_POO_TP.dir/Solo.cpp.obj CMakeFiles/2526_POO_TP.dir/Plantas.cpp.obj CMakeFiles/2526_POO_TP.dir/Ferramenta.cpp.obj CMakeFiles/2526_POO_TP.dir/Jardineiro.cpp.obj CMakeFiles/2526_POO_TP.dir/GestorComandos.cpp.obj CMakeFiles/2526_POO_TP.dir/Simulacao.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\2526_POO_TP.dir

@@ -15,4 +15,6 @@ add_executable(2526_POO_TP main.cpp
         Jardineiro.cpp
         Jardineiro.h
         GestorComandos.cpp
-        GestorComandos.h)
+        GestorComandos.h
+        Simulacao.cpp
+        Simulacao.h)
