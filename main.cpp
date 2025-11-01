@@ -1,5 +1,9 @@
 #include <iostream>
+
+#include "Ferramenta.h"
 #include "GestorComandos.h"
+#include "Plantas.h"
+#include "Solo.h"
 
 int main() {
     GestorComandos gc;

@@ -10,9 +10,12 @@ class Solo
 public:
 	int nutriSolo;
 	int aguaSolo;
-	Solo(int nutri, int agua);
+
+	Solo();
 	void getNutriSolo();
 	void getAguaSolo();
+	void setNutriSolo();
+	void setAguaSolo();
 	~Solo();
 };
 #endif //SOLO_H

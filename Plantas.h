@@ -8,7 +8,8 @@ using namespace std;
 class Plantas
 {
 protected:
-	int nutrientes, agua, posLinha, posColuna;
+	int nutrientes, agua;
+	int posLinha, posColuna;
 	string beleza;
 	char simbolo;
 public:
@@ -23,16 +24,17 @@ public:
 	virtual void absorveNutrientes(int &nutrientes);
 	virtual void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
-	virtual ~Plantas() = default;
+	virtual ~Plantas();
 };
 
 class Cacto : public Plantas
 {
 private:
 	int instantesAguaAlta, instantesNutriZero, nutriAbsorvidos;
-	int aguaCacto = 2, nutriCacto = 1;
+	int aguaCacto = 2;
+	int nutriCacto = 1;
 public:
-	Cacto(int aguaCacto, int nutriCacto, int linha, int coluna);
+	Cacto(int linha, int coluna);
 	void absorveAgua(int &agua) override;
 	void absorveNutrientes(int &nutrientes) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
@@ -42,26 +44,50 @@ public:
 
 class Roseira : public Plantas
 {
+public:
+	Roseira(int linha, int coluna);
 	void absorveAgua(int &agua) override;
 	void absorveNutrientes(int &nutrientes) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
+	~Roseira() override;
 };
 
 class ErvaDaninha : public Plantas
 {
+public:
+	ErvaDaninha(int linha, int coluna);
 	void absorveAgua(int &agua) override;
 	void absorveNutrientes(int &nutrientes) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
+	~ErvaDaninha() override;
 };
 
 class BastaoImperador : public Plantas
 {
+public:
+	BastaoImperador(int linha, int coluna);
 	void absorveAgua(int &agua) override;
 	void absorveNutrientes(int &nutrientes) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
+	~BastaoImperador() override;
+private:
+	static const int inicial_agua = 20;
+	static const int inicial_nutrientes = 15;
+	static const int perda_agua = 4;
+	static const int perda_nutrientes = 4;
+	static const int absorcao_agua = 8;
+	static const int absorcao_nutrientes = 6;
+	static const int morre_agua_menor = 5;
+	static const int morre_nutrientes_menor = 4;
+	static const int morre_nutrientes_maior = 130;
+	static const int multiplica_nutrientes_maior = 50;
+	static const int nova_nutrientes = 15;
+	static const int nova_agua_percentagem = 50;
+	static const int original_nutrientes = 90;
+	static const int original_agua_percentagem = 50;
 };
 #endif //PLANTAS_H
 

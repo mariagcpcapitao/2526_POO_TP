@@ -1,15 +1,24 @@
-
-
 #include "Ferramenta.h"
-
-Ferramenta::Ferramenta(const string &nome, int id, const string &representacao) : nomeFerr(nome), id_ferramenta(id), representacao(representacao) {}
+int Ferramenta::contId = 0;
+Ferramenta::Ferramenta(const string &nome, const char &simbolo) : nomeFerr(nome), simbolo(simbolo)
+{
+	setId();
+	cout << "Ferramenta com id " << id_ferramenta << " criada" << endl;
+}
 Ferramenta::~Ferramenta(){}
 void Ferramenta::usar() {
 	cout << "Usando ferramenta: " << nomeFerr << " (ID: " << id_ferramenta << ")" << endl;
 }
+void Ferramenta::setId()
+{
+	id_ferramenta = ++contId;
+}
 
 
-Regador::Regador(const string &nomeFerr, int id_ferramenta, int qtd_agua, string representacao) : Ferramenta(nomeFerr, id_ferramenta, "g"), capacidade(qtd_agua){}
+Regador::Regador() : Ferramenta("Regador", 'g')
+{
+	cout << "Regador " <<  id_ferramenta << " com capaciddade de: " << capacidade << endl;
+}
 Regador::~Regador()
 {
 	cout << "Regador descartado, nao ha mais agua.";
@@ -19,16 +28,13 @@ void Regador::usar()
 {
 	capacidade = capacidade - dose;
 	if (capacidade <= 0)
-		cout << "Acabou o adubo. Nao e possível usar mais";
+		cout << "Acabou o adubo. Nao e possivel usar mais";
 	else
 		cout << "A regar as plantas. Agua restante: " << capacidade << "ml" << endl;
 }
 
 
-Adubo::Adubo(const string &nomeFerr, int id_ferramenta, int qtd_adubo, const string &representacao) : Ferramenta(nomeFerr, id_ferramenta, "a")
-{
-	capacidade = qtd_adubo;
-}
+Adubo::Adubo() : Ferramenta("Adubo", 'a'){}
 Adubo::~Adubo(){}
 
 void Adubo::usar()
@@ -38,12 +44,19 @@ void Adubo::usar()
 		cout << "Acabou o adubo. Nao e possivel usar mais";
 }
 
-TesouraPoda::TesouraPoda(const string &nomeFerr, int id_ferramenta, const string &representacao) : Ferramenta(nomeFerr, id_ferramenta, "t") {}
+TesouraPoda::TesouraPoda() : Ferramenta("Tesoura de Poda", 't')
+{
+	cout << "Ferramenta Tesoura de id: " << id_ferramenta << " criada" << endl;
+}
 void TesouraPoda::usar()
 {
 	//elimina plantas
 }
 TesouraPoda::~TesouraPoda() {}
+
+FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z'){}
+void FerramentaZ::usar(){}
+FerramentaZ::~FerramentaZ(){}
 
 
 

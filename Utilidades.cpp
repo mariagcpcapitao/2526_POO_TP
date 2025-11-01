@@ -1,4 +1,5 @@
 #include "Utilidades.h"
+#include <random>
 
 int Utilidades::obterValorAleatorio(int min, int max){
 	uniform_int_distribution<int> distribution =
