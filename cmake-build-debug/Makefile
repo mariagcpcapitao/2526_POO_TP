@@ -248,6 +248,30 @@ Plantas.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Plantas.cpp.s
 .PHONY : Plantas.cpp.s
 
+Simulacao.obj: Simulacao.cpp.obj
+.PHONY : Simulacao.obj
+
+# target to build an object file
+Simulacao.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Simulacao.cpp.obj
+.PHONY : Simulacao.cpp.obj
+
+Simulacao.i: Simulacao.cpp.i
+.PHONY : Simulacao.i
+
+# target to preprocess a source file
+Simulacao.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Simulacao.cpp.i
+.PHONY : Simulacao.cpp.i
+
+Simulacao.s: Simulacao.cpp.s
+.PHONY : Simulacao.s
+
+# target to generate assembly for a file
+Simulacao.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Simulacao.cpp.s
+.PHONY : Simulacao.cpp.s
+
 Solo.obj: Solo.cpp.obj
 .PHONY : Solo.obj
 
@@ -320,6 +344,9 @@ help:
 	@echo ... Plantas.obj
 	@echo ... Plantas.i
 	@echo ... Plantas.s
+	@echo ... Simulacao.obj
+	@echo ... Simulacao.i
+	@echo ... Simulacao.s
 	@echo ... Solo.obj
 	@echo ... Solo.i
 	@echo ... Solo.s

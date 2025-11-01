@@ -1,5 +1,3 @@
-
-
 #ifndef PLANTAS_H
 #define PLANTAS_H
 #include <iostream>
@@ -10,25 +8,36 @@ using namespace std;
 class Plantas
 {
 protected:
-	int nutrientes;
-	int agua;
+	int nutrientes, agua, posLinha, posColuna;
 	string beleza;
+	char simbolo;
 public:
-	Plantas(int nutrientes, int agua, string beleza);
+	Plantas(int agua, int nutrientes, string beleza, int posLinha, int posColuna);
+	int getPosLinha() const;
+	int getPosColuna() const;
+	int setPosLinha();
+	int setPosColuna();
+	string getBeleza() const;
+
 	virtual void absorveAgua(int &agua);
 	virtual void absorveNutrientes(int &nutrientes);
 	virtual void multiplica(int &nutrientes, int &agua);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
-	~Plantas();
+	virtual ~Plantas();
 };
 
 class Cacto : public Plantas
 {
+private:
+	int instantesAguaAlta, instantesNutriZero, nutriAbsorvidos;
+	int aguaCacto = 2, nutriCacto = 1;
 public:
+	Cacto(int aguaCacto, int nutriCacto, int posLinha, int posColuna);
 	void absorveAgua(int &agua) override;
 	void absorveNutrientes(int &nutrientes) override;
 	void multiplica(int &nutrientes, int &agua) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
+	~Cacto() override;
 };
 
 class Roseira : public Plantas
@@ -55,3 +64,7 @@ class BastaoImperador : public Plantas
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 };
 #endif //PLANTAS_H
+
+
+
+
