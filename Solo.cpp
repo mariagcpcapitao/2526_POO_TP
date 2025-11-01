@@ -9,18 +9,18 @@
 
 Solo::Solo(int nutri, int agua) : nutriSolo(nutri), aguaSolo(agua)
 {
-	setNutriSolo();
-	setAguaSolo();
+	getNutriSolo();
+	getAguaSolo();
 	cout << "Solo criado com valores aleatórios -> " << "Nutrientes: " << nutriSolo << ", Água: " << aguaSolo << endl;}
 
-void Solo::setNutriSolo()
+void Solo::getNutriSolo()
 {
 	nutriSolo = Utilidades::obterValorAleatorio(
 	   Settings::Jardim::nutrientes_min,
 	   Settings::Jardim::nutrientes_max
    );
 }
-void Solo::setAguaSolo()
+void Solo::getAguaSolo()
 {
 	aguaSolo = Utilidades::obterValorAleatorio(
 		Settings::Jardim::agua_min,

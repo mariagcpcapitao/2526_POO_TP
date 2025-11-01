@@ -11,8 +11,8 @@ public:
 	int nutriSolo;
 	int aguaSolo;
 	Solo(int nutri, int agua);
-	void setNutriSolo();
-	void setAguaSolo();
+	void getNutriSolo();
+	void getAguaSolo();
 	~Solo();
 };
 #endif //SOLO_H
