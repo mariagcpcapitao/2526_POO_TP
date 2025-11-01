@@ -17,4 +17,6 @@ add_executable(2526_POO_TP main.cpp
         GestorComandos.cpp
         GestorComandos.h
         Simulacao.cpp
-        Simulacao.h)
+        Simulacao.h
+        Utilidades.cpp
+        Utilidades.h)

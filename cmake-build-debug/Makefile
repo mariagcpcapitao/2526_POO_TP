@@ -296,6 +296,30 @@ Solo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Solo.cpp.s
 .PHONY : Solo.cpp.s
 
+Utilidades.obj: Utilidades.cpp.obj
+.PHONY : Utilidades.obj
+
+# target to build an object file
+Utilidades.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Utilidades.cpp.obj
+.PHONY : Utilidades.cpp.obj
+
+Utilidades.i: Utilidades.cpp.i
+.PHONY : Utilidades.i
+
+# target to preprocess a source file
+Utilidades.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Utilidades.cpp.i
+.PHONY : Utilidades.cpp.i
+
+Utilidades.s: Utilidades.cpp.s
+.PHONY : Utilidades.s
+
+# target to generate assembly for a file
+Utilidades.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\2526_POO_TP.dir\build.make CMakeFiles/2526_POO_TP.dir/Utilidades.cpp.s
+.PHONY : Utilidades.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -350,6 +374,9 @@ help:
 	@echo ... Solo.obj
 	@echo ... Solo.i
 	@echo ... Solo.s
+	@echo ... Utilidades.obj
+	@echo ... Utilidades.i
+	@echo ... Utilidades.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
