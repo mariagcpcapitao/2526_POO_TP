@@ -14,6 +14,7 @@ private:
 	Ferramenta** inventario;
 	int quant_ferramentas;
 	char simbolo = '*';
+	bool noJardim = false;
 public:
 	Jardineiro();
 	void mover(int &posLinha, int &posColuna);
