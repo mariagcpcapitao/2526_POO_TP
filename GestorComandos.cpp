@@ -28,6 +28,7 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
 
         if (cmd == "jardim") return validarJardim(palavras);
         if (cmd == "recupera")return validarRecupera(palavras);
+        if (cmd == "executa")return validarExecuta(palavras);
 
     if(criado == 1) {
         if (cmd == "planta") return validarPlanta(palavras);
@@ -45,7 +46,6 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
         if (cmd == "sai") return validarSai(palavras);
         if (cmd == "grava") return validarGrava(palavras);
         if (cmd == "apaga")return validarApaga(palavras);
-        if (cmd == "executa")return validarExecuta(palavras);
         if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
     }
     if (criado==0)
@@ -273,7 +273,7 @@ bool GestorComandos::validarGrava(const std::vector<string>& palavras) {
     std::string nome = palavras[1] + ".txt";
     std::ifstream f(nome);
     if (f.good()) {
-        std::cout << "Erro: já existe uma cópia chamada '" << palavras[1] << "'.\n";
+        std::cout << "Erro: ja existe uma copia chamada '" << palavras[1] << "'.\n";
         return false;
     }
     std::cout << "Comando valido: grava o jardim no ficheiro "<<palavras[1]<<".txt ...\n";
@@ -291,7 +291,7 @@ bool GestorComandos::validarRecupera(const std::vector<string>& palavras) {
     std::string nome = palavras[1] + ".txt";
     std::ifstream f(nome);
     if (!f.good()) {
-        std::cout << "Erro: não existe nenhuma cópia chamada '" << palavras[1] << "'.\n";
+        std::cout << "Erro: nao existe nenhuma copia chamada '" << palavras[1] << "'.\n";
         return false;
     }
     criado =1;
@@ -310,7 +310,7 @@ bool GestorComandos::validarApaga(const std::vector<string>& palavras) {
     std::string nome = palavras[1] + ".txt";
     std::ifstream f(nome);
     if (!f.good()) {
-        std::cout << "Erro: não existe nenhuma cópia chamada '" << palavras[1] << "'.\n";
+        std::cout << "Erro: nao existe nenhuma copia chamada '" << palavras[1] << "'.\n";
         return false;
     }
     std::cout << "Comando valido: apaga o ficheiro "<<palavras[1]<<".txt ...\n";
@@ -335,8 +335,8 @@ bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
     std::string linha;
     int linhaNum = 1;
     while (std::getline(f, linha)) {
-        // Ignorar linhas vazias e comentários
-        if (linha.empty() || linha[0] == '#')
+        // Ignorar linhas vazias
+        if (linha.empty() )
             continue;
 
         std::cout << "\n> Linha " << linhaNum << ": " << linha << "\n";
@@ -345,6 +345,6 @@ bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
     }
 
     f.close();
-    std::cout << "\nExecução do ficheiro concluída.\n";
+    std::cout << "\nExecucao do ficheiro concluida.\n";
     return true;
 }
