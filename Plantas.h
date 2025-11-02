@@ -74,13 +74,13 @@ public:
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~BastaoImperador() override;
 private:
-	static const int inicial_agua = 20;
+	static const int inicial_agua = 40;
 	static const int inicial_nutrientes = 15;
 	static const int perda_agua = 4;
 	static const int perda_nutrientes = 4;
 	static const int absorcao_agua = 8;
 	static const int absorcao_nutrientes = 6;
-	static const int morre_agua_menor = 5;
+	static const int morre_agua_menor = 15;
 	static const int morre_nutrientes_menor = 4;
 	static const int morre_nutrientes_maior = 130;
 	static const int multiplica_nutrientes_maior = 50;
