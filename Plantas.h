@@ -20,8 +20,10 @@ public:
 	int setPosColuna();
 	string getBeleza() const;
 
-	virtual void absorveAgua(int &agua);
-	virtual void absorveNutrientes(int &nutrientes);
+	virtual void absorveAgua(int &agua, int posLinha, int posColuna);
+	virtual void absorveNutrientes(int &nutrientes, int posLinha, int posColuna);
+	virtual void perdeAgua(int &agua, int posLinha, int posColuna);
+	virtual void perdeNutri(int &nutrientes, int posLinha, int posColuna);
 	virtual void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
 	virtual ~Plantas();
@@ -35,8 +37,10 @@ private:
 	int nutriCacto = 1;
 public:
 	Cacto(int linha, int coluna);
-	void absorveAgua(int &agua) override;
-	void absorveNutrientes(int &nutrientes) override;
+	void absorveAgua(int &agua, int posLinha, int posColuna) override;
+	void absorveNutrientes(int &nutrientes, int posLinha, int posColuna) override;
+	void perdeAgua(int &agua, int posLinha, int posColuna) override;
+	void perdeNutri(int &nutrientes, int posLinha, int posColuna) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~Cacto() override;
@@ -46,8 +50,10 @@ class Roseira : public Plantas
 {
 public:
 	Roseira(int linha, int coluna);
-	void absorveAgua(int &agua) override;
-	void absorveNutrientes(int &nutrientes) override;
+	void absorveAgua(int &agua, int posLinha, int posColuna) override;
+	void absorveNutrientes(int &nutrientes, int posLinha, int posColuna) override;
+	void perdeAgua(int &agua, int posLinha, int posColuna) override;
+	void perdeNutri(int &nutrientes, int posLinha, int posColuna) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~Roseira() override;
@@ -57,8 +63,10 @@ class ErvaDaninha : public Plantas
 {
 public:
 	ErvaDaninha(int linha, int coluna);
-	void absorveAgua(int &agua) override;
-	void absorveNutrientes(int &nutrientes) override;
+	void absorveAgua(int &agua, int posLinha, int posColuna) override;
+	void absorveNutrientes(int &nutrientes, int posLinha, int posColuna) override;
+	void perdeAgua(int &agua, int posLinha, int posColuna) override;
+	void perdeNutri(int &nutrientes, int posLinha, int posColuna) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~ErvaDaninha() override;
@@ -68,8 +76,10 @@ class BastaoImperador : public Plantas
 {
 public:
 	BastaoImperador(int linha, int coluna);
-	void absorveAgua(int &agua) override;
-	void absorveNutrientes(int &nutrientes) override;
+	void absorveAgua(int &agua, int posLinha, int posColuna) override;
+	void absorveNutrientes(int &nutrientes, int posLinha, int posColuna) override;
+	void perdeAgua(int &agua, int posLinha, int posColuna) override;
+	void perdeNutri(int &nutrientes, int posLinha, int posColuna) override;
 	void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~BastaoImperador() override;
