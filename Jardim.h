@@ -7,10 +7,8 @@
 
 class Jardim
 {
-	int agua = 0;
-	int nutrientes = 0;
 public:
-	Jardim(int agua, int nutrientes, int l, int c);
+	Jardim(int l, int c);
 	void mostraJardim() const;
 	int getLinhas() const;
 	int getColunas() const;

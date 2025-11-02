@@ -7,7 +7,7 @@
 #include "Settings.h"
 #include "Utilidades.h"
 
-Solo::Solo()
+Solo::Solo() : planta(nullptr), ferramenta(nullptr), jardineiro(nullptr)
 {
 	setNutriSolo();
 	setAguaSolo();
@@ -27,4 +27,43 @@ void Solo::setAguaSolo()
 		Settings::Jardim::agua_max
 	);
 }
+
+void Solo::setPlanta(Plantas* p)
+{
+	planta = p;
+}
+void Solo::setFerramenta(Ferramenta* f)
+{
+	ferramenta = f;
+}
+void Solo::setJardineiro(Jardineiro* j)
+{
+	jardineiro = j;
+}
+
+Plantas* Solo::getPlanta() const
+{
+	return planta;
+}
+Ferramenta* Solo::getFerramenta() const
+{
+	return ferramenta;
+}
+Jardineiro* Solo::getJardineiro() const
+{
+	return jardineiro;
+}
+bool Solo::temPlanta() const
+{
+	return planta != nullptr;
+}
+bool Solo::temFerramenta() const
+{
+	return ferramenta != nullptr;
+}
+bool Solo::temJardineiro() const
+{
+	return jardineiro != nullptr;
+}
+
 Solo::~Solo(){}

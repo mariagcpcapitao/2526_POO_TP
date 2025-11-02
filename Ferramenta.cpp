@@ -3,12 +3,9 @@ int Ferramenta::contId = 0;
 Ferramenta::Ferramenta(const string &nome, const char &simbolo) : nomeFerr(nome), simbolo(simbolo)
 {
 	setId();
-	cout << "Ferramenta com id " << id_ferramenta << " criada" << endl;
 }
 Ferramenta::~Ferramenta(){}
-void Ferramenta::usar() {
-	cout << "Usando ferramenta: " << nomeFerr << " (ID: " << id_ferramenta << ")" << endl;
-}
+void Ferramenta::usar() {}
 void Ferramenta::setId()
 {
 	id_ferramenta = ++contId;
@@ -17,7 +14,7 @@ void Ferramenta::setId()
 
 Regador::Regador() : Ferramenta("Regador", 'g')
 {
-	cout << "Regador " <<  id_ferramenta << " com capaciddade de: " << capacidade << endl;
+	cout << "Regador " <<  id_ferramenta << " com capacidade de: " << capacidade << " unidades de agua " << endl;
 }
 Regador::~Regador()
 {
@@ -28,7 +25,7 @@ void Regador::usar()
 {
 	capacidade = capacidade - dose;
 	if (capacidade <= 0)
-		cout << "Acabou o adubo. Nao e possivel usar mais";
+		cout << "Acabou a agua. Regador descartado";
 	else
 		cout << "A regar as plantas. Agua restante: " << capacidade << "ml" << endl;
 }
@@ -44,10 +41,7 @@ void Adubo::usar()
 		cout << "Acabou o adubo. Nao e possivel usar mais";
 }
 
-TesouraPoda::TesouraPoda() : Ferramenta("Tesoura de Poda", 't')
-{
-	cout << "Ferramenta Tesoura de id: " << id_ferramenta << " criada" << endl;
-}
+TesouraPoda::TesouraPoda() : Ferramenta("Tesoura de Poda", 't') {}
 void TesouraPoda::usar()
 {
 	//elimina plantas

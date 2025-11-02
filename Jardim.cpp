@@ -7,9 +7,9 @@
 #include <iostream>
 #include <ostream>
 using namespace std;
-Jardim::Jardim(int agua, int nutrientes, int l, int c) : agua(agua), nutrientes(nutrientes), linhas(l), colunas(c)
+Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 {
-	cout << "Construindo Jardim " << linhas << " " << colunas << endl;
+	cout << "Construindo Jardim " << linhas << " por " << colunas << endl;
 }
 int Jardim::getLinhas() const{ return linhas; }
 int Jardim::getColunas() const{ return colunas; }

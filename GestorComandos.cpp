@@ -1,5 +1,4 @@
 
-
 #include "GestorComandos.h"
 
 
@@ -45,7 +44,7 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
         if (cmd == "fim") { std::cout << "A fechar o programa...\n"; return true; }
     }
     if (criado==0)
-        std::cout << "Erro: Para fazeres o que quer  que seja precisas de um jardim...\n";
+        std::cout << "Erro: Para fazeres o que quer que seja precisas de um jardim...\n";
     else
         std::cout << "Erro: comando desconhecido.\n";
 
@@ -84,7 +83,7 @@ bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: jardim " << palavras[1] << " " << palavras[2] << "\n";
-    Jardim* j = new Jardim(100, 50, linhas, colunas);
+    Jardim* j = new Jardim(linhas, colunas);
     setJardim(j);
     criado =1;
     return true;
