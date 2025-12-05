@@ -8,8 +8,8 @@ add_executable(2526_POO_TP main.cpp
         Jardim.h
         Solo.cpp
         Solo.h
-        Plantas.cpp
-        Plantas.h
+        Planta.cpp
+        Planta.h
         Ferramenta.cpp
         Ferramenta.h
         Jardineiro.cpp

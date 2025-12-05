@@ -2,7 +2,7 @@
 
 #ifndef JARDIM_H
 #define JARDIM_H
-
+#include "Solo.h"
 class Jardim
 {
 public:
@@ -15,6 +15,7 @@ public:
 private:
 	int linhas;
 	int colunas;
+	Solo ** conjunto;
 
 };
 #endif //JARDIM_H

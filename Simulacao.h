@@ -14,6 +14,7 @@ class Simulador {
     //std::map< string, Jardim*> copias;
 
 public:
+    int instante;
     ~Simulador();
 
     void criarJardim(int linhas, int colunas);

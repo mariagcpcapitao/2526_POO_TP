@@ -31,7 +31,7 @@ class Regador : public Ferramenta
 	int dose = Settings::Regador::dose;
 public:
 	Regador();
-	virtual void usar() override;
+	void usar() override;
 
 	~Regador() override;
 };
@@ -43,7 +43,7 @@ class Adubo : public Ferramenta
 	int dose = Settings::Adubo::dose;
 public:
 	Adubo();
-	virtual void usar() override;
+	void usar() override;
 
 	~Adubo() override;
 };
@@ -53,7 +53,7 @@ class TesouraPoda : public Ferramenta
 
 public:
 	TesouraPoda();
-	virtual void usar() override;
+	void usar() override;
 	~TesouraPoda() override;
 };
 
@@ -61,7 +61,7 @@ class FerramentaZ : public Ferramenta
 {
 public:
 	FerramentaZ();
-	virtual void usar() override;
+	void usar() override;
 	~FerramentaZ() override;
 };
 

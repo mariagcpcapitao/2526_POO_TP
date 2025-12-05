@@ -32,12 +32,12 @@ bool GestorComandos::validarComando(const std::vector<string>& palavras) {
 
     if(criado == 1) {
         if (cmd == "planta") return validarPlanta(palavras);
-        if (cmd == "lplanta") return validarPlanta(palavras);
+        if (cmd == "lplanta") return validarLPlanta(palavras);
         if (cmd == "colhe") return validarColhe(palavras);
         if (cmd == "avanca") return validarAvanca(palavras);
         if (cmd == "compra") return validarCompra(palavras);
         if (cmd == "lplantas") return validarLPlantas(palavras);
-        if (cmd == "entra") return validarCompra(palavras);
+        if (cmd == "entra") return validarEntra(palavras);
         if (cmd == "lferr") return validarLFerramentas(palavras);
         if (cmd == "pega") return validarPega(palavras);
         if (cmd == "larga") return validarLarga(palavras);
@@ -66,7 +66,7 @@ bool GestorComandos::validarPosicao(const string& pos, int linhas, int colunas) 
     int coluna = pos[1] - 'a';
 
     if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas) {
-        std::cout << "Erro: posição fora dos limites do jardim ("
+        std::cout << "Erro: posicao fora dos limites do jardim ("
                   << linhas << "x" << colunas << ").\n";
         return false;
     }
@@ -96,15 +96,15 @@ bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
 
 bool GestorComandos::validarPlanta(const std::vector<string>& palavras) {
     if (palavras.size() != 3) {
-        std::cout << "Erro: planta requer posição e tipo.\n";
+        std::cout << "Erro: planta requer posicao e tipo.\n";
         return false;
     }
     string pos = palavras[1];
     if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
         return false;
-    char tipo = palavras[2][0];
+    char tipo = palavras[2][0]; //primeiro caracter da 3a palavra
     if (string("crex").find(tipo) == string::npos) {
-        std::cout << "Erro: tipo de planta inválido (usa c, r, e ou x).\n";
+        std::cout << "Erro: tipo de planta invalido (usa c, r, e ou x).\n";
         return false;
     }
     std::cout << "Comando valido: planta " << pos << " " << tipo << "\n";
@@ -129,7 +129,7 @@ bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
     string pos = palavras[1];
     if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
         return false;
-    std::cout << "Comando valido: colhe " << pos << "\n";
+    std::cout << "Comando valido: entra " << pos << "\n";
     return true;
 }
 bool GestorComandos::validarColhe(const std::vector<string>& palavras) {
@@ -179,7 +179,7 @@ bool GestorComandos::validarCompra(const std::vector<string>& palavras) {
 }
 bool GestorComandos::validarLPlantas(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
-        std::cout << "Para listar as plantas só precisas de uma palavra.\n";
+        std::cout << "Para listar as plantas so precisas de uma palavra.\n";
         return false;
     }
     std::cout << "Comando valido: Listar todas as plantas\n";
@@ -187,7 +187,7 @@ bool GestorComandos::validarLPlantas(const std::vector<string>& palavras) {
 }
 bool GestorComandos::validarLFerramentas(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
-        std::cout << "Para listar as ferramentas só precisas de uma palavra.\n";
+        std::cout << "Para listar as ferramentas so precisas de uma palavra.\n";
         return false;
     }
     std::cout << "Comando valido: Listar todas as ferramentas\n";
@@ -195,7 +195,7 @@ bool GestorComandos::validarLFerramentas(const std::vector<string>& palavras) {
 }
 bool GestorComandos::validarLarga(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
-        std::cout << "Para largar a ferramenta só precisas de uma palavra.\n";
+        std::cout << "Para largar a ferramenta so precisas de uma palavra.\n";
         return false;
     }
     std::cout << "Comando valido: Largar a ferramenta que tem na mao\n";
@@ -203,7 +203,7 @@ bool GestorComandos::validarLarga(const std::vector<string>& palavras) {
 }
 bool GestorComandos::validarLArea(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
-        std::cout << "Para lArea só precisas de uma palavra.\n";
+        std::cout << "Para lArea so precisas de uma palavra.\n";
         return false;
     }
     std::cout << "Comando valido: Listar conteudo e props\n";
@@ -328,7 +328,7 @@ bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
     std::string nome = palavras[1] + ".txt";
     std::ifstream f(nome);
     if (!f.good()) {
-        std::cout << "Erro: o ficheiro '" << nome << "' não existe.\n";
+        std::cout << "Erro: o ficheiro '" << nome << "' nao existe.\n";
         return false;
     }
     std::cout << "Comando valido: executar os comandos do ficheiro "<<palavras[1]<<".txt ...\n";

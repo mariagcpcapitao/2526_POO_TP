@@ -1,24 +1,28 @@
-#ifndef PLANTAS_H
-#define PLANTAS_H
+#ifndef PLANTA_H
+#define PLANTA_H
 #include <iostream>
 #include <string>
+#include "Simulacao.h"
 
+class Solo;
 using namespace std;
 
-class Plantas
+class Planta
 {
 protected:
-	int nutrientes, agua;
-	int posLinha, posColuna;
+	int nutrientes, agua, posLinha, posColuna, instantesAguaAlta, instantesNutriZero, nutriAbsorvidos = 0, aguaAbsorvida = 0;
 	string beleza;
 	char simbolo;
+	Solo *solo_hosp;
+
 public:
-	Plantas(int agua, int nutrientes, string beleza, int posLinha, int posColuna, char simbolo);
-	int getPosLinha() const;
-	int getPosColuna() const;
+	Planta(Solo *solo, int agua, int nutrientes, string beleza, int posLinha, int posColuna, char simbolo);
+	int getPosLinha() const {return posLinha;}
+	int getPosColuna() const {return posColuna;}
 	int setPosLinha();
 	int setPosColuna();
 	string getBeleza() const;
+
 
 	virtual void absorveAgua(int &agua, int posLinha, int posColuna);
 	virtual void absorveNutrientes(int &nutrientes, int posLinha, int posColuna);
@@ -26,13 +30,12 @@ public:
 	virtual void perdeNutri(int &nutrientes, int posLinha, int posColuna);
 	virtual void multiplica(int &nutrientes, int &agua, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
-	virtual ~Plantas();
+	virtual ~Planta();
 };
 
-class Cacto : public Plantas
+class Cacto : public Planta
 {
 private:
-	int instantesAguaAlta, instantesNutriZero, nutriAbsorvidos;
 	int aguaCacto = 2;
 	int nutriCacto = 1;
 public:
@@ -46,7 +49,7 @@ public:
 	~Cacto() override;
 };
 
-class Roseira : public Plantas
+class Roseira : public Planta
 {
 public:
 	Roseira(int linha, int coluna);
@@ -59,7 +62,7 @@ public:
 	~Roseira() override;
 };
 
-class ErvaDaninha : public Plantas
+class ErvaDaninha : public Planta
 {
 public:
 	ErvaDaninha(int linha, int coluna);
@@ -72,7 +75,7 @@ public:
 	~ErvaDaninha() override;
 };
 
-class BastaoImperador : public Plantas
+class BastaoImperador : public Planta
 {
 public:
 	BastaoImperador(int linha, int coluna);
@@ -99,7 +102,7 @@ private:
 	static const int original_nutrientes = 90;
 	static const int original_agua_percentagem = 50;
 };
-#endif //PLANTAS_H
+#endif //PLANTA_H
 
 
 

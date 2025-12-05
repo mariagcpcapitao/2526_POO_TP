@@ -2,28 +2,28 @@
 #define SOLO_H
 #include "Jardineiro.h"
 #include "Ferramenta.h"
-#include "Plantas.h"
+#include "Planta.h"
 class Solo
 {
 private:
 	int nutriSolo;
 	int aguaSolo;
 
-	Plantas *planta;
-	Ferramenta *ferramenta;
-	Jardineiro *jardineiro;
+	Planta *planta = nullptr;
+	Ferramenta *ferramenta =  nullptr;
+	Jardineiro *jardineiro = nullptr;
 public:
 	Solo();
-	void getNutriSolo();
-	void getAguaSolo();
-	void setNutriSolo();
-	void setAguaSolo();
+	int getNutriSolo(){return nutriSolo;}
+	int getAguaSolo(){return aguaSolo;}
+	void setNutriSolo(int valor=-1, string acao);
+	void setAguaSolo(int valor=-1, string acao);
 
-	void setPlanta(Plantas* p);
+	void setPlanta(Planta* p);
 	void setFerramenta(Ferramenta* f);
 	void setJardineiro(Jardineiro* j);
 
-	Plantas* getPlanta() const;
+	Planta* getPlanta() const;
 	Ferramenta* getFerramenta() const;
 	Jardineiro* getJardineiro() const;
 

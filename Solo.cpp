@@ -8,24 +8,33 @@ Solo::Solo() : planta(nullptr), ferramenta(nullptr), jardineiro(nullptr)
 {
 	setNutriSolo();
 	setAguaSolo();
-	cout << "Solo criado com valores aleatorios -> " << "Nutrientes: " << nutriSolo << ", Aagua: " << aguaSolo << endl;}
+	cout << "Solo criado com valores aleatorios -> " << "Nutrientes: " << nutriSolo << ", Agua: " << aguaSolo << endl;}
 
-void Solo::setNutriSolo()
+void Solo::setNutriSolo(int valor, string acao)
 {
 	nutriSolo = Utilidades::obterValorAleatorio(
 	   Settings::Jardim::nutrientes_min,
 	   Settings::Jardim::nutrientes_max
-   );
+	);
+	if (valor != -1 && acao == "perder")
+		nutriSolo = nutriSolo - valor;
+	if (valor != -1 && acao == "ganhar")
+		nutriSolo = nutriSolo + valor;
+	// if (nutriSolo <= 0){} ...completar
+
 }
-void Solo::setAguaSolo()
+void Solo::setAguaSolo(int valor, string acao)
 {
 	aguaSolo = Utilidades::obterValorAleatorio(
 		Settings::Jardim::agua_min,
 		Settings::Jardim::agua_max
 	);
+	if (valor != -1 && acao == "perder")
+		aguaSolo = aguaSolo - valor;
+	// if (aguaSolo <= 0){} ...completar
 }
 
-void Solo::setPlanta(Plantas* p)
+void Solo::setPlanta(Planta* p)
 {
 	planta = p;
 }
@@ -38,7 +47,7 @@ void Solo::setJardineiro(Jardineiro* j)
 	jardineiro = j;
 }
 
-Plantas* Solo::getPlanta() const
+Planta* Solo::getPlanta() const
 {
 	return planta;
 }

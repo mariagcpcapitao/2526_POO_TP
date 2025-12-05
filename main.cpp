@@ -2,7 +2,7 @@
 
 #include "Ferramenta.h"
 #include "GestorComandos.h"
-#include "Plantas.h"
+#include "Planta.h"
 #include "Solo.h"
 
 int main() {
