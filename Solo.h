@@ -6,16 +6,18 @@
 class Solo
 {
 private:
-	int nutriSolo;
-	int aguaSolo;
+	int nutriSolo = -1;
+	int aguaSolo = -1;
 
 	Planta *planta = nullptr;
 	Ferramenta *ferramenta =  nullptr;
 	Jardineiro *jardineiro = nullptr;
 public:
 	Solo();
-	int getNutriSolo(){return nutriSolo;}
-	int getAguaSolo(){return aguaSolo;}
+	int getNutriSolo() const {return nutriSolo;}
+	int getAguaSolo() const {return aguaSolo;}
+	char getConteudo() const;
+	Solo & getPosicao(int l, int c);
 	void setNutriSolo(int valor=-1, string acao);
 	void setAguaSolo(int valor=-1, string acao);
 

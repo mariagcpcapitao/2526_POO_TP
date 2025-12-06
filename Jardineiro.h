@@ -13,8 +13,11 @@ private:
 	int quant_ferramentas;
 	char simbolo = '*';
 	bool noJardim = false;
+
 public:
 	Jardineiro();
+	char getSimbolo() const{ return simbolo;}
+	Solo & getSolo() const;
 	void mover(int &posLinha, int &posColuna);
 	void comprarFerramenta(Ferramenta *f);
 	void adicionarFerramenta(Ferramenta *f);

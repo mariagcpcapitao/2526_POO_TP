@@ -1,0 +1,4 @@
+to do List
+- funcao de multiplicar plantas
+- verificação de posições livres nos solos vizinhos
+- todas as funcoes da planta exótica (<<)

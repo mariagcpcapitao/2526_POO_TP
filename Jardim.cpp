@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <ostream>
+
+#include "GestorComandos.h"
 using namespace std;
 Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 {
@@ -14,3 +16,7 @@ Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 }
 int Jardim::getLinhas() const{ return linhas; }
 int Jardim::getColunas() const{ return colunas; }
+Solo & Jardim::getPosicao(int linha, int coluna)
+{
+	// this->GestorComandos::validarPosicao(linha, coluna);
+}

@@ -7,6 +7,8 @@
 #include<iostream>
 #include "Settings.h"
 
+class Solo;
+
 using namespace std;
 class Ferramenta
 {
@@ -15,10 +17,12 @@ protected:
 	char simbolo;
 	int id_ferramenta;
 	static int contId;
+	Solo *solo_onde_esta;
 
 public:
 	Ferramenta(const string &nomeFerr, const char &simbolo);
 	int getId();
+	char getSimbolo() const{return simbolo;}
 	virtual void usar();
 	virtual ~Ferramenta();
 private:

@@ -12,10 +12,14 @@ Solo::Solo() : planta(nullptr), ferramenta(nullptr), jardineiro(nullptr)
 
 void Solo::setNutriSolo(int valor, string acao)
 {
-	nutriSolo = Utilidades::obterValorAleatorio(
-	   Settings::Jardim::nutrientes_min,
-	   Settings::Jardim::nutrientes_max
-	);
+	if (nutriSolo == -1)
+	{
+		nutriSolo = Utilidades::obterValorAleatorio(
+		   Settings::Jardim::nutrientes_min,
+		   Settings::Jardim::nutrientes_max
+		   );
+		return;
+	}
 	if (valor != -1 && acao == "perder")
 		nutriSolo = nutriSolo - valor;
 	if (valor != -1 && acao == "ganhar")
@@ -25,22 +29,29 @@ void Solo::setNutriSolo(int valor, string acao)
 }
 void Solo::setAguaSolo(int valor, string acao)
 {
-	aguaSolo = Utilidades::obterValorAleatorio(
-		Settings::Jardim::agua_min,
-		Settings::Jardim::agua_max
-	);
+	if (aguaSolo == -1)
+	{
+		aguaSolo = Utilidades::obterValorAleatorio(
+			Settings::Jardim::agua_min,
+			Settings::Jardim::agua_max
+		);
+		return;
+	}
 	if (valor != -1 && acao == "perder")
 		aguaSolo = aguaSolo - valor;
+	if (valor != -1 && acao == "ganhar")
+		aguaSolo = aguaSolo + valor;
+
 	// if (aguaSolo <= 0){} ...completar
 }
 
 void Solo::setPlanta(Planta* p)
 {
-	planta = p;
+	this->planta = p;
 }
 void Solo::setFerramenta(Ferramenta* f)
 {
-	ferramenta = f;
+	this->ferramenta = f;
 }
 void Solo::setJardineiro(Jardineiro* j)
 {
@@ -59,6 +70,20 @@ Jardineiro* Solo::getJardineiro() const
 {
 	return jardineiro;
 }
+
+char Solo::getConteudo() const
+{
+	if (this->temJardineiro())
+		return jardineiro->getSimbolo();
+	if (this->temPlanta())
+		return planta->getSimbolo();
+	if (this->temFerramenta())
+		return ferramenta->getSimbolo();
+	cout << "Solo vazio" << endl;
+	return ' ';
+}
+
+
 bool Solo::temPlanta() const
 {
 	return planta != nullptr;
