@@ -1,12 +1,9 @@
 #include "Utilidades.h"
 #include <random>
 
-int* Utilidades::converteLetras(int l, int c)
-{
-	int linha = l - 'a';
-	int coluna = c - 'a';
-	int pos[2] = {linha, coluna};
-	return pos;
+void Utilidades::converteLetras(char linChar, char colChar, int& l, int& c) {
+	l = linChar - 'a';
+	c = colChar - 'a';
 }
 
 int Utilidades::calculaIndice(int l, int c, int numColunas)

@@ -3,6 +3,7 @@
 #include "Jardineiro.h"
 #include "Ferramenta.h"
 #include "Planta.h"
+class Planta;
 class Solo
 {
 private:
@@ -18,8 +19,8 @@ public:
 	int getAguaSolo() const {return aguaSolo;}
 	char getConteudo() const;
 	Solo & getPosicao(int l, int c);
-	void setNutriSolo(int valor=-1, string acao);
-	void setAguaSolo(int valor=-1, string acao);
+	void setNutriSolo(double valor = -1, std::string acao = "");
+	void setAguaSolo(double valor = -1, std::string acao = "");
 
 	void setPlanta(Planta* p);
 	void setFerramenta(Ferramenta* f);

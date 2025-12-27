@@ -3,6 +3,7 @@
 #define GESTORCOMANDOS_H
 #include <string>
 #include <vector>
+#include <map>
 #include <sstream>
 #include <iostream>
 #include <cctype>
@@ -11,13 +12,19 @@
 using namespace std;
 using std::string;
 
+
+
 class GestorComandos {
     Jardim* jardim = nullptr;
+    std::map<string, int> mapComandos;
+
 public:
+    GestorComandos();
     void setJardim(Jardim* j) { jardim = j; }
     void processarComando(const string& linha);
 
 private:
+    void inicializarMap();
     std::vector<string> dividir(const string& linha);
     //Validação geral
     bool validarComando(const std::vector<string>& palavras);
@@ -41,6 +48,10 @@ private:
     bool validarRecupera(const std::vector<string>& palavras);
     bool validarApaga(const std::vector<string>& palavras);
     bool validarExecuta(const std::vector<string>& palavras);
+    bool validarE(const std::vector<string>& palavras);
+    bool validarD(const std::vector<string>& palavras);
+    bool validarC(const std::vector<string>& palavras);
+    bool validarB(const std::vector<string>& palavras);
 };
 
 #endif //GESTORCOMANDOS_H

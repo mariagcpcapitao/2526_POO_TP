@@ -16,7 +16,27 @@ Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 }
 int Jardim::getLinhas() const{ return linhas; }
 int Jardim::getColunas() const{ return colunas; }
-Solo & Jardim::getPosicao(int linha, int coluna)
-{
-	// this->GestorComandos::validarPosicao(linha, coluna);
+Solo & Jardim::getPosicao(int linha, int coluna) {
+	return conjunto[linha][coluna];
+}
+// No Jardim.cpp
+void Jardim::mostraJardim() const {
+	// 1. Régua Superior (Letras das colunas em Maiúsculas)
+	std::cout << " "; // Espaço para alinhar com a régua lateral
+	for (int j = 0; j < colunas; j++) {
+		std::cout << (char)('A' + j);
+	}
+	std::cout << "\n";
+
+	for (int i = 0; i < linhas; i++) {
+		std::cout << (char)('A' + i) << " ";
+
+		for (int j = 0; j < colunas; j++) {
+			//prioridade: Jardineiro > Planta > Ferramenta
+
+			char simbolo = conjunto[i][j].getConteudo();
+			cout << (simbolo == ' ' ? ' ' : simbolo) << " ";
+		}
+		std::cout << "\n";
+	}
 }

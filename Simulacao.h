@@ -1,14 +1,13 @@
 #ifndef SIMULACAO_H
 #define SIMULACAO_H
-#ifndef SIMULADOR_H
-#define SIMULADOR_H
+
 
 #include "Jardim.h"
 #include <map>
 #include <string>
 using namespace std;
 using std::string;
-
+class Jardim;
 class Simulador {
     Jardim* jardimAtual = nullptr;
     //std::map< string, Jardim*> copias;
@@ -28,4 +27,4 @@ public:
 
 #endif
 
-#endif //SIMULACAO_H
+
