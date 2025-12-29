@@ -11,6 +11,7 @@ public:
 	int getLinhas() const;
 	int getColunas() const;
 	Solo & getPosicao(int linha, int coluna);
+	Solo* getVizinhoLivre(int l, int c);
 
 	~Jardim();
 private:

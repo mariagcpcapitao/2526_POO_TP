@@ -29,7 +29,7 @@ public:
 	virtual void absorveNutrientes(int posLinha, int posColuna);
 	virtual void perdeAgua(int posLinha, int posColuna);
 	virtual void perdeNutri(int posLinha, int posColuna);
-	virtual void multiplica(int posLinha, int posColuna);
+	virtual void multiplica(Jardim & j, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
 	virtual ~Planta();
 };
@@ -45,7 +45,7 @@ public:
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
 	void perdeNutri(int posLinha, int posColuna) override;
-	void multiplica(int posLinha, int posColuna) override;
+	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~Cacto() override;
 };
@@ -58,7 +58,7 @@ public:
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
 	void perdeNutri(int posLinha, int posColuna) override;
-	void multiplica(int posLinha, int posColuna) override;
+	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~Roseira() override;
 };
@@ -71,7 +71,7 @@ public:
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
 	void perdeNutri(int posLinha, int posColuna) override;
-	void multiplica(int posLinha, int posColuna) override;
+	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~ErvaDaninha() override;
 };
@@ -84,7 +84,7 @@ public:
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
 	void perdeNutri(int posLinha, int posColuna) override;
-	void multiplica(int posLinha, int posColuna) override;
+	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~BastaoImperador() override;
 private:

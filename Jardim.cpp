@@ -40,3 +40,32 @@ void Jardim::mostraJardim() const {
 		std::cout << "\n";
 	}
 }
+
+// Retorna um ponteiro para o Solo vizinho livre, ou nullptr se não houver
+Solo* Jardim::getVizinhoLivre(int l, int c) {
+	// cima, baixo, esquerda, direita
+	int dl[] = {-1, 1,  0, 0};
+	int dc[] = { 0, 0, -1, 1};
+
+	// Sorteia pra definir ponto de inicio de busca (0 a 3) para dar variedade
+	int inicio = rand() % 4;
+
+	for (int i = 0; i < 4; i++) {
+		// % garante que o índice da a volta
+		int idx = (inicio + i) % 4;
+
+		int nL = l + dl[idx]; // Nova Linha
+		int nC = c + dc[idx]; // Nova Coluna
+
+		// verifica se está dentro das bordas do jardim
+		if (nL >= 0 && nL < linhas && nC >= 0 && nC < colunas) {
+
+			// verifica se nao tem planta nessa posição
+			if (conjunto[nL][nC].getPlanta() == nullptr) {
+				return &conjunto[nL][nC];
+			}
+		}
+	}
+
+	return nullptr;
+}

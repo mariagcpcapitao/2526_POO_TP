@@ -74,13 +74,13 @@ Jardineiro* Solo::getJardineiro() const
 
 char Solo::getConteudo() const
 {
-	if (jardineiro != nullptr)
+	if (temJardineiro())
 		return jardineiro->getSimbolo();
 
-	if (planta != nullptr)
+	if (temPlanta())
 		return planta->getSimbolo();
 
-	if (ferramenta != nullptr)
+	if (temFerramenta())
 		return ferramenta->getSimbolo();
 
 	return ' ';
@@ -99,5 +99,10 @@ bool Solo::temJardineiro() const
 {
 	return jardineiro != nullptr;
 }
+
+Solo & Solo::getSolo(int l, int c) {
+
+}
+
 
 Solo::~Solo(){}

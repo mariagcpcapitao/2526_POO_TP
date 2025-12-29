@@ -8,10 +8,10 @@ Jardineiro::Jardineiro()
 }
 Jardineiro::~Jardineiro(){}
 
-Solo & Jardineiro::getSolo() const
-{
-
-}
+// Solo & Jardineiro::getSolo() const
+// {
+//
+// }
 void Jardineiro::comprarFerramenta(Ferramenta *f){}
 void Jardineiro::adicionarFerramenta(Ferramenta* f){}
 void Jardineiro::usarFerramenta(int index){}

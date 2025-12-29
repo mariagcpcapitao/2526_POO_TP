@@ -56,9 +56,19 @@ void Cacto::absorveNutrientes(int posLinha, int posColuna)
 void Cacto::perdeAgua(int posLinha, int posColuna){}
 void Cacto::perdeNutri(int posLinha, int posColuna) {}
 
-void Cacto::multiplica(int posLinha, int posColuna)
+void Cacto::multiplica(Jardim & j, int posLinha, int posColuna)
 {
-	// if (agua > 50 && nutrientes > 100){}
+	if (nutrientes <= 100 || agua <= 50) return;
+	Solo* vizinho = j.getVizinhoLivre(posLinha, posColuna);
+
+	if (vizinho != nullptr) {
+		// Divide os recursos
+		this->nutrientes /= 2;
+		this->agua /= 2;
+
+		// cria o novo cacto
+		vizinho->setPlanta(new Cacto(this->nutrientes, this->agua));
+	}
 }
 void Cacto::morre()
 {
@@ -122,7 +132,24 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
-void Roseira::multiplica(int posLinha, int posColuna){}
+void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
+{
+	if (this->nutrientes <= 100) {
+		return;
+	}
+
+	Solo* vizinho = j.getVizinhoLivre(posLinha, posColuna);
+
+	if (vizinho != nullptr) {
+
+		int metadeAgua = this->agua / 2;
+
+		vizinho->setPlanta(new Roseira(25, metadeAgua));
+
+		this->nutrientes = 100;
+		this->agua = metadeAgua;
+	}
+}
 void Roseira::morre()
 {
 	solo_hosp->setAguaSolo(aguaAbsorvida/2, "ganhar");

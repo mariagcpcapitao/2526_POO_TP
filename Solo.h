@@ -18,7 +18,9 @@ public:
 	int getNutriSolo() const {return nutriSolo;}
 	int getAguaSolo() const {return aguaSolo;}
 	char getConteudo() const;
-	Solo & getPosicao(int l, int c);
+
+	Solo & getSolo(int l, int c);
+
 	void setNutriSolo(double valor = -1, std::string acao = "");
 	void setAguaSolo(double valor = -1, std::string acao = "");
 
