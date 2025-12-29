@@ -3,21 +3,29 @@
 #ifndef JARDIM_H
 #define JARDIM_H
 #include "Solo.h"
+#include "Jardineiro.h"
 class Jardim
 {
 public:
 	Jardim(int l, int c);
+	Jardim(const Jardim& outro);
 	void mostraJardim() const;
 	int getLinhas() const;
 	int getColunas() const;
+	void atualizarJardim();
 	Solo & getPosicao(int linha, int coluna);
 	Solo* getVizinhoLivre(int l, int c);
+	Jardineiro* getJardineiro() const { return jardineiro; }
+	bool posicionarJardineiro(int l, int c, Jardineiro* j);
+	void removerJardineiro();
+	bool moverJardineiro(char direcao);
 
 	~Jardim();
 private:
 	int linhas;
 	int colunas;
 	Solo ** conjunto;
+	Jardineiro* jardineiro = nullptr;
 
 };
 #endif //JARDIM_H

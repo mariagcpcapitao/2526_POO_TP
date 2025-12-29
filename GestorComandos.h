@@ -12,14 +12,14 @@
 using namespace std;
 using std::string;
 
-
-
 class GestorComandos {
     Jardim* jardim = nullptr;
-    std::map<string, int> mapComandos;
+    Simulador* simulador = nullptr;
+    map<string, int> mapComandos;
 
 public:
-    GestorComandos();
+    GestorComandos(Simulador* s);
+    ~GestorComandos();
     void setJardim(Jardim* j) { jardim = j; }
     void processarComando(const string& linha);
 

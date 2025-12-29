@@ -14,7 +14,7 @@ void Planta::absorveAgua(int posLinha, int posColuna) {}
 void Planta::absorveNutrientes(int posLinha, int posColuna) {}
 void Planta::perdeAgua(int posLinha, int posColuna){}
 void Planta::perdeNutri(int posLinha, int posColuna) {}
-void Planta::multiplica(int posLinha, int posColuna) {}
+//void Planta::multiplica(int posLinha, int posColuna) {}
 void Planta::morre() {}
 
 Cacto::Cacto(int linha, int coluna) : Planta(solo_hosp, aguaCacto, nutriCacto, "neutra", linha, coluna, 'c'){}
@@ -56,7 +56,7 @@ void Cacto::absorveNutrientes(int posLinha, int posColuna)
 void Cacto::perdeAgua(int posLinha, int posColuna){}
 void Cacto::perdeNutri(int posLinha, int posColuna) {}
 
-void Cacto::multiplica(Jardim & j, int posLinha, int posColuna)
+/*void Cacto::multiplica(Jardim & j, int posLinha, int posColuna)
 {
 	if (nutrientes <= 100 || agua <= 50) return;
 	Solo* vizinho = j.getVizinhoLivre(posLinha, posColuna);
@@ -69,7 +69,7 @@ void Cacto::multiplica(Jardim & j, int posLinha, int posColuna)
 		// cria o novo cacto
 		vizinho->setPlanta(new Cacto(this->nutrientes, this->agua));
 	}
-}
+}*/
 void Cacto::morre()
 {
 	// deixar no solo os nutrientes absorvidos
@@ -132,7 +132,7 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
-void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
+/*void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
 {
 	if (this->nutrientes <= 100) {
 		return;
@@ -149,7 +149,7 @@ void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
 		this->nutrientes = 100;
 		this->agua = metadeAgua;
 	}
-}
+}*/
 void Roseira::morre()
 {
 	solo_hosp->setAguaSolo(aguaAbsorvida/2, "ganhar");
@@ -187,7 +187,7 @@ void ErvaDaninha::absorveNutrientes(int posLinha, int posColuna)
 }
 void ErvaDaninha::perdeAgua(int posLinha, int posColuna){}
 void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
-void ErvaDaninha::multiplica(int posLinha, int posColuna){}
+//void ErvaDaninha::multiplica(int posLinha, int posColuna){}
 void ErvaDaninha::morre(){}
 ErvaDaninha::~ErvaDaninha(){}
 
@@ -196,6 +196,6 @@ void BastaoImperador::absorveAgua(int posLinha, int posColuna){}
 void BastaoImperador::absorveNutrientes(int posLinha, int posColuna) {}
 void BastaoImperador::perdeAgua(int posLinha, int posColuna){}
 void BastaoImperador::perdeNutri(int posLinha, int posColuna) {}
-void BastaoImperador::multiplica(int posLinha, int posColuna){}
+//void BastaoImperador::multiplica(int posLinha, int posColuna){}
 void BastaoImperador::morre(){}
 BastaoImperador::~BastaoImperador(){}

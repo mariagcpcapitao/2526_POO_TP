@@ -9,7 +9,8 @@ Solo::Solo() : planta(nullptr), ferramenta(nullptr), jardineiro(nullptr)
 
 	setNutriSolo();
 	setAguaSolo();
-	cout << "Solo criado com valores aleatorios -> " << "Nutrientes: " << nutriSolo << ", Agua: " << aguaSolo << endl;}
+	//cout << "Solo criado com valores aleatorios -> " << "Nutrientes: " << nutriSolo << ", Agua: " << aguaSolo << endl;
+}
 
 void Solo::setNutriSolo(double valor, string acao)
 {
@@ -54,10 +55,6 @@ void Solo::setFerramenta(Ferramenta* f)
 {
 	this->ferramenta = f;
 }
-void Solo::setJardineiro(Jardineiro* j)
-{
-	jardineiro = j;
-}
 
 Planta* Solo::getPlanta() const
 {
@@ -83,7 +80,7 @@ char Solo::getConteudo() const
 	if (temFerramenta())
 		return ferramenta->getSimbolo();
 
-	return ' ';
+	return '.';
 }
 
 
@@ -97,7 +94,7 @@ bool Solo::temFerramenta() const
 }
 bool Solo::temJardineiro() const
 {
-	return jardineiro != nullptr;
+	return this->jardineiro != nullptr;
 }
 
 Solo & Solo::getSolo(int l, int c) {

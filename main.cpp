@@ -6,7 +6,8 @@
 #include "Solo.h"
 
 int main() {
-    GestorComandos gc;
+    Simulador sim;
+    GestorComandos gc(&sim);
     std::string linha;
 
     std::cout << "Simulador de Jardim \n";

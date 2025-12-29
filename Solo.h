@@ -6,7 +6,7 @@
 class Planta;
 class Solo
 {
-private:
+
 	int nutriSolo = -1;
 	int aguaSolo = -1;
 
@@ -26,7 +26,7 @@ public:
 
 	void setPlanta(Planta* p);
 	void setFerramenta(Ferramenta* f);
-	void setJardineiro(Jardineiro* j);
+	void setJardineiro(Jardineiro* j){this->jardineiro = j;};
 
 	Planta* getPlanta() const;
 	Ferramenta* getFerramenta() const;
