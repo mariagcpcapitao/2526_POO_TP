@@ -1,10 +1,11 @@
 #ifndef SOLO_H
 #define SOLO_H
-#include "Jardineiro.h"
-#include "Ferramenta.h"
-#include "Planta.h"
+
+#include <string>
 class Planta;
+class Ferramenta;
 class Jardineiro;
+
 class Solo
 {
 

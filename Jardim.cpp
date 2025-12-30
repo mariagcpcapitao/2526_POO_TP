@@ -5,16 +5,49 @@
 #include <iostream>
 #include <ostream>
 
+#include "Solo.h"
+#include "Planta.h"
+#include "Jardineiro.h"
 #include "GestorComandos.h"
+#include "Ferramenta.h"
+#include "Utilidades.h"
 using namespace std;
 Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 {
+	int numFerrInicial=3;
+	if (l*c<3)
+		numFerrInicial=l*c;
 	cout << "Construindo Jardim " << linhas << " por " << colunas << endl;
 	conjunto = new Solo*[linhas];
 	for (int i = 0; i < linhas; i++)
 		conjunto[i] = new Solo[colunas];
+	for (int i = 0; i < numFerrInicial; i++) {
+		colocarFerramentaAleatoria();
+	}
+}
+void Jardim::colocarFerramentaAleatoria() {
+	int l, c;
+	do {
+		l = Utilidades::obterValorAleatorio(0, linhas - 1); //
+		c = Utilidades::obterValorAleatorio(0, colunas - 1);
+	} while (conjunto[l][c].temFerramenta());
+
+	int tipo = Utilidades::obterValorAleatorio(1, 4);
+	Ferramenta* f = nullptr;
+
+	switch (tipo) {
+		case 1: f = new Regador(); break;
+		case 2: f = new Adubo(); break;
+		case 3: f = new TesouraPoda(); break;
+		case 4: f = new FerramentaZ(); break;
+	}
+
+	if (f != nullptr) {
+		conjunto[l][c].setFerramenta(f); //
+	}
 }
 Jardim::Jardim(const Jardim& outro) : linhas(outro.linhas), colunas(outro.colunas) {
+
 	conjunto = new Solo*[linhas];
 	for (int i = 0; i < linhas; i++) {
 		conjunto[i] = new Solo[colunas];
@@ -63,7 +96,7 @@ Solo & Jardim::getPosicao(int linha, int coluna) {
 
 void Jardim::mostraJardim() const {
 
-	cout << " ";
+	cout << "  ";
 	for (int j = 0; j < colunas; j++) {
 		cout << (char)('A' + j);
 	}
@@ -76,7 +109,7 @@ void Jardim::mostraJardim() const {
 			//prioridade: Jardineiro > Planta > Ferramenta
 
 			char simbolo = conjunto[i][j].getConteudo();
-			cout << (simbolo == ' ' ? ' ' : simbolo) << " ";
+			cout << (simbolo == ' ' ? ' ' : simbolo);
 		}
 		cout << "\n";
 	}
@@ -89,6 +122,13 @@ bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
 	conjunto[l][c].setJardineiro(j);
 
 	j->setPosicao(l, c);
+	Solo& s = conjunto[l][c];
+
+	if (s.temFerramenta()) {
+		j->adicionarFerramenta(s.getFerramenta());
+		s.setFerramenta(nullptr);
+		colocarFerramentaAleatoria();
+	}
 	return true;
 }
 

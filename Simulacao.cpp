@@ -1,6 +1,11 @@
 
 
 #include "Simulacao.h"
+#include <iostream>
+#include <ostream>
+#include "Simulacao.h"
+#include "Jardim.h"
+#include "Jardineiro.h"
 Simulador::Simulador() {
     jardimAtual=nullptr;
     j = new Jardineiro();
@@ -27,11 +32,13 @@ void Simulador::resetaLimitesTurno() {
 }
 void Simulador::avanca(int n) {
     if (j == nullptr || jardimAtual == nullptr) return;
-    j->resetTurno();
-    cout << "O jardineiro descansou. Limites reiniciados." << endl;
-    for (int i = 0; i < n; ++i)
+
+    for (int i = 0; i < n; ++i) {
+        j->resetTurno();
         jardimAtual->atualiza();
         j->atualizaFerramentas();
+    }
+    cout << "O jardineiro descansou. Limites reiniciados." << endl;
     cout << "Avancaram " << n << " instantes no tempo." << endl;
 }
 Simulador::~Simulador() {

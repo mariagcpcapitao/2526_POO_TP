@@ -3,11 +3,11 @@
 
 #include "GestorComandos.h"
 
+
 GestorComandos::GestorComandos(Simulador* s) : simulador(s){
     inicializarMap();
 }
 GestorComandos::~GestorComandos() {
-    delete jardim;
 }
 std::vector<string> GestorComandos::dividir(const string& linha) {
     std::istringstream iss(linha);
@@ -54,9 +54,9 @@ void GestorComandos::processarComando(const string& linha) {
     }
 
     int id = mapComandos[cmd];
+    Jardim* j=simulador->getJardimAtual();
 
-
-    if (jardim == nullptr && id != 1 && id != 10) {
+    if (j == nullptr && id != 1 && id != 10) {
         std::cout << "Erro: Precisa de um jardim para este comando.\n";
         return;
     }
@@ -82,8 +82,8 @@ void GestorComandos::processarComando(const string& linha) {
         case 19: validarC(palavras); break;
         case 20: validarB(palavras); break;
     }
-    if (jardim != nullptr) {
-        jardim->mostraJardim();
+    if (j != nullptr) {
+        j->mostraJardim();
     }
 }
 bool GestorComandos::validarPosicao(const string& pos, int linhas, int colunas) {
@@ -122,6 +122,7 @@ bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
     Jardim* j = new Jardim( linhas, colunas);
     setJardim(j);
     simulador->setJardim(j);
+    j->mostraJardim();
     return true;
 }
 
@@ -131,7 +132,8 @@ bool GestorComandos::validarPlanta(const std::vector<string>& palavras) {
         return false;
     }
     string pos = palavras[1];
-    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+    Jardim* j=simulador->getJardimAtual();
+    if (!validarPosicao(pos, j->getLinhas(), j->getColunas()))
         return false;
     char tipo = palavras[2][0]; //primeiro caracter da 3a palavra
     if (string("crex").find(tipo) == string::npos) {
@@ -148,13 +150,15 @@ bool GestorComandos::validarLPlanta(const std::vector<string>& palavras) {
         return false;
     }
     string pos = palavras[1];
-    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+    Jardim* j=simulador->getJardimAtual();
+    if (!validarPosicao(pos, j->getLinhas(), j->getColunas()))
         return false;
     std::cout << "Comando valido: lplanta " << pos << "\n";
     return true;
 }
 bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
     Jardineiro* j = simulador->getJardineiro();
+    Jardim* jm=simulador->getJardimAtual();
     if (palavras.size() != 2) {
         std::cout << "Erro: entra requer uma posicao.\n";
         return false;
@@ -171,7 +175,7 @@ bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
     int l = palavras[1][0] - 'a';
     int c = palavras[1][1] - 'a';
 
-    if (jardim->posicionarJardineiro(l, c, j)) {
+    if (jm->posicionarJardineiro(l, c, j)) {
         std::cout << "Chamada ao Jardim feita com sucesso.\n";
         return true;
     }
@@ -185,15 +189,16 @@ bool GestorComandos::validarColhe(const std::vector<string>& palavras) {
         return false;
     }
     string pos = palavras[1];
-    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+    Jardim* j=simulador->getJardimAtual();
+    if (!validarPosicao(pos, j->getLinhas(), j->getColunas()))
         return false;
 
     std::cout << "Comando valido: colhe " << pos << "\n";
-    return true;
+    return simulador->executaColhe(pos[0] - 'a', pos[1] - 'a');
 }
 
 bool GestorComandos::validarAvanca(const std::vector<string>& palavras) {
-    int n;
+    int n = 1;
     if (palavras.size() > 2) {
         std::cout << "Erro: avanca tem no maximo 1 parametro.\n";
         return false;
@@ -265,7 +270,8 @@ bool GestorComandos::validarLSolo(const std::vector<string>& palavras) {
     }
 
     string pos = palavras[1];
-    if (!validarPosicao(pos, jardim->getLinhas(), jardim->getColunas()))
+    Jardim* j=simulador->getJardimAtual();
+    if (!validarPosicao(pos, j->getLinhas(), j->getColunas()))
         return false;
     if (palavras.size() == 3) {
         try {
@@ -395,10 +401,8 @@ bool GestorComandos::validarE(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (simulador->executaComandoMover('e')) {
-        j->incrementaMov();
+    if (simulador->executaComandoMover('e'))
         return true;
-    }
     return false;
 }
 bool GestorComandos::validarD(const std::vector<string>& palavras) {
@@ -412,10 +416,8 @@ bool GestorComandos::validarD(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (simulador->executaComandoMover('d')) {
-        j->incrementaMov();
+    if (simulador->executaComandoMover('d'))
         return true;
-    }
     return false;
 }
 bool GestorComandos::validarC(const std::vector<string>& palavras) {
@@ -429,10 +431,10 @@ bool GestorComandos::validarC(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (simulador->executaComandoMover('c')) {
-        j->incrementaMov();
+    if (simulador->executaComandoMover('c'))
+
         return true;
-    }
+
     return false;
 }
 bool GestorComandos::validarB(const std::vector<string>& palavras) {
@@ -447,9 +449,8 @@ bool GestorComandos::validarB(const std::vector<string>& palavras) {
     }
 
 
-    if (simulador->executaComandoMover('b')) {
-        j->incrementaMov();
+    if (simulador->executaComandoMover('b'))
         return true;
-    }
+
     return false;
 }

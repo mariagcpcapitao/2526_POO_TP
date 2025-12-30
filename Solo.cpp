@@ -1,6 +1,8 @@
 
 #include "Solo.h"
-
+#include "Planta.h"
+#include "Jardineiro.h"
+#include "Ferramenta.h"
 #include "Settings.h"
 #include "Utilidades.h"
 
@@ -98,7 +100,7 @@ bool Solo::temJardineiro() const
 }
 
 Solo & Solo::getSolo(int l, int c) {
-
+	return *this;
 }
 
 

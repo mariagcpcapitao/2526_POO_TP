@@ -6,8 +6,7 @@
 #include <string>
 #include<iostream>
 #include "Settings.h"
-
-class Solo;
+#include "Solo.h"
 
 using namespace std;
 class Ferramenta

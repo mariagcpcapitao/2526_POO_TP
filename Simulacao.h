@@ -19,7 +19,7 @@ public:
     int instante;
     Simulador();
     ~Simulador();
-    void avanca(int n=1);
+    void avanca(int n);
     void resetaLimitesTurno();
     void criarJardim(int linhas, int colunas);
     void grava(const string& nome);

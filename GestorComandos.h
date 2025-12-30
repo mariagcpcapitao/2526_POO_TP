@@ -8,7 +8,10 @@
 #include <iostream>
 #include <cctype>
 #include <fstream>
+
+#include "Simulacao.h"
 #include "Jardim.h"
+
 using namespace std;
 using std::string;
 

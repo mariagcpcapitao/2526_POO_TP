@@ -2,14 +2,15 @@
 
 #ifndef JARDINEIRO_H
 #define JARDINEIRO_H
-#include "Ferramenta.h"
+class Ferramenta;
 class Jardim;
+class Solo;
 
 class Jardineiro
 {
 	int posLinha, posColuna;
-	Ferramenta** inventario;
-	int quant_ferramentas;
+	Ferramenta** inventario=nullptr;
+	int quant_ferramentas=0;
 	char simbolo = '*';
 	bool noJardim = false;
 	Ferramenta* ferramentaNaMao = nullptr;

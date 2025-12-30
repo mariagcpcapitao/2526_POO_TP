@@ -2,11 +2,12 @@
 
 #ifndef JARDIM_H
 #define JARDIM_H
-#include "Solo.h"
-#include "Jardineiro.h"
+class Solo;
+class Jardineiro;
 class Jardim
 {
 public:
+	void colocarFerramentaAleatoria();
 	Jardim(int l, int c);
 	Jardim(const Jardim& outro);
 	void mostraJardim() const;

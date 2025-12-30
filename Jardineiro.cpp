@@ -18,7 +18,12 @@ void Jardineiro::resetTurno() {
 	pPlantadas = 0;
 }
 void Jardineiro::comprarFerramenta(Ferramenta *f){}
-void Jardineiro::adicionarFerramenta(Ferramenta* f){}
+void Jardineiro::adicionarFerramenta(Ferramenta* f) {
+	if (f == nullptr) return;
+	inventario[quant_ferramentas] = f;
+	quant_ferramentas++;
+	cout << "Ferramenta " << f->getSimbolo() << " guardada no inventario." << endl;
+}
 void Jardineiro::usarFerramenta(Solo& s){}
 bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;
@@ -36,6 +41,7 @@ bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	else if (direcao == 'b') proxL++;
 
 	if (jardim->posicionarJardineiro(proxL, proxC, this)) {
+		cout<<movEfetuados<<endl;
 		movEfetuados++;
 		return true;
 	}
@@ -75,9 +81,13 @@ bool Jardineiro::plantar(int l, int c, char tipo, Jardim* jardim) {
 	return false;
 }
 void Jardineiro::atualizaFerramentas() {
-	ferramentaNaMao->deteriora();
-	for (int i=0; i<quant_ferramentas;++i) {
-		inventario[i]->deteriora();
+	if (ferramentaNaMao != nullptr) {
+		ferramentaNaMao->deteriora();
+	}
+	for (int i = 0; i < quant_ferramentas; ++i) {
+		if (inventario[i] != nullptr) {
+			inventario[i]->deteriora();
+		}
 	}
 }
 

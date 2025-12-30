@@ -2,7 +2,6 @@
 #define PLANTA_H
 #include <iostream>
 #include <string>
-#include "Simulacao.h"
 
 class Solo;
 using namespace std;
