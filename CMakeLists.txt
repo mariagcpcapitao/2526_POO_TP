@@ -19,4 +19,20 @@ add_executable(2526_POO_TP main.cpp
         Simulacao.cpp
         Simulacao.h
         Utilidades.cpp
-        Utilidades.h)
+        Utilidades.h
+        Roseira.cpp
+        Roseira.h
+        Cacto.cpp
+        Cacto.h
+        ErvaDaninha.cpp
+        ErvaDaninha.h
+        BastaoImperador.cpp
+        BastaoImperador.h
+        Regador.cpp
+        Regador.h
+        Adubo.cpp
+        Adubo.h
+        TesouraPoda.cpp
+        TesouraPoda.h
+        FerramentaZ.cpp
+        FerramentaZ.h)

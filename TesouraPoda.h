@@ -1,0 +1,20 @@
+//
+// Created by luana on 30/12/2025.
+//
+
+#ifndef TESOURAPODA_H
+#define TESOURAPODA_H
+
+#include "Ferramenta.h"
+
+class TesouraPoda : public Ferramenta
+{
+
+public:
+	TesouraPoda();
+	void usar() override;
+	~TesouraPoda() override;
+};
+
+
+#endif //TESOURAPODA_H

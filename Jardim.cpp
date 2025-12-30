@@ -7,6 +7,10 @@
 
 #include "Solo.h"
 #include "Planta.h"
+#include "Cacto.h"
+#include "Roseira.h"
+#include "ErvaDaninha.h"
+#include "BastaoImperador.h"
 #include "Jardineiro.h"
 #include "GestorComandos.h"
 #include "Ferramenta.h"
