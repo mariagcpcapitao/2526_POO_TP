@@ -26,13 +26,13 @@ void Simulador::resetaLimitesTurno() {
     std::cout << "Limites de turno reiniciados.\n";
 }
 void Simulador::avanca(int n) {
-    for (int i = 0; i < n; i++) {
-        instante++;
-        if (jardimAtual != nullptr) {
-            jardimAtual->atualizarJardim();
-            this->resetaLimitesTurno();
-        }
-    }
+    if (j == nullptr || jardimAtual == nullptr) return;
+    j->resetTurno();
+    cout << "O jardineiro descansou. Limites reiniciados." << endl;
+    for (int i = 0; i < n; ++i)
+        jardimAtual->atualiza();
+        j->atualizaFerramentas();
+    cout << "Avancaram " << n << " instantes no tempo." << endl;
 }
 Simulador::~Simulador() {
     delete j; // Libertar a memória no fim
@@ -40,34 +40,7 @@ Simulador::~Simulador() {
     for (auto const& [nome, cp] : jardins)
         delete cp;
 }
-bool Simulador::moverJardineiro(char direcao) {
-    if (j == nullptr || jardimAtual == nullptr) {
-        cout << "jardim ou jardineiro.\n";
-        return false;
-    }
 
-    if (!j->podeMover()) {
-        cout << "Erro: Limite de movimentos atingido neste turno." << endl;
-        return false;
-    }
-
-    int nLin = j->getLinha();
-    int nCol = j->getColuna();
-
-    if (direcao == 'e') nCol--;
-    else if (direcao == 'd') nCol++;
-    else if (direcao == 'c') nLin--;
-    else if (direcao == 'b') nLin++;
-
-
-    if (jardimAtual->posicionarJardineiro(nLin, nCol, j)) {
-        cout <<"posicionar jardineiro neste turno." << endl;
-        j->incrementaMov(); // Só incrementa se o jardim aceitou o movimento
-        return true;
-    }
-    cout<<"posicionar jardim";
-    return false;
-}
 void Simulador::grava(const std::string& nome) {
     if (jardimAtual == nullptr) {
         std::cout << "Erro: Nao ha jardim para gravar.\n";
@@ -120,4 +93,16 @@ bool Simulador::sair() {
     jardimAtual->removerJardineiro();
     std::cout << "O jardineiro saiu do jardim.\n";
     return true;
+}
+bool Simulador::executaComandoMover(char dir) {
+    // O Simulador apenas ordena ao objeto que se mova no jardim atual
+    return j->mover(dir, jardimAtual);
+}
+bool Simulador::executaColhe(int l, int c) {
+
+    return j->colher(l, c, jardimAtual);
+}
+bool Simulador::executaPlanta(int l, int c, char tipo){
+
+    return j->plantar(l, c, tipo, jardimAtual);
 }

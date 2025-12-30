@@ -9,7 +9,9 @@ Planta::Planta(Solo *solo, int agua, int nutrientes, string beleza, int posLinha
 
 }
 Planta::~Planta(){}
-
+void Planta::passaTempo() {
+	cout << "planta reage nsei como " << endl;
+}
 void Planta::absorveAgua(int posLinha, int posColuna) {}
 void Planta::absorveNutrientes(int posLinha, int posColuna) {}
 void Planta::perdeAgua(int posLinha, int posColuna){}
@@ -17,7 +19,9 @@ void Planta::perdeNutri(int posLinha, int posColuna) {}
 //void Planta::multiplica(int posLinha, int posColuna) {}
 void Planta::morre() {}
 
-Cacto::Cacto(int linha, int coluna) : Planta(solo_hosp, aguaCacto, nutriCacto, "neutra", linha, coluna, 'c'){}
+Cacto::Cacto(int linha, int coluna, Solo* s) : Planta(s, aguaCacto, nutriCacto, "neutra", linha, coluna, 'c') {
+	cout<<"plantei c";
+}
 
 void Cacto::absorveAgua(int posLinha, int posColuna)
 {
@@ -79,7 +83,9 @@ void Cacto::morre()
 Cacto::~Cacto(){}
 
 
-Roseira::Roseira(int linha, int coluna): Planta(solo_hosp, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r'){}
+Roseira::Roseira(int linha, int coluna, Solo* s) : Planta(s, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r') {
+	cout<<"plantei r";
+}
 void Roseira::absorveAgua(int posLinha, int posColuna)
 {
 	if (solo_hosp != nullptr)
@@ -158,7 +164,9 @@ void Roseira::morre()
 }
 Roseira::~Roseira(){}
 
-ErvaDaninha::ErvaDaninha(int linha, int coluna): Planta(solo_hosp, Settings::ErvaDaninha::inicial_agua, Settings::ErvaDaninha::inicial_nutrientes, "feia", linha, coluna, 'e'){}
+ErvaDaninha::ErvaDaninha(int linha, int coluna, Solo* s) : Planta(s, Settings::ErvaDaninha::inicial_agua, Settings::ErvaDaninha::inicial_nutrientes, "feia", linha, coluna, 'e') {
+	cout<<"plantei ed";
+}
 void ErvaDaninha::absorveAgua(int posLinha, int posColuna)
 {
 	if (solo_hosp != nullptr)
@@ -191,7 +199,9 @@ void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
 void ErvaDaninha::morre(){}
 ErvaDaninha::~ErvaDaninha(){}
 
-BastaoImperador::BastaoImperador(int linha, int coluna): Planta(solo_hosp, inicial_agua, inicial_nutrientes, "bonita", linha, coluna, 'x'){}
+BastaoImperador::BastaoImperador(int linha, int coluna, Solo* s) : Planta(s, inicial_agua, inicial_nutrientes, "bonita", linha, coluna, 'x') {
+	cout<<"plantei bi";
+}
 void BastaoImperador::absorveAgua(int posLinha, int posColuna){}
 void BastaoImperador::absorveNutrientes(int posLinha, int posColuna) {}
 void BastaoImperador::perdeAgua(int posLinha, int posColuna){}

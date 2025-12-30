@@ -19,6 +19,9 @@ public:
 	bool posicionarJardineiro(int l, int c, Jardineiro* j);
 	void removerJardineiro();
 	bool moverJardineiro(char direcao);
+	bool removerPlanta(int l, int c);
+	bool adicionarPlanta(int l, int c,char tipo) ;
+	void atualiza();
 
 	~Jardim();
 private:

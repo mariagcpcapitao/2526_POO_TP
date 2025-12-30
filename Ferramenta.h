@@ -22,6 +22,7 @@ protected:
 public:
 	Ferramenta(const string &nomeFerr, const char &simbolo);
 	int getId();
+	void deteriora();
 	char getSimbolo() const{return simbolo;}
 	virtual void usar();
 	virtual ~Ferramenta();

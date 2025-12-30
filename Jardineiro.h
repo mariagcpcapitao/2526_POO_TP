@@ -3,7 +3,7 @@
 #ifndef JARDINEIRO_H
 #define JARDINEIRO_H
 #include "Ferramenta.h"
-
+class Jardim;
 
 class Jardineiro
 {
@@ -13,11 +13,11 @@ class Jardineiro
 	char simbolo = '*';
 	bool noJardim = false;
 	Ferramenta* ferramentaNaMao = nullptr;
-	int movEfetivados = 0;      // max 10
+	int movEfetuados = 0;      // max 10
 	bool jaEntrouNoTurno = false;
 	bool jaSaiuNoTurno = false;
-	int plantasColhidasTurno = 0;  //max  5
-	int plantasPlantadasTurno = 0; //max 2
+	int pColhidas = 0;  //max  5
+	int pPlantadas = 0; //max 2
 
 public:
 	Jardineiro();
@@ -30,8 +30,7 @@ public:
 		posColuna = c;
 	}
 
-	bool podeMover() const { return movEfetivados < 10; }
-	void incrementaMov() { movEfetivados++; }
+	void incrementaMov() { movEfetuados++; }
 
 	bool podeEntrar() const { return !jaEntrouNoTurno; }
 	void marcarEntrada() { jaEntrouNoTurno = true; noJardim = true; }
@@ -42,7 +41,7 @@ public:
 	bool isNoJardim() const { return noJardim; }
 	void setNoJardim(bool estado) { noJardim = estado; }
 
-	int getMovimentosRestantes() const { return 10 - movEfetivados; }
+	int getMovimentosRestantes() const { return 10 - movEfetuados; }
 
 	char getSimbolo() const{ return simbolo;}
 
@@ -51,6 +50,10 @@ public:
 	bool temFerramentaAtiva() const { return ferramentaNaMao != nullptr; }
 	void usarFerramenta(Solo& s);
 	void removerFerramenta(int id_ferramenta);
+	bool mover(char direcao, Jardim* jardim);
+	bool plantar(int l, int c, char tipo, Jardim* jardim);
+	bool colher(int l, int c, Jardim* jardim);
+	void atualizaFerramentas();
 
 	~Jardineiro();
 };

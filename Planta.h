@@ -24,7 +24,7 @@ public:
 	int setPosColuna();
 	string getBeleza() const;
 
-
+	virtual void passaTempo();
 	virtual void absorveAgua(int posLinha, int posColuna);
 	virtual void absorveNutrientes(int posLinha, int posColuna);
 	virtual void perdeAgua(int posLinha, int posColuna);
@@ -40,7 +40,7 @@ private:
 	int aguaCacto = 2;
 	int nutriCacto = 1;
 public:
-	Cacto(int linha, int coluna);
+	Cacto(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna) override;
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
@@ -53,7 +53,7 @@ public:
 class Roseira : public Planta
 {
 public:
-	Roseira(int linha, int coluna);
+	Roseira(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna) override;
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
@@ -66,7 +66,7 @@ public:
 class ErvaDaninha : public Planta
 {
 public:
-	ErvaDaninha(int linha, int coluna);
+	ErvaDaninha(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna) override;
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;
@@ -79,7 +79,7 @@ public:
 class BastaoImperador : public Planta
 {
 public:
-	BastaoImperador(int linha, int coluna);
+	BastaoImperador(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna) override;
 	void absorveNutrientes(int posLinha, int posColuna) override;
 	void perdeAgua(int posLinha, int posColuna) override;

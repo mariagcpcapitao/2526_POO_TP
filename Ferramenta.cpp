@@ -5,6 +5,9 @@ Ferramenta::Ferramenta(const string &nome, const char &simbolo) : nomeFerr(nome)
 	setId();
 }
 Ferramenta::~Ferramenta(){}
+void Ferramenta::deteriora() {
+	cout<<"Ferramenta a deteriorar "<<endl;
+}
 void Ferramenta::usar() {}
 void Ferramenta::setId()
 {

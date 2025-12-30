@@ -139,6 +139,7 @@ bool GestorComandos::validarPlanta(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: planta " << pos << " " << tipo << "\n";
+    simulador->executaPlanta(pos[0] - 'a',pos[1] - 'a',tipo);
     return true;
 }
 bool GestorComandos::validarLPlanta(const std::vector<string>& palavras) {
@@ -394,12 +395,7 @@ bool GestorComandos::validarE(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (!j->podeMover()) {
-        std::cout << "Erro: Limite de 10 movimentos atingido.\n";
-        return false;
-    }
-
-    if (simulador->moverJardineiro('e')) {
+    if (simulador->executaComandoMover('e')) {
         j->incrementaMov();
         return true;
     }
@@ -416,12 +412,7 @@ bool GestorComandos::validarD(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (!j->podeMover()) {
-        std::cout << "Erro: Limite de 10 movimentos atingido.\n";
-        return false;
-    }
-
-    if (simulador->moverJardineiro('d')) {
+    if (simulador->executaComandoMover('d')) {
         j->incrementaMov();
         return true;
     }
@@ -438,12 +429,7 @@ bool GestorComandos::validarC(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (!j->podeMover()) {
-        std::cout << "Erro: Limite de 10 movimentos atingido.\n";
-        return false;
-    }
-
-    if (simulador->moverJardineiro('c')) {
+    if (simulador->executaComandoMover('c')) {
         j->incrementaMov();
         return true;
     }
@@ -460,12 +446,8 @@ bool GestorComandos::validarB(const std::vector<string>& palavras) {
         return false;
     }
 
-    if (!j->podeMover()) {
-        std::cout << "Erro: Limite de 10 movimentos atingido.\n";
-        return false;
-    }
 
-    if (simulador->moverJardineiro('b')) {
+    if (simulador->executaComandoMover('b')) {
         j->incrementaMov();
         return true;
     }

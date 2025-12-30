@@ -135,3 +135,53 @@ Solo* Jardim::getVizinhoLivre(int l, int c) {
 	return nullptr;
 }
 
+bool Jardim::removerPlanta(int l, int c) {
+	if (l < 0 || l >= linhas || c < 0 || c >= colunas) return false;
+
+	Solo& s = conjunto[l][c];
+	if (!s.temPlanta()) {
+		cout << "Nao ha planta em " << (char)('a'+l) << (char)('a'+c) << endl;
+		return false;
+	}
+
+	delete s.getPlanta();
+	s.setPlanta(nullptr);
+	return true;
+}
+bool Jardim::adicionarPlanta(int l, int c, char tipo) {
+	if (l < 0 || l >= linhas || c < 0 || c >= colunas) return false;
+
+	Solo& s = conjunto[l][c];
+	if (s.temPlanta()) {
+		cout << "Ja tens uma planta em " << (char)('a'+l) << (char)('a'+c) << endl;
+		return false;
+	}
+	Planta* p = nullptr;
+	char t = toupper(tipo);
+
+	if (t == 'C') p = new Cacto(l,c, &s);
+	else if (t == 'R') p = new Roseira(l,c,&s);
+	else if (t == 'E') p = new ErvaDaninha(l,c,&s);
+	else if (t == 'X') p = new BastaoImperador(l,c,&s);
+	else {
+		cout << "Tipo de planta desconhecido: " << tipo << endl;
+		return false;
+	}
+
+	s.setPlanta(p);
+	return true;
+}
+void Jardim::atualiza() {
+	for (int i = 0; i < linhas; i++) {
+		for (int j = 0; j < colunas; j++) {
+
+			if (conjunto[i][j].temPlanta()) {
+				conjunto[i][j].getPlanta()->passaTempo();
+			}
+			if (conjunto[i][j].temFerramenta()) {
+				conjunto[i][j].getFerramenta()->deteriora();
+			}
+		}
+	}
+	std::cout << "O jardim foi atualizado (plantas cresceram/processaram)." << std::endl;
+}

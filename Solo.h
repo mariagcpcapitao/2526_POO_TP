@@ -4,6 +4,7 @@
 #include "Ferramenta.h"
 #include "Planta.h"
 class Planta;
+class Jardineiro;
 class Solo
 {
 
