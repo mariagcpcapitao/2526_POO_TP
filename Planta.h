@@ -2,6 +2,7 @@
 #define PLANTA_H
 #include <iostream>
 #include <string>
+#include "Jardim.h"
 
 class Solo;
 using namespace std;
@@ -28,7 +29,7 @@ public:
 	virtual void absorveNutrientes(int posLinha, int posColuna);
 	virtual void perdeAgua(int posLinha, int posColuna);
 	virtual void perdeNutri(int posLinha, int posColuna);
-	//virtual void multiplica(Jardim & j, int posLinha, int posColuna);
+	virtual void multiplica(Jardim & j, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
 	virtual ~Planta();
 };

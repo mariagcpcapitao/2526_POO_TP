@@ -16,5 +16,5 @@ void Planta::absorveAgua(int posLinha, int posColuna) {}
 void Planta::absorveNutrientes(int posLinha, int posColuna) {}
 void Planta::perdeAgua(int posLinha, int posColuna){}
 void Planta::perdeNutri(int posLinha, int posColuna) {}
-//void Planta::multiplica(int posLinha, int posColuna) {}
+void Planta::multiplica(Jardim & j, int posLinha, int posColuna) {}
 void Planta::morre() {}

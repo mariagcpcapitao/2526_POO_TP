@@ -13,6 +13,6 @@ void BastaoImperador::absorveAgua(int posLinha, int posColuna){}
 void BastaoImperador::absorveNutrientes(int posLinha, int posColuna) {}
 void BastaoImperador::perdeAgua(int posLinha, int posColuna){}
 void BastaoImperador::perdeNutri(int posLinha, int posColuna) {}
-//void BastaoImperador::multiplica(int posLinha, int posColuna){}
+void BastaoImperador::multiplica(Jardim & j, int posLinha, int posColuna){}
 void BastaoImperador::morre(){}
 BastaoImperador::~BastaoImperador(){}

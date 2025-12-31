@@ -14,7 +14,7 @@ public:
 	int getLinhas() const;
 	int getColunas() const;
 	void atualizarJardim();
-	Solo & getPosicao(int linha, int coluna);
+	Solo & getSolo(int linha, int coluna);
 	Solo* getVizinhoLivre(int l, int c);
 	Jardineiro* getJardineiro() const { return jardineiro; }
 	bool posicionarJardineiro(int l, int c, Jardineiro* j);

@@ -14,6 +14,10 @@
 #include "Jardineiro.h"
 #include "GestorComandos.h"
 #include "Ferramenta.h"
+#include "Adubo.h"
+#include "Regador.h"
+#include "FerramentaZ.h"
+#include "TesouraPoda.h"
 #include "Utilidades.h"
 using namespace std;
 Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
@@ -94,7 +98,7 @@ void Jardim::atualizarJardim() {
 		}
 	}
 }
-Solo & Jardim::getPosicao(int linha, int coluna) {
+Solo & Jardim::getSolo(int linha, int coluna) {
 	return conjunto[linha][coluna];
 }
 
@@ -204,7 +208,7 @@ bool Jardim::adicionarPlanta(int l, int c, char tipo) {
 	char t = toupper(tipo);
 
 	if (t == 'C') p = new Cacto(l,c, &s);
-	else if (t == 'R') p = new Roseira(l,c,&s);
+	else if (t == 'R') p = new Roseira(&s, l,c);
 	else if (t == 'E') p = new ErvaDaninha(l,c,&s);
 	else if (t == 'X') p = new BastaoImperador(l,c,&s);
 	else {

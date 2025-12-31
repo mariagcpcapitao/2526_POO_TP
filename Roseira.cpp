@@ -6,7 +6,7 @@
 #include "Settings.h"
 #include "Solo.h"
 
-Roseira::Roseira(int linha, int coluna, Solo* s) : Planta(s, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r') {
+Roseira::Roseira(Solo* s, int linha, int coluna) : Planta(s, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r') {
 	cout<<"plantei r";
 }
 void Roseira::absorveAgua(int posLinha, int posColuna)
@@ -61,7 +61,7 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
-/*void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
+void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
 {
 	if (this->nutrientes <= 100) {
 		return;
@@ -73,12 +73,12 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 
 		int metadeAgua = this->agua / 2;
 
-		vizinho->setPlanta(new Roseira(25, metadeAgua));
+		vizinho->setPlanta(new Roseira(vizinho, 25, metadeAgua));
 
 		this->nutrientes = 100;
 		this->agua = metadeAgua;
 	}
-}*/
+}
 void Roseira::morre()
 {
 	solo_hosp->setAguaSolo(aguaAbsorvida/2, "ganhar");

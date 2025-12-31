@@ -37,6 +37,6 @@ void ErvaDaninha::absorveNutrientes(int posLinha, int posColuna)
 }
 void ErvaDaninha::perdeAgua(int posLinha, int posColuna){}
 void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
-//void ErvaDaninha::multiplica(int posLinha, int posColuna){}
+void ErvaDaninha::multiplica(Jardim & j, int posLinha, int posColuna){}
 void ErvaDaninha::morre(){}
 ErvaDaninha::~ErvaDaninha(){}
