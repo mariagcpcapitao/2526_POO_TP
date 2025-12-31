@@ -2,6 +2,8 @@
 
 #ifndef JARDINEIRO_H
 #define JARDINEIRO_H
+#include <vector>
+#include <string>
 class Ferramenta;
 class Jardim;
 class Solo;
@@ -9,7 +11,7 @@ class Solo;
 class Jardineiro
 {
 	int posLinha, posColuna;
-	Ferramenta** inventario=nullptr;
+	std::vector<Ferramenta*> inventario;
 	int quant_ferramentas=0;
 	char simbolo = '*';
 	bool noJardim = false;
@@ -25,6 +27,8 @@ public:
 	void resetTurno();
 	int getLinha() const { return posLinha; }
 	int getColuna() const { return posColuna; }
+	void largaFerramenta();
+	bool pegaFerramenta(int id);
 
 	void setPosicao(int l, int c) {
 		posLinha = l;
@@ -55,6 +59,7 @@ public:
 	bool plantar(int l, int c, char tipo, Jardim* jardim);
 	bool colher(int l, int c, Jardim* jardim);
 	void atualizaFerramentas();
+	std::string listarFerramentas() const;
 
 	~Jardineiro();
 };

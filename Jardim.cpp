@@ -133,6 +133,7 @@ bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
 	Solo& s = conjunto[l][c];
 
 	if (s.temFerramenta()) {
+		cout<<"encontrei uma ferramenta";
 		j->adicionarFerramenta(s.getFerramenta());
 		s.setFerramenta(nullptr);
 		colocarFerramentaAleatoria();

@@ -5,9 +5,20 @@
 #include "Jardim.h"
 Jardineiro::Jardineiro()
 {
-
+	posLinha = -1;
+	posColuna = -1;
+	noJardim = false;
+	ferramentaNaMao = nullptr;
 }
-Jardineiro::~Jardineiro(){}
+Jardineiro::~Jardineiro() {
+
+	for (Ferramenta* f : inventario) {
+		delete f;
+	}
+	inventario.clear();
+
+	if (ferramentaNaMao != nullptr) delete ferramentaNaMao;
+}
 
 
 void Jardineiro::resetTurno() {
@@ -20,7 +31,7 @@ void Jardineiro::resetTurno() {
 void Jardineiro::comprarFerramenta(Ferramenta *f){}
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
 	if (f == nullptr) return;
-	inventario[quant_ferramentas] = f;
+	inventario.push_back(f);
 	quant_ferramentas++;
 	cout << "Ferramenta " << f->getSimbolo() << " guardada no inventario." << endl;
 }
@@ -84,12 +95,65 @@ void Jardineiro::atualizaFerramentas() {
 	if (ferramentaNaMao != nullptr) {
 		ferramentaNaMao->deteriora();
 	}
-	for (int i = 0; i < quant_ferramentas; ++i) {
-		if (inventario[i] != nullptr) {
-			inventario[i]->deteriora();
+	for (Ferramenta* f : inventario)
+		if (f != nullptr) {
+			f->deteriora();
 		}
-	}
 }
 
+void Jardineiro::largaFerramenta() {
+	if (ferramentaNaMao == nullptr) {
+		cout << "Nao tens nenhuma ferramenta na mao para largar." << endl;
+		return;
+	}
 
+	inventario.push_back(ferramentaNaMao);
+	cout << "Ferramenta " << ferramentaNaMao->getSimbolo()
+		 << " ID: " << ferramentaNaMao->getId() << " guardada no inventario." << endl;
+
+	ferramentaNaMao = nullptr;
+}
+
+bool Jardineiro::pegaFerramenta(int id) {
+	auto it=inventario.begin();
+	for (; it != inventario.end(); ++it) {
+		if ((*it) != nullptr && (*it)->getId() == id) {
+
+			if (ferramentaNaMao != nullptr) {
+				largaFerramenta();
+			}
+
+			ferramentaNaMao = *it;
+			inventario.erase(it);
+
+			std::cout << "Ferramenta (ID: " << id << ") agora esta na tua mao." << std::endl;
+			return true;
+		}
+	}
+
+	std::cout << "Erro: Nao transportas nenhuma ferramenta com o ID " << id << "." << std::endl;
+	return false;
+}
+string Jardineiro::listarFerramentas() const {
+	std::ostringstream oss;
+	oss << "\nFerramentas do Jardineiro:\n" << endl;
+
+	if (ferramentaNaMao != nullptr) {
+		oss << "Na mao:";
+		oss<<ferramentaNaMao->mostrarDetalhes();
+	} else {
+		oss << "Mao vazia" << endl;
+	}
+
+	if (inventario.empty()) {
+		oss << "Inventario vazio." << endl;
+	} else {
+		oss << "Inventario: \n" << endl;
+		for (auto it = inventario.begin(); it != inventario.end(); ++it) {
+
+			oss<<(*it)->mostrarDetalhes();
+		}
+	}
+	return oss.str();
+}
 

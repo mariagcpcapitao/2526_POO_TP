@@ -31,6 +31,8 @@ public:
     bool executaPlanta(int l, int c, char tipo);
     void setJardim(Jardim* j);
     Jardineiro* getJardineiro() { return j; }
+    bool comprarFerramenta(char tipo);
+    void listarInfoFerr();
 
     Jardim* getJardimAtual() const { return jardimAtual; }
 };

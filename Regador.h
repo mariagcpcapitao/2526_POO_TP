@@ -16,6 +16,7 @@ public:
 	void usar() override;
 
 	~Regador() override;
+	string mostrarDetalhes()const override;
 };
 
 

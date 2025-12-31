@@ -16,6 +16,7 @@ public:
 	void usar() override;
 
 	~Adubo() override;
+	string mostrarDetalhes()const override;
 };
 
 

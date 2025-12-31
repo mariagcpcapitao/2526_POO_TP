@@ -13,6 +13,7 @@ public:
 	FerramentaZ();
 	void usar() override;
 	~FerramentaZ() override;
+	string mostrarDetalhes()const override;
 };
 
 

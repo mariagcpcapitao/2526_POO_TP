@@ -14,3 +14,10 @@ void Adubo::usar()
 	if (capacidade <= 0)
 		cout << "Acabou o adubo. Nao e possivel usar mais";
 }
+string Adubo::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << Ferramenta::mostrarDetalhes();
+	oss << " | Capacidade: " << capacidade << " kg" << endl;
+	return oss.str();
+}

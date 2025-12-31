@@ -6,6 +6,10 @@
 #include "Simulacao.h"
 #include "Jardim.h"
 #include "Jardineiro.h"
+#include "Adubo.h"
+#include "TesouraPoda.h"
+#include "Regador.h"
+#include "FerramentaZ.h"
 Simulador::Simulador() {
     jardimAtual=nullptr;
     j = new Jardineiro();
@@ -112,4 +116,24 @@ bool Simulador::executaColhe(int l, int c) {
 bool Simulador::executaPlanta(int l, int c, char tipo){
 
     return j->plantar(l, c, tipo, jardimAtual);
+}
+bool Simulador::comprarFerramenta(char tipo) {
+    if (j == nullptr) return false;
+
+    Ferramenta* nova = nullptr;
+    char t = (char)tolower(tipo);
+
+    if (t == 'g') nova = new Regador();
+    else if (t == 'a') nova = new Adubo();
+    else if (t == 't') nova = new TesouraPoda();
+    else if (t == 'z') nova = new FerramentaZ();
+
+    if (nova != nullptr) {
+        j->adicionarFerramenta(nova); // O jardineiro guarda no inventário
+        return true;
+    }
+    return false;
+}
+void Simulador::listarInfoFerr() {
+    cout<<j->listarFerramentas()<<endl;
 }

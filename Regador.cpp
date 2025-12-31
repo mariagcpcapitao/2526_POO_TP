@@ -22,3 +22,10 @@ void Regador::usar()
 	else
 		cout << "A regar as plantas. Agua restante: " << capacidade << "ml" << endl;
 }
+string Regador::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << Ferramenta::mostrarDetalhes();
+	oss << " | Agua: " << capacidade << " ml" << endl;
+	return oss.str();
+}

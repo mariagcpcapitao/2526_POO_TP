@@ -8,6 +8,11 @@ Ferramenta::~Ferramenta(){}
 void Ferramenta::deteriora() {
 	cout<<"Ferramenta a deteriorar "<<endl;
 }
+string Ferramenta::mostrarDetalhes ()const {
+	std::ostringstream oss;
+	oss << "ID: " << id_ferramenta << " | Simbulo: " << getSimbolo()<< " | Nome da ferramenta:" << getNome();
+	return oss.str();
+}
 void Ferramenta::usar() {}
 void Ferramenta::setId()
 {

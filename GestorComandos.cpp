@@ -38,6 +38,7 @@ void GestorComandos::inicializarMap() {
     mapComandos["d"] = 18;
     mapComandos["c"] = 19;
     mapComandos["b"] = 20;
+    mapComandos["compra"] = 21;
 }
 void GestorComandos::processarComando(const string& linha) {
     auto palavras = dividir(linha);
@@ -81,6 +82,7 @@ void GestorComandos::processarComando(const string& linha) {
         case 18: validarD(palavras); break;
         case 19: validarC(palavras); break;
         case 20: validarB(palavras); break;
+        case 21:validarCompra(palavras); break;
     }
     if (j != nullptr) {
         j->mostraJardim();
@@ -224,12 +226,13 @@ bool GestorComandos::validarCompra(const std::vector<string>& palavras) {
         return false;
     }
     char tipo = palavras[1][0];
-    if (string("gat z").find(tipo) == string::npos) {
-        std::cout << "Erro: ferramenta invalida (usa g, a, t ou z).\n";
-        return false;
+    if (simulador->comprarFerramenta(tipo)) {
+        cout << "Comando valido: ferramenta comprada e enviada para o inventario." << endl;
+        return true;
     }
-    std::cout << "Comando valido: compra " << tipo << "\n";
-    return true;
+
+    cout << "Erro: Tipo de ferramenta desconhecido." << endl;
+    return false;
 }
 bool GestorComandos::validarLPlantas(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
@@ -244,15 +247,17 @@ bool GestorComandos::validarLFerramentas(const std::vector<string>& palavras) {
         std::cout << "Para listar as ferramentas so precisas de uma palavra.\n";
         return false;
     }
-    std::cout << "Comando valido: Listar todas as ferramentas\n";
-    return true;
+    simulador->listarInfoFerr();
+        return true;
 }
 bool GestorComandos::validarLarga(const std::vector<string>& palavras) {
     if (palavras.size() != 1) {
         std::cout << "Para largar a ferramenta so precisas de uma palavra.\n";
         return false;
     }
+
     std::cout << "Comando valido: Largar a ferramenta que tem na mao\n";
+    simulador->getJardineiro()->largaFerramenta();
     return true;
 }
 bool GestorComandos::validarLArea(const std::vector<string>& palavras) {
@@ -298,10 +303,10 @@ bool GestorComandos::validarPega(const std::vector<string>& palavras) {
     }
     if (palavras.size() == 2) {
         try {
-            int n = std::stoi(palavras[1]);//se o stoi nao conseguir converter porque nao é um num valido manda um std::invalid_argument tambem
-            if (n <= 0) throw std::invalid_argument("n invalido");
+            int id = std::stoi(palavras[1]);
+            return simulador->getJardineiro()->pegaFerramenta(id);
         } catch (...) {
-            std::cout << "Erro: parametro invalido em pega.\n";
+            cout << "Erro: ID invalido." << endl;
             return false;
         }
     }

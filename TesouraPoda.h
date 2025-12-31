@@ -14,6 +14,7 @@ public:
 	TesouraPoda();
 	void usar() override;
 	~TesouraPoda() override;
+	string mostrarDetalhes()const override;
 };
 
 
