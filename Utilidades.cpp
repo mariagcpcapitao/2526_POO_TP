@@ -26,11 +26,8 @@ Solo* Utilidades::getVizinhoLivre(Jardim& jardim, int l, int c) {
 
 		if (nL >= 0 && nL < jardim.getLinhas() && nC >= 0 && nC < jardim.getColunas()) {
 
-			// 2. Pede ao jardim o ponteiro para o solo naquela posição
-			// Você precisa ter criado o método 'getSolo' no Jardim
 			Solo* soloVizinho = &jardim.getSolo(nL, nC);
 
-			// 3. Verifica se o ponteiro é válido e se não tem planta
 			if (soloVizinho != nullptr) //incluir verificacao soloVizinho->temPlanta() == false
 				return soloVizinho;
 		}
