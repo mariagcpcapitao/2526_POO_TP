@@ -132,5 +132,33 @@ std::string Solo::mostrarDetalhes() const {
 	return oss.str();
 }
 
+Solo& Solo::operator=(const Solo& outro) {
+	if (this == &outro) return *this;
 
-Solo::~Solo(){}
+	this->aguaSolo = outro.aguaSolo;
+	this->nutriSolo = outro.nutriSolo;
+
+	delete this->planta;
+	delete this->ferramenta;
+	delete this->jardineiro;
+
+	this->planta = nullptr;
+	this->ferramenta = nullptr;
+	this->jardineiro = nullptr;
+
+	if (outro.planta != nullptr) {
+		this->planta = outro.planta->clone();
+	}
+	if (outro.ferramenta != nullptr) {
+		this->ferramenta = outro.ferramenta->clone();
+	}
+
+	return *this;
+}
+Solo::~Solo() {
+	delete planta;
+	delete ferramenta;
+	planta = nullptr;
+	ferramenta = nullptr;
+	jardineiro = nullptr;
+}

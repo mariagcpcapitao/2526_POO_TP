@@ -18,6 +18,9 @@ public:
 	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	string mostrarDetalhes()const override;
+	Planta* clone() const override {
+		return new BastaoImperador(*this);
+	}
 
 	~BastaoImperador() override;
 private:

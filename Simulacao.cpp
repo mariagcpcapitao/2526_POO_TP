@@ -17,12 +17,18 @@ Simulador::Simulador() {
 
 
 }
-void Simulador::setJardim(Jardim* j) {
+void Simulador::setJardim(Jardim* nj) {
     if (jardimAtual != nullptr) {
-        delete this->jardimAtual;
-        std::cout << "Jardim anterior removido da memoria.\n";
+        // Se há jardineiro no jardim atual, removê-lo
+        if (nj != nullptr && j->getNoJardim()) {
+            jardimAtual->removerJardineiro();
+        }
+        delete jardimAtual;
+        cout << "Jardim anterior removido da memoria.\n";
     }
-    jardimAtual = j;
+
+    jardimAtual = nj;
+
 
 }
 void Simulador::resetaLimitesTurno() {
@@ -60,40 +66,74 @@ void Simulador::grava(const std::string& nome) {
         std::cout << "Erro: Nao ha jardim para gravar.\n";
         return;
     }
-    apaga(nome);
 
-
-    jardins[nome] = new Jardim(*jardimAtual);
-
-    std::cout << "Jardim gravado com sucesso: " << nome << "\n";
-}
-void Simulador::recupera(const std::string& nome) {
-    if (jardins.find(nome) == jardins.end()) {
-        std::cout << "nao existe nenhuma gravacao com o nome '" << nome << "'.\n";
+    // Verificar se o jardim atual é válido
+    if (jardimAtual->getLinhas() <= 0 || jardimAtual->getColunas() <= 0) {
+        std::cout << "Erro: Jardim atual tem dimensões inválidas.\n";
         return;
     }
 
-    delete jardimAtual;
-
-    jardimAtual = new Jardim(*jardins[nome]);
-
-
-    if (jardimAtual->getJardineiro() != nullptr) {
-        this->j = jardimAtual->getJardineiro();
+    auto it = jardins.find(nome);
+    if (it != jardins.end()) {
+        std::cout << "Esse nome ja existe\n";
+        return;
     }
 
-    std::cout << "Estado '" << nome << "' recuperado.\n";
+    try {
+        Jardim* copia = new Jardim(*jardimAtual);
+        jardins[nome] = copia;
+
+        std::cout << "Jardim gravado com sucesso: " << nome << "\n";
+    } catch (const std::exception& e) {
+        std::cout << "Erro ao gravar jardim: " << e.what() << "\n";
+    }
+}
+void Simulador::recupera(const std::string& nome) {
+    auto it = jardins.find(nome);
+    if (it == jardins.end()) {
+        std::cout << "Gravacao nao encontrada.\n";
+        return;
+    }
+
+    // Verificar se a cópia é válida
+    if (it->second == nullptr) {
+        std::cout << "Gravacao corrompida (nullptr).\n";
+        return;
+    }
+
+
+    try {
+        Jardim* novoJardim = new Jardim(*it->second);
+
+        delete jardimAtual;
+        jardimAtual = novoJardim;
+
+
+        if (jardimAtual != nullptr) {
+            if (j->getNoJardim()) {
+                jardimAtual->getSolo(j->getLinha(), j->getColuna()).setJardineiro(j);
+                jardimAtual->posicionarJardineiro(j->getLinha(), j->getColuna(), j);
+            }
+            jardimAtual->mostraJardim();
+        }
+
+    } catch (const std::exception& e) {
+        std::cout << "Erro ao recuperar jardim: " << e.what() << "\n";
+    }
     apaga(nome);
 }
 void Simulador::apaga(const std::string& nome) {
     auto it = jardins.find(nome);
     if (it != jardins.end()) {
-        delete it->second;
+        if (jardimAtual != it->second) {
+            delete it->second;
+        }
         jardins.erase(it);
         std::cout << "Gravacao '" << nome << "' apagada.\n";
     }
-    else
-        cout<<"Gravacao nao encontrada\n";
+    else {
+        cout << "Gravacao nao encontrada\n";
+    }
 }
 bool Simulador::sair() {
     if (j == nullptr || jardimAtual == nullptr) return false;
@@ -102,7 +142,6 @@ bool Simulador::sair() {
     return true;
 }
 bool Simulador::executaComandoMover(char dir) {
-    // O Simulador apenas ordena ao objeto que se mova no jardim atual
     return j->mover(dir, jardimAtual);
 }
 bool Simulador::executaColhe(int l, int c) {
@@ -147,6 +186,7 @@ void Simulador::executaLArea() {
     cout<<jardimAtual->lArea();
 }
 void Simulador::executaLSolo(int l, int c, int r) {
+    cout<<"entrei no simulaador";
     if (jardimAtual == nullptr) return;
     cout<<jardimAtual->lSolo(l,c,r);
 }

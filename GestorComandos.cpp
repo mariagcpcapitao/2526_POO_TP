@@ -3,6 +3,8 @@
 
 #include "GestorComandos.h"
 
+#include "Settings.h"
+
 
 GestorComandos::GestorComandos(Simulador* s) : simulador(s){
     inicializarMap();
@@ -41,70 +43,71 @@ void GestorComandos::inicializarMap() {
     mapComandos["compra"] = 21;
 }
 void GestorComandos::processarComando(const string& linha) {
-    auto palavras = dividir(linha);
+    try {
+        auto palavras = dividir(linha);
+        if (palavras.empty()) return;
+        if (linha == "fim") {
+            std::cout << "A encerrar o simulador e a libertar memoria...\n";
+            exit(0);
+        }
+        string cmd = palavras[0];
+        if (mapComandos.find(cmd) == mapComandos.end()) {
+            throw std::runtime_error("Comando desconhecido.");
+        }
 
-    if (palavras.empty()) return;
+        int id = mapComandos[cmd];
+        if (simulador == nullptr) throw std::runtime_error("Simulador nao inicializado.");
 
-
-    string cmd = palavras[0];
-
-    if (mapComandos.find(cmd) == mapComandos.end()) {
-        if (cmd == "fim") return;
-        std::cout << "Erro: comando desconhecido.\n";
-        return;
-    }
-
-    int id = mapComandos[cmd];
-    Jardim* j=simulador->getJardimAtual();
-
-    if (j == nullptr && id != 1 && id != 10) {
-        std::cout << "Erro: Precisa de um jardim para este comando.\n";
-        return;
-    }
-    switch (id) {
-        case 1:  validarJardim(palavras); break;
-        case 2:  validarPlanta(palavras); break;
-        case 3:  validarColhe(palavras); break;
-        case 4:  validarEntra(palavras); break;
-        case 5:  validarSai(palavras); break;
-        case 6:  validarAvanca(palavras); break;
-        case 7:  validarGrava(palavras); break;
-        case 8:  validarRecupera(palavras); break;
-        case 9:  validarApaga(palavras); break;
-        case 10: validarExecuta(palavras); break;
-        case 11: validarLArea(palavras); break;
-        case 12: validarLSolo(palavras); break;
-        case 13: validarLPlantas(palavras); break;
-        case 14: validarLFerramentas(palavras); break;
-        case 15: validarPega(palavras); break;
-        case 16: validarLarga(palavras); break;
-        case 17: validarE(palavras); break;
-        case 18: validarD(palavras); break;
-        case 19: validarC(palavras); break;
-        case 20: validarB(palavras); break;
-        case 21:validarCompra(palavras); break;
-    }
-    if (j != nullptr) {
-        j->mostraJardim();
+        Jardim* j = simulador->getJardimAtual();
+        if (j == nullptr && id != 1 && id != 10) {
+            throw std::logic_error("Precisa de criar um jardim primeiro (comando 'jardim').");
+        }
+        switch (id) {
+            case 1:  validarJardim(palavras); break;
+            case 2:  validarPlanta(palavras); break;
+            case 3:  validarColhe(palavras); break;
+            case 4:  validarEntra(palavras); break;
+            case 5:  validarSai(palavras); break;
+            case 6:  validarAvanca(palavras); break;
+            case 7:  validarGrava(palavras); break;
+            case 8:  validarRecupera(palavras); break;
+            case 9:  validarApaga(palavras); break;
+            case 10: validarExecuta(palavras); break;
+            case 11: validarLArea(palavras); break;
+            case 12: validarLSolo(palavras); break;
+            case 13: validarLPlantas(palavras); break;
+            case 14: validarLFerramentas(palavras); break;
+            case 15: validarPega(palavras); break;
+            case 16: validarLarga(palavras); break;
+            case 17: validarE(palavras); break;
+            case 18: validarD(palavras); break;
+            case 19: validarC(palavras); break;
+            case 20: validarB(palavras); break;
+            case 21:validarCompra(palavras); break;
+        }
+        if (j != nullptr && id!=8 && id!=1 ) {
+            j->mostraJardim();
+        }
+    } catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
     }
 }
 bool GestorComandos::validarPosicao(const string& pos, int linhas, int colunas) {
-    if (pos.size() != 2 || !islower(pos[0]) || !islower(pos[1])) {
-        std::cout << "Erro: formato de posicao invalido.\n";
+
+    try {
+        if (pos.size() != 2|| !islower(pos[0]) || !islower(pos[1])) throw std::invalid_argument("Formato de coordenadas invalido.");
+
+        int linha = pos[0] - 'a';
+        int coluna = pos[1] - 'a';
+
+        if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas)
+            throw std::out_of_range("Coordenadas fora dos limites do jardim.");
+
+        return true;
+    } catch (const std::exception& e) {
+        std::cout << "Erro: " << e.what() << "\n";
         return false;
     }
-
-    // Converte letras em índices
-    int linha = pos[0] - 'a';
-    int coluna = pos[1] - 'a';
-
-    if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas) {
-        std::cout << "Erro: posicao fora dos limites do jardim ("
-                  << linhas << "x" << colunas << ").\n";
-        return false;
-    }
-
-    return true;
 }
 bool GestorComandos::validarJardim(const std::vector<string>& palavras) {
     int linhas = std::stoi(palavras[1]);
@@ -169,9 +172,8 @@ bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
     if (j == nullptr)
         return false;
 
-
-    if (!j->podeEntrar()) {
-        std::cout << "Erro: O jardineiro ja entrou/teletransportou-se este turno.\n";
+    if (j->getEntradasNoTurno()>=Settings::Jardineiro::max_entradas_saidas && !j->getNoJardim()) {
+        std::cout << "Erro: O jardineiro ja entrou este turno e nao pode reentrar.\n";
         return false;
     }
 
@@ -179,6 +181,7 @@ bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
     int c = palavras[1][1] - 'a';
 
     if (jm->posicionarJardineiro(l, c, j)) {
+        j->marcarEntrada();
         std::cout << "Chamada ao Jardim feita com sucesso.\n";
         return true;
     }
@@ -269,7 +272,7 @@ bool GestorComandos::validarLArea(const std::vector<string>& palavras) {
     return true;
 }
 bool GestorComandos::validarLSolo(const std::vector<string>& palavras) {
-    int r=1;
+    int r=0;
     if (palavras.size() > 3) {
         std::cout << "Para lSolo so precisas de 3 palavras no maximo.\n";
         return false;
@@ -288,7 +291,7 @@ bool GestorComandos::validarLSolo(const std::vector<string>& palavras) {
             return false;
         }
         std::cout << "Comando valido: Listar solo num raio de "<< palavras[2] << " a partir da posicao"<<pos<<"\n";
-        return true;
+
     }
     std::cout << "Comando valido: Listar solo da posicao"<<pos<<"\n";
     simulador->executaLSolo(pos[0]-'a',pos[1]-'a',r);
@@ -316,13 +319,24 @@ bool GestorComandos::validarPega(const std::vector<string>& palavras) {
     return true;
 }
 bool GestorComandos::validarSai(const std::vector<string>& palavras) {
+    Jardineiro* j= simulador->getJardineiro();
     if (palavras.size() != 1) {
         std::cout << "Para sair so precisas de uma palavra.\n";
         return false;
     }
-
-    std::cout << "O jardineiro saiu do jardim.\n";
-    return simulador->sair();;
+    if (!j->getNoJardim()) {
+        std::cout << "Erro: O jardineiro nao esta no jardim para poder sair.\n";
+        return false;
+    }
+    if (j->getSaidasNoTurno()>=Settings::Jardineiro::max_entradas_saidas) {
+        std::cout << "Erro: Ja utilizaste o comando sai este turno.\n";
+        return false;
+    }
+    if (simulador->sair()) {
+        j->marcarSaida();
+        return true;
+    }
+    return false;
 }
 bool GestorComandos::validarGrava(const std::vector<string>& palavras) {
     if (palavras.size() == 1) {
@@ -367,11 +381,11 @@ bool GestorComandos::validarApaga(const std::vector<string>& palavras) {
 }
 bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
     if (palavras.size() == 1) {
-        std::cout << "Erro: Eu sei que e para executar mas o que?\n";
+        std::cout << "Eu sei que e para executar mas o que?\n";
         return false;
     }
     if (palavras.size() > 2) {
-        std::cout << "Erro: executa tem no maximo 1 parametro.\n";
+        std::cout << "executa tem no maximo 1 parametro.\n";
         return false;
     }
     std::string nome = palavras[1] + ".txt";
@@ -380,7 +394,7 @@ bool GestorComandos::validarExecuta(const std::vector<string>& palavras) {
         std::cout << "Erro: o ficheiro '" << nome << "' nao existe.\n";
         return false;
     }
-    std::cout << "Comando valido: executar os comandos do ficheiro "<<palavras[1]<<".txt ...\n";
+    std::cout << " executar os comandos do ficheiro "<<palavras[1]<<".txt ...\n";
     std::string linha;
     int linhaNum = 1;
     while (std::getline(f, linha)) {

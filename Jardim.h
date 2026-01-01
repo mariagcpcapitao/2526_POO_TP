@@ -8,6 +8,7 @@ class Jardineiro;
 class Jardim
 {
 public:
+	Jardim& operator=(const Jardim& outro);
 	void colocarFerramentaAleatoria();
 	Jardim(int l, int c);
 	Jardim(const Jardim& outro);

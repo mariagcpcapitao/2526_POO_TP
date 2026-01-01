@@ -9,7 +9,6 @@
 
 class Cacto : public Planta
 {
-private:
 	int aguaCacto = 2;
 	int nutriCacto = 1;
 public:
@@ -22,6 +21,9 @@ public:
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~Cacto() override;
 	string mostrarDetalhes()const override;
+	Planta* clone() const override{
+		return new Cacto(*this);
+	}
 };
 
 

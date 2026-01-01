@@ -10,7 +10,7 @@ void Ferramenta::deteriora() {
 }
 string Ferramenta::mostrarDetalhes ()const {
 	std::ostringstream oss;
-	oss << "ID: " << id_ferramenta << " | Simbulo: " << getSimbolo()<< " | Nome da ferramenta:" << getNome();
+	oss << "ID: " << id_ferramenta << " | Simbolo: " << getSimbolo()<< " | Nome da ferramenta:" << getNome();
 	return oss.str();
 }
 void Ferramenta::usar(Solo& s) {}

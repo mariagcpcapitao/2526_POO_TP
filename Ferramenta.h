@@ -30,6 +30,7 @@ public:
 	virtual void usar(Solo& s);
 	virtual ~Ferramenta();
 	virtual string mostrarDetalhes ()const;
+	virtual Ferramenta* clone() const = 0;
 private:
 	void setId();
 };

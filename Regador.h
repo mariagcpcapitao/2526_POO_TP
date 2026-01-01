@@ -17,6 +17,9 @@ public:
 
 	~Regador() override;
 	string mostrarDetalhes()const override;
+	Ferramenta* clone() const {
+		return new Regador(*this);
+	}
 };
 
 

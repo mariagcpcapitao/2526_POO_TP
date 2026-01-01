@@ -19,6 +19,9 @@ public:
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~ErvaDaninha() override;
 	string mostrarDetalhes()const override;
+	Planta* clone() const override {
+		return new ErvaDaninha(*this);
+	}
 };
 
 

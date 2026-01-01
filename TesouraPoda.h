@@ -15,6 +15,9 @@ public:
 	void usar(Solo& s) override;
 	~TesouraPoda() override;
 	string mostrarDetalhes()const override;
+	Ferramenta* clone() const {
+		return new TesouraPoda(*this);
+	}
 };
 
 

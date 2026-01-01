@@ -17,8 +17,8 @@ class Jardineiro
 	bool noJardim = false;
 	Ferramenta* ferramentaNaMao = nullptr;
 	int movEfetuados = 0;      // max 10
-	bool jaEntrouNoTurno = false;
-	bool jaSaiuNoTurno = false;
+	int entradasNoTurno;
+	int saidasNoTurno;
 	int pColhidas = 0;  //max  5
 	int pPlantadas = 0; //max 2
 
@@ -34,17 +34,13 @@ public:
 		posLinha = l;
 		posColuna = c;
 	}
+	bool getNoJardim() const { return noJardim; }
+	int getEntradasNoTurno() const { return entradasNoTurno; }
+	int getSaidasNoTurno() const { return saidasNoTurno; }
+	void marcarEntrada() { entradasNoTurno++; noJardim = true; }
+	void marcarSaida() { saidasNoTurno++; noJardim = false; }
 
-	void incrementaMov() { movEfetuados++; }
 
-	bool podeEntrar() const { return !jaEntrouNoTurno; }
-	void marcarEntrada() { jaEntrouNoTurno = true; noJardim = true; }
-
-	bool podeSair() const { return !jaSaiuNoTurno; }
-	void marcarSaida() { jaSaiuNoTurno = true; noJardim = false; }
-
-	bool isNoJardim() const { return noJardim; }
-	void setNoJardim(bool estado) { noJardim = estado; }
 
 	int getMovimentosRestantes() const { return 10 - movEfetuados; }
 

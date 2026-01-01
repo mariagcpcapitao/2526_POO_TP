@@ -20,7 +20,7 @@
 #include "TesouraPoda.h"
 #include "Utilidades.h"
 using namespace std;
-Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
+Jardim::Jardim(int l, int c) : linhas(l), colunas(c), conjunto(nullptr)
 {
 	int numFerrInicial=3;
 	if (l*c<3)
@@ -36,7 +36,7 @@ Jardim::Jardim(int l, int c) : linhas(l), colunas(c)
 void Jardim::colocarFerramentaAleatoria() {
 	int l, c;
 	do {
-		l = Utilidades::obterValorAleatorio(0, linhas - 1); //
+		l = Utilidades::obterValorAleatorio(0, linhas - 1);
 		c = Utilidades::obterValorAleatorio(0, colunas - 1);
 	} while (conjunto[l][c].temFerramenta());
 
@@ -51,21 +51,45 @@ void Jardim::colocarFerramentaAleatoria() {
 	}
 
 	if (f != nullptr) {
-		conjunto[l][c].setFerramenta(f); //
+		conjunto[l][c].setFerramenta(f);
 	}
 }
-Jardim::Jardim(const Jardim& outro) : linhas(outro.linhas), colunas(outro.colunas) {
-
-	conjunto = new Solo*[linhas];
-	for (int i = 0; i < linhas; i++) {
-		conjunto[i] = new Solo[colunas];
-		for (int j = 0; j < colunas; j++) {
-			conjunto[i][j] = outro.conjunto[i][j];
-		}
+Jardim::Jardim(const Jardim& outro) {
+	if (&outro == nullptr) {
+		throw std::invalid_argument("Tentativa de copiar de ponteiro nulo");
 	}
-	this->jardineiro = outro.jardineiro;
+
+	this->linhas = outro.linhas;
+	this->colunas = outro.colunas;
+
+
+	try {
+		this->conjunto = new Solo*[linhas];
+		for (int i = 0; i < linhas; i++) {
+			this->conjunto[i] = new Solo[colunas];
+			for (int j = 0; j < colunas; j++) {
+
+				this->conjunto[i][j] = outro.conjunto[i][j];
+			}
+		}
+	} catch (const std::bad_alloc& e) {
+		std::cout << "Falha ao alocar memoria para copia: "
+				  << e.what() << std::endl;
+		// Limpar o que foi alocado parcialmente
+		if (this->conjunto != nullptr) {
+			for (int i = 0; i < linhas && this->conjunto[i] != nullptr; i++) {
+				delete[] this->conjunto[i];
+			}
+			delete[] this->conjunto;
+		}
+		throw;
+	}
+
+	this->jardineiro = nullptr;
+
 }
 Jardim::~Jardim() {
+
 	if (conjunto != nullptr) {
 		for (int i = 0; i < linhas; i++)
 			delete[] conjunto[i];
@@ -73,6 +97,30 @@ Jardim::~Jardim() {
 		delete[] conjunto;
 		conjunto = nullptr;
 	}
+}
+Jardim& Jardim::operator=(const Jardim& outro) {
+	if (this == &outro) return *this;
+
+	// Libertar memória atual
+	for (int i = 0; i < linhas; i++) {
+		delete[] conjunto[i];
+	}
+	delete[] conjunto;
+
+	this->linhas = outro.linhas;
+	this->colunas = outro.colunas;
+
+	this->conjunto = new Solo*[linhas];
+	for (int i = 0; i < linhas; i++) {
+		this->conjunto[i] = new Solo[colunas];
+		for (int j = 0; j < colunas; j++) {
+			this->conjunto[i][j] = outro.conjunto[i][j];
+		}
+	}
+
+	this->jardineiro = nullptr;
+
+	return *this;
 }
 int Jardim::getLinhas() const{ return linhas; }
 int Jardim::getColunas() const{ return colunas; }
@@ -103,6 +151,16 @@ Solo & Jardim::getSolo(int linha, int coluna) {
 }
 
 void Jardim::mostraJardim() const {
+	if (conjunto == nullptr) {
+		cout << "ERRO: conjunto é nullptr!" << endl;
+		return;
+	}
+
+	if (linhas <= 0 || colunas <= 0) {
+		cout << "Dimensoes invalidas: " << linhas << "x" << colunas << endl;
+		return;
+	}
+
 
 	cout << "  ";
 	for (int j = 0; j < colunas; j++) {
@@ -123,17 +181,18 @@ void Jardim::mostraJardim() const {
 	}
 }
 bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
-	if (l < 0 || l >= linhas || c < 0 || c >= colunas) return false;
-
+	if (l < 0 || l >= linhas || c < 0 || c >= colunas) {
+		cout<<"Fora dos limtes\n";
+		return false;
+	}
 	removerJardineiro();
 	this->jardineiro = j;
-	conjunto[l][c].setJardineiro(j);
-
-	j->setPosicao(l, c);
 	Solo& s = conjunto[l][c];
+	s.setJardineiro(j);
+	j->setPosicao(l, c);
 
 	if (s.temFerramenta()) {
-		cout<<"encontrei uma ferramenta";
+		cout<<"encontrei uma ferramenta\n";
 		j->adicionarFerramenta(s.getFerramenta());
 		s.setFerramenta(nullptr);
 		colocarFerramentaAleatoria();
@@ -232,7 +291,6 @@ void Jardim::atualiza() {
 			}
 		}
 	}
-	std::cout << "O jardim foi atualizado (plantas cresceram/processaram)." << std::endl;
 }
 string Jardim::listarPlantas() const {
 	int i,j;
@@ -274,18 +332,21 @@ string Jardim::lArea() const {
 	return oss.str();
 }
 string Jardim::lSolo(int l,int c,int r) const {
+	cout<<"entrei no jardim";
+
 	std::ostringstream oss;
 	for (int i = l - r; i <= l + r; i++) {
 		for (int j = c - r; j <= c + r; j++) {
 			if (i >= 0 && i < linhas && j >= 0 && j < colunas) {
 				const Solo& s = conjunto[i][j];
-				cout << "Posicao " << (char)('a' + i) << (char)('a' + j) << ": "
+				oss << "Posicao " << (char)('a' + i) << (char)('a' + j) << ": "
 					 << s.mostrarDetalhes() << endl;
 			}
 			else
-				cout << "Posicao " << (char)('a' + i) << (char)('a' + j) <<"fica fora do jardim"<<endl;
+				oss << "Posicao " << (char)('a' + i) << (char)('a' + j) <<"fica fora do jardim"<<endl;
 		}
 	}
+	return oss.str();
 }
 bool Jardim::removeJardineiro(int l, int c) {
 	if (l >= 0 && l < linhas && c >= 0 && c < colunas) {

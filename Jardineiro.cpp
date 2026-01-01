@@ -9,6 +9,8 @@ Jardineiro::Jardineiro()
 	posColuna = -1;
 	noJardim = false;
 	ferramentaNaMao = nullptr;
+	entradasNoTurno = 0;
+	saidasNoTurno = 0;
 }
 Jardineiro::~Jardineiro() {
 
@@ -23,8 +25,8 @@ Jardineiro::~Jardineiro() {
 
 void Jardineiro::resetTurno() {
 	movEfetuados = 0;
-	jaEntrouNoTurno = false;
-	jaSaiuNoTurno = false;
+	entradasNoTurno = 0;
+	saidasNoTurno = 0;
 	pColhidas = 0;
 	pPlantadas = 0;
 }
@@ -43,9 +45,9 @@ void Jardineiro::usarFerramenta(Solo& s) {
 }
 bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;
-	if (noJardim == false) noJardim = true;
 
-	if (movEfetuados > 10) {
+	if (movEfetuados == Settings::Jardineiro::max_movimentos) {
+		cout<<"Neste turno ja me movimentei 10 vezes, estou cansado\n";
 		return false;
 	}
 
@@ -58,15 +60,16 @@ bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	else if (direcao == 'b') proxL++;
 
 	if (jardim->posicionarJardineiro(proxL, proxC, this)) {
-		cout<<movEfetuados<<endl;
 		movEfetuados++;
+		cout<<movEfetuados<<endl;
+
 		return true;
 	}
 
 	return false;
 }
 bool Jardineiro::sai(Jardim* jardim) {
-	if (jardim == nullptr ) {
+	if (jardim == nullptr || !noJardim) {
 		std::cout << "Erro: O jardineiro ja esta fora do jardim.\n";
 		return false;
 	}
@@ -85,7 +88,7 @@ bool Jardineiro::sai(Jardim* jardim) {
 bool Jardineiro::colher(int l, int c, Jardim* jardim) {
 	if (jardim == nullptr) return false;
 
-	if (pColhidas >= 5) {
+	if (pColhidas >= Settings::Jardineiro::max_colheitas) {
 		cout << "O jardineiro esta cansado de colher ." << endl;
 		return false;
 	}
@@ -101,11 +104,11 @@ bool Jardineiro::plantar(int l, int c, char tipo, Jardim* jardim) {
 	if (jardim == nullptr) return false;
 
 
-	if (pPlantadas >= 2) {
+	if (pPlantadas >= Settings::Jardineiro::max_plantacoes) {
+		cout << "O jardineiro esta cansado de plantar ." << endl;
 		return false;
 	}
 
-	// 2. O Jardineiro tenta colocar a planta no Jardim
 	if (jardim->adicionarPlanta(l, c, tipo)) {
 		pPlantadas++;
 		return true;

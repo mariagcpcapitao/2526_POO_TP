@@ -17,6 +17,9 @@ public:
 
 	~Adubo() override;
 	string mostrarDetalhes()const override;
+	Ferramenta* clone() const {
+		return new Adubo(*this);
+	}
 };
 
 

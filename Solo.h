@@ -38,6 +38,7 @@ public:
 	bool temPlanta() const;
 	bool temFerramenta() const;
 	bool temJardineiro() const;
+	Solo& operator=(const Solo& outro);
 
 	~Solo();
 };

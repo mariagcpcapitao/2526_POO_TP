@@ -14,6 +14,9 @@ public:
 	void usar(Solo& s) override;
 	~FerramentaZ() override;
 	string mostrarDetalhes()const override;
+	Ferramenta* clone() const {
+		return new FerramentaZ(*this);
+	}
 };
 
 

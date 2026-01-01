@@ -25,6 +25,7 @@ public:
 	int setPosColuna();
 	string getBeleza() const;
 
+	virtual Planta* clone() const = 0;
 	virtual void passaTempo();
 	virtual void absorveAgua(int posLinha, int posColuna);
 	virtual void absorveNutrientes(int posLinha, int posColuna);
