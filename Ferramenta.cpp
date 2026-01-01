@@ -13,7 +13,7 @@ string Ferramenta::mostrarDetalhes ()const {
 	oss << "ID: " << id_ferramenta << " | Simbulo: " << getSimbolo()<< " | Nome da ferramenta:" << getNome();
 	return oss.str();
 }
-void Ferramenta::usar() {}
+void Ferramenta::usar(Solo& s) {}
 void Ferramenta::setId()
 {
 	id_ferramenta = ++contId;

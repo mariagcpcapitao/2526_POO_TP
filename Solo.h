@@ -20,6 +20,7 @@ public:
 	int getNutriSolo() const {return nutriSolo;}
 	int getAguaSolo() const {return aguaSolo;}
 	char getConteudo() const;
+	std::string mostrarDetalhes() const;
 
 	Solo & getSolo(int l, int c);
 

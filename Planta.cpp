@@ -18,3 +18,9 @@ void Planta::perdeAgua(int posLinha, int posColuna){}
 void Planta::perdeNutri(int posLinha, int posColuna) {}
 void Planta::multiplica(Jardim & j, int posLinha, int posColuna) {}
 void Planta::morre() {}
+string Planta::mostrarDetalhes ()const {
+	std::ostringstream oss;
+	oss << "Simbolo: " << simbolo << " | Pos: (" << (char)('a' + posLinha) << (char)('a' + posColuna) << ")"
+		 << " | Agua: " << agua << " | Nutri: " << nutrientes<<" | Beleza:"<<beleza<<endl;
+	return oss.str();
+}

@@ -13,7 +13,7 @@ Regador::~Regador()
 	cout << "Regador descartado, nao ha mais agua.";
 }
 
-void Regador::usar()
+void Regador::usar(Solo& s)
 {
 
 	capacidade = capacidade - dose;

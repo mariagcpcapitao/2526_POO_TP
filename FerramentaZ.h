@@ -11,7 +11,7 @@ class FerramentaZ : public Ferramenta
 {
 public:
 	FerramentaZ();
-	void usar() override;
+	void usar(Solo& s) override;
 	~FerramentaZ() override;
 	string mostrarDetalhes()const override;
 };

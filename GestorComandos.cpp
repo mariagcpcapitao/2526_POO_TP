@@ -156,6 +156,7 @@ bool GestorComandos::validarLPlanta(const std::vector<string>& palavras) {
     if (!validarPosicao(pos, j->getLinhas(), j->getColunas()))
         return false;
     std::cout << "Comando valido: lplanta " << pos << "\n";
+    simulador->executaLPlanta(pos[0] - 'a',pos[1] - 'a');
     return true;
 }
 bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
@@ -181,8 +182,6 @@ bool GestorComandos::validarEntra(const std::vector<string>& palavras) {
         std::cout << "Chamada ao Jardim feita com sucesso.\n";
         return true;
     }
-    j->podeEntrar();
-
     return false;
 }
 bool GestorComandos::validarColhe(const std::vector<string>& palavras) {
@@ -230,7 +229,6 @@ bool GestorComandos::validarCompra(const std::vector<string>& palavras) {
         cout << "Comando valido: ferramenta comprada e enviada para o inventario." << endl;
         return true;
     }
-
     cout << "Erro: Tipo de ferramenta desconhecido." << endl;
     return false;
 }
@@ -240,6 +238,7 @@ bool GestorComandos::validarLPlantas(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: Listar todas as plantas\n";
+    simulador->listarPlantas();
     return true;
 }
 bool GestorComandos::validarLFerramentas(const std::vector<string>& palavras) {
@@ -266,9 +265,11 @@ bool GestorComandos::validarLArea(const std::vector<string>& palavras) {
         return false;
     }
     std::cout << "Comando valido: Listar conteudo e props\n";
+    simulador->executaLArea();
     return true;
 }
 bool GestorComandos::validarLSolo(const std::vector<string>& palavras) {
+    int r=1;
     if (palavras.size() > 3) {
         std::cout << "Para lSolo so precisas de 3 palavras no maximo.\n";
         return false;
@@ -280,16 +281,17 @@ bool GestorComandos::validarLSolo(const std::vector<string>& palavras) {
         return false;
     if (palavras.size() == 3) {
         try {
-            int n = std::stoi(palavras[2]);
-            if (n <= 0) throw std::invalid_argument("n invalido");
+            r = std::stoi(palavras[2]);
+            if (r <= 0) throw std::invalid_argument("n invalido");
         } catch (...) {
-            std::cout << "Erro: parametro invalido em avanca.\n";
+            std::cout << "Erro: parametro invalido em LSolo.\n";
             return false;
         }
         std::cout << "Comando valido: Listar solo num raio de "<< palavras[2] << " a partir da posicao"<<pos<<"\n";
         return true;
     }
     std::cout << "Comando valido: Listar solo da posicao"<<pos<<"\n";
+    simulador->executaLSolo(pos[0]-'a',pos[1]-'a',r);
     return true;
 }
 bool GestorComandos::validarPega(const std::vector<string>& palavras) {

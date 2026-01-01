@@ -27,7 +27,7 @@ public:
 	char getSimbolo() const{return simbolo;}
 	int getDurabilidade() const{return durabilidade;}
 	string getNome() const{return nomeFerr;}
-	virtual void usar();
+	virtual void usar(Solo& s);
 	virtual ~Ferramenta();
 	virtual string mostrarDetalhes ()const;
 private:

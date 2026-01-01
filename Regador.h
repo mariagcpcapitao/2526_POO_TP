@@ -13,7 +13,7 @@ class Regador : public Ferramenta
 	int dose = Settings::Regador::dose;
 public:
 	Regador();
-	void usar() override;
+	void usar(Solo& s) override;
 
 	~Regador() override;
 	string mostrarDetalhes()const override;

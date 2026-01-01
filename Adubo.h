@@ -13,7 +13,7 @@ class Adubo : public Ferramenta
 	int dose = Settings::Adubo::dose;
 public:
 	Adubo();
-	void usar() override;
+	void usar(Solo& s) override;
 
 	~Adubo() override;
 	string mostrarDetalhes()const override;

@@ -39,4 +39,12 @@ void ErvaDaninha::perdeAgua(int posLinha, int posColuna){}
 void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
 void ErvaDaninha::multiplica(Jardim & j, int posLinha, int posColuna){}
 void ErvaDaninha::morre(){}
+string ErvaDaninha::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << "\nNome: Erva Daninha |"<<endl;
+	oss<<Planta::mostrarDetalhes();
+
+	return oss.str();
+}
 ErvaDaninha::~ErvaDaninha(){}

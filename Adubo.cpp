@@ -8,7 +8,7 @@
 Adubo::Adubo() : Ferramenta("Adubo", 'a'){}
 Adubo::~Adubo(){}
 
-void Adubo::usar()
+void Adubo::usar(Solo& s)
 {
 	capacidade = capacidade - dose;
 	if (capacidade <= 0)

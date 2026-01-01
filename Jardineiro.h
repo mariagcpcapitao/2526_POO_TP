@@ -49,16 +49,16 @@ public:
 	int getMovimentosRestantes() const { return 10 - movEfetuados; }
 
 	char getSimbolo() const{ return simbolo;}
-
-	void comprarFerramenta(Ferramenta *f);
+	bool sai() const;
 	void adicionarFerramenta(Ferramenta *f);
 	bool temFerramentaAtiva() const { return ferramentaNaMao != nullptr; }
 	void usarFerramenta(Solo& s);
-	void removerFerramenta(int id_ferramenta);
+	//void removerFerramenta(int id_ferramenta);
 	bool mover(char direcao, Jardim* jardim);
 	bool plantar(int l, int c, char tipo, Jardim* jardim);
 	bool colher(int l, int c, Jardim* jardim);
 	void atualizaFerramentas();
+	bool sai(Jardim* jardim) ;
 	std::string listarFerramentas() const;
 
 	~Jardineiro();

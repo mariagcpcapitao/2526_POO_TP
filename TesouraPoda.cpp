@@ -6,7 +6,7 @@
 
 
 TesouraPoda::TesouraPoda() : Ferramenta("Tesoura de Poda", 't') {}
-void TesouraPoda::usar()
+void TesouraPoda::usar(Solo& s)
 {
 	//elimina plantas
 }

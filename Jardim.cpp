@@ -234,3 +234,65 @@ void Jardim::atualiza() {
 	}
 	std::cout << "O jardim foi atualizado (plantas cresceram/processaram)." << std::endl;
 }
+string Jardim::listarPlantas() const {
+	int i,j;
+	std::ostringstream oss;
+	for (i = 0; i < linhas; i++) {
+		for (j = 0; j < colunas; j++) {
+			if (conjunto[i][j].temPlanta()) {
+				oss<<conjunto[i][j].getPlanta()->mostrarDetalhes();
+				oss<<conjunto[i][j].mostrarDetalhes()<<endl;
+
+			}
+		}
+	}
+
+	return oss.str();
+}
+string Jardim::lPlanta(int l, int c) const {
+	std::ostringstream oss;
+	Solo& s= conjunto[l][c];
+	if (s.temPlanta()) {
+		oss << s.getPlanta()->mostrarDetalhes() << endl;
+		oss << "Solo : Agua " << s.getAguaSolo() << " | Nutri " << s.getNutriSolo() << endl;
+	} else {
+		oss << "Nao existe nenhuma planta nesta posicao." << endl;
+	}
+	return oss.str();
+}
+string Jardim::lArea() const {
+	int i,j;
+	std::ostringstream oss;
+
+	for (i = 0; i < linhas; i++) {
+		for (j = 0; j < colunas; j++) {
+			if (conjunto[i][j].temPlanta()||conjunto[i][j].temJardineiro()||conjunto[i][j].temFerramenta()) {
+				oss<<conjunto[i][j].mostrarDetalhes()<<endl;
+			}
+		}
+	}
+	return oss.str();
+}
+string Jardim::lSolo(int l,int c,int r) const {
+	std::ostringstream oss;
+	for (int i = l - r; i <= l + r; i++) {
+		for (int j = c - r; j <= c + r; j++) {
+			if (i >= 0 && i < linhas && j >= 0 && j < colunas) {
+				const Solo& s = conjunto[i][j];
+				cout << "Posicao " << (char)('a' + i) << (char)('a' + j) << ": "
+					 << s.mostrarDetalhes() << endl;
+			}
+			else
+				cout << "Posicao " << (char)('a' + i) << (char)('a' + j) <<"fica fora do jardim"<<endl;
+		}
+	}
+}
+bool Jardim::removeJardineiro(int l, int c) {
+	if (l >= 0 && l < linhas && c >= 0 && c < colunas) {
+		cout<<"jardim removeu";
+		conjunto[l][c].setJardineiro(nullptr);
+		this->jardineiro = nullptr;
+		return true;
+	}
+	return false;
+}

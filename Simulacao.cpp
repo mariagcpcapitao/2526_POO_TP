@@ -10,6 +10,7 @@
 #include "TesouraPoda.h"
 #include "Regador.h"
 #include "FerramentaZ.h"
+#include "Planta.h"
 Simulador::Simulador() {
     jardimAtual=nullptr;
     j = new Jardineiro();
@@ -41,6 +42,8 @@ void Simulador::avanca(int n) {
         j->resetTurno();
         jardimAtual->atualiza();
         j->atualizaFerramentas();
+        Solo& s = jardimAtual->getSolo(j->getLinha(), j->getColuna());
+        j->usarFerramenta(s);
     }
     cout << "O jardineiro descansou. Limites reiniciados." << endl;
     cout << "Avancaram " << n << " instantes no tempo." << endl;
@@ -93,16 +96,9 @@ void Simulador::apaga(const std::string& nome) {
         cout<<"Gravacao nao encontrada\n";
 }
 bool Simulador::sair() {
-    if (jardimAtual == nullptr || j == nullptr) return false;
-
-    // Verificar se ele está realmente lá dentro antes de tentar tirar
-    if (jardimAtual->getJardineiro() == nullptr) {
-        std::cout << "Erro: O jardineiro ja esta fora do jardim.\n";
-        return false;
-    }
-
-    jardimAtual->removerJardineiro();
-    std::cout << "O jardineiro saiu do jardim.\n";
+    if (j == nullptr || jardimAtual == nullptr) return false;
+     if (!j->sai(jardimAtual))return false;
+    j->marcarSaida();
     return true;
 }
 bool Simulador::executaComandoMover(char dir) {
@@ -135,5 +131,22 @@ bool Simulador::comprarFerramenta(char tipo) {
     return false;
 }
 void Simulador::listarInfoFerr() {
+    if (jardimAtual == nullptr) return;
     cout<<j->listarFerramentas()<<endl;
+}
+void Simulador::listarPlantas() {
+    if (jardimAtual == nullptr) return;
+    cout<<jardimAtual->listarPlantas()<<endl;
+}
+void Simulador::executaLPlanta(int l, int c) {
+    if (jardimAtual == nullptr) return;
+    cout<<jardimAtual->lPlanta(l,c);
+}
+void Simulador::executaLArea() {
+    if (jardimAtual == nullptr) return;
+    cout<<jardimAtual->lArea();
+}
+void Simulador::executaLSolo(int l, int c, int r) {
+    if (jardimAtual == nullptr) return;
+    cout<<jardimAtual->lSolo(l,c,r);
 }

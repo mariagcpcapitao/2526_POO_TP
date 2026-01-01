@@ -5,7 +5,7 @@
 #include "FerramentaZ.h"
 
 FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z'){}
-void FerramentaZ::usar(){}
+void FerramentaZ::usar(Solo& s){}
 FerramentaZ::~FerramentaZ(){}
 string FerramentaZ::mostrarDetalhes() const {
     std::ostringstream oss;

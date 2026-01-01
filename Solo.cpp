@@ -104,4 +104,33 @@ Solo & Solo::getSolo(int l, int c) {
 }
 
 
+std::string Solo::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << " Solo:\nAgua: " << aguaSolo << " | Nutrientes: " << nutriSolo ;
+
+	if (temPlanta()) {
+
+		oss << "| Tem planta: " << planta->getSimbolo();
+	}
+	else
+		oss<<"| Nao tem planta ";
+	if (temFerramenta()) {
+
+		oss << "| Tem ferramenta: " << ferramenta->getSimbolo();
+	}
+	else
+		oss<<"| Nao tem ferramenta ";
+
+	if (temJardineiro()) {
+		oss << "| Jardineiro esta aqui ";
+	}
+	else
+		oss<<"| Nao tem jardineiro";
+
+
+	return oss.str();
+}
+
+
 Solo::~Solo(){}

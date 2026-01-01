@@ -12,7 +12,7 @@ class TesouraPoda : public Ferramenta
 
 public:
 	TesouraPoda();
-	void usar() override;
+	void usar(Solo& s) override;
 	~TesouraPoda() override;
 	string mostrarDetalhes()const override;
 };

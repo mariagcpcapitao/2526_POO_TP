@@ -18,6 +18,7 @@ public:
 	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	~ErvaDaninha() override;
+	string mostrarDetalhes()const override;
 };
 
 

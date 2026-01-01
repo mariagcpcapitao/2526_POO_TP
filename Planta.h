@@ -2,6 +2,7 @@
 #define PLANTA_H
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "Jardim.h"
 
 class Solo;
@@ -32,6 +33,7 @@ public:
 	virtual void multiplica(Jardim & j, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
 	virtual ~Planta();
+	virtual string mostrarDetalhes ()const;
 };
 
 #endif //PLANTA_H

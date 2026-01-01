@@ -66,6 +66,14 @@ void Cacto::morre()
 	solo_hosp->setNutriSolo(nutriAbsorvidos, "ganhar");
 	nutrientes = 0; //...redundante
 }
+string Cacto::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << "\nNome: Cacto |"<<endl;
+	oss<<Planta::mostrarDetalhes();
+
+	return oss.str();
+}
 Cacto::~Cacto(){}
 
 

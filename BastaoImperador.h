@@ -17,6 +17,8 @@ public:
 	void perdeNutri(int posLinha, int posColuna) override;
 	void multiplica(Jardim & j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
+	string mostrarDetalhes()const override;
+
 	~BastaoImperador() override;
 private:
 	static const int inicial_agua = 40;

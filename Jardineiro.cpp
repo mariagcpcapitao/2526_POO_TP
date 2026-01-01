@@ -28,16 +28,22 @@ void Jardineiro::resetTurno() {
 	pColhidas = 0;
 	pPlantadas = 0;
 }
-void Jardineiro::comprarFerramenta(Ferramenta *f){}
+
 void Jardineiro::adicionarFerramenta(Ferramenta* f) {
 	if (f == nullptr) return;
 	inventario.push_back(f);
 	quant_ferramentas++;
 	cout << "Ferramenta " << f->getSimbolo() << " guardada no inventario." << endl;
 }
-void Jardineiro::usarFerramenta(Solo& s){}
+void Jardineiro::usarFerramenta(Solo& s) {
+	if (ferramentaNaMao == nullptr) {
+		return;
+	}
+	ferramentaNaMao->usar(s);
+}
 bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;
+	if (noJardim == false) noJardim = true;
 
 	if (movEfetuados > 10) {
 		return false;
@@ -59,6 +65,23 @@ bool Jardineiro::mover(char direcao, Jardim* jardim) {
 
 	return false;
 }
+bool Jardineiro::sai(Jardim* jardim) {
+	if (jardim == nullptr ) {
+		std::cout << "Erro: O jardineiro ja esta fora do jardim.\n";
+		return false;
+	}
+	if (jardim->removeJardineiro(posLinha, posColuna)) {
+
+		setPosicao(-1,-1);
+
+
+		std::cout << "Jardineiro: Saia com sucesso. Ferramentas guardadas na mochila.\n";
+		return true;
+	}
+
+	return false;
+
+}
 bool Jardineiro::colher(int l, int c, Jardim* jardim) {
 	if (jardim == nullptr) return false;
 
@@ -79,7 +102,6 @@ bool Jardineiro::plantar(int l, int c, char tipo, Jardim* jardim) {
 
 
 	if (pPlantadas >= 2) {
-		cout << "O jardineiro ja plantou 2 neste turno, esta cansado." << endl;
 		return false;
 	}
 

@@ -85,4 +85,12 @@ void Roseira::morre()
 	agua = 0;
 	solo_hosp->setNutriSolo(nutriAbsorvidos/2, "ganhar");
 }
+string Roseira::mostrarDetalhes() const {
+	std::ostringstream oss;
+
+	oss << "\nNome: Roseira |"<<endl;
+	oss<<Planta::mostrarDetalhes();
+
+	return oss.str();
+}
 Roseira::~Roseira(){}

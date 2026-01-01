@@ -33,7 +33,10 @@ public:
     Jardineiro* getJardineiro() { return j; }
     bool comprarFerramenta(char tipo);
     void listarInfoFerr();
-
+    void listarPlantas();
+    void executaLPlanta(int l, int c);
+    void executaLArea();
+    void executaLSolo(int l, int c, int r);
     Jardim* getJardimAtual() const { return jardimAtual; }
 };
 

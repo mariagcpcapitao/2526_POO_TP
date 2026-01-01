@@ -2,6 +2,7 @@
 
 #ifndef JARDIM_H
 #define JARDIM_H
+#include <string>
 class Solo;
 class Jardineiro;
 class Jardim
@@ -23,6 +24,12 @@ public:
 	bool removerPlanta(int l, int c);
 	bool adicionarPlanta(int l, int c,char tipo) ;
 	void atualiza();
+	std::string listarPlantas()const;
+	std::string lPlanta(int l, int c)const;
+	std::string lArea()const;
+	std::string lSolo(int l,int c,int r)const;
+	bool removeJardineiro(int l, int c);
+
 
 	~Jardim();
 private:
