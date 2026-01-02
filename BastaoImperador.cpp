@@ -23,4 +23,9 @@ string BastaoImperador::mostrarDetalhes() const {
 
 	return oss.str();
 }
+void BastaoImperador::passaTempo()
+{
+
+}
+bool BastaoImperador::estaViva(Jardim* j)const {}
 BastaoImperador::~BastaoImperador(){}

@@ -133,8 +133,15 @@ void Jardim::atualizarJardim() {
 				Planta* p = s.getPlanta();
 				p->absorveAgua(i, j);
 				p->absorveNutrientes(i, j);
-
 				p->passaTempo();
+
+				if (!p->estaViva(this)) {
+					p->morre();
+					delete p;
+					s.setPlanta(nullptr);
+					continue;
+				}
+
 				p->multiplica(this, i, j); //this é o jardim
 			}
 
@@ -217,50 +224,65 @@ void Jardim::removerJardineiro() {
 		this->jardineiro = nullptr;
 	}
 }
-// Retorna um ponteiro para o Solo vizinho livre, ou nullptr se não houver
-Solo* Jardim::getVizinhoLivre(int l, int c) {
-	// cima, baixo, esquerda, direita
-	int dl[] = {-1, 1,  0, 0};
-	int dc[] = { 0, 0, -1, 1};
+Solo* Jardim::getVizinhoLivre(int l, int c, bool apenasVazio) {
+    int listaL[4];
+    int listaC[4];
+    int total = 0;
 
-	// Sorteia pra definir ponto de inicio de busca (0 a 3) para dar variedade
-	int inicio = rand() % 4;
+   // cima
+    if (l > 0) {
+        bool temPlanta = (conjunto[l - 1][c].getPlanta() != nullptr);
 
-	for (int i = 0; i < 4; i++) {
-		// % garante que o índice da a volta
-		int idx = (inicio + i) % 4;
+        if (!apenasVazio || !temPlanta) {
+            listaL[total] = l - 1;
+            listaC[total] = c;
+            total++;
+        }
+    }
 
-		int nL = l + dl[idx]; // Nova Linha
-		int nC = c + dc[idx]; // Nova Coluna
+    // baixo
+    if (l < linhas - 1) {
+        bool temPlanta = (conjunto[l + 1][c].getPlanta() != nullptr);
 
-		// verifica se está dentro das bordas do jardim
-		if (nL >= 0 && nL < linhas && nC >= 0 && nC < colunas) {
+        if (!apenasVazio || !temPlanta) {
+            listaL[total] = l + 1;
+            listaC[total] = c;
+            total++;
+        }
+    }
 
-			// verifica se nao tem planta nessa posição
-			if (conjunto[nL][nC].getPlanta() == nullptr) {
-				return &conjunto[nL][nC];
-			}
-		}
-	}
+    // esquerda
+    if (c > 0) {
+        bool temPlanta = (conjunto[l][c - 1].getPlanta() != nullptr);
 
-	return nullptr;
-}
+        if (!apenasVazio || !temPlanta) {
+            listaL[total] = l;
+            listaC[total] = c - 1;
+            total++;
+        }
+    }
 
-Solo* Jardim::getVizinhoAleatorio(int l, int c) { //pra erva daninha
-	int dl[] = {-1, 1, 0, 0};
-	int dc[] = {0, 0, -1, 1};
-	int inicio = rand() % 4;
+    // direita
+    if (c < colunas - 1) {
+        bool temPlanta = (conjunto[l][c + 1].getPlanta() != nullptr);
 
-	for (int i = 0; i < 4; i++) {
-		int idx = (inicio + i) % 4;
-		int nL = l + dl[idx];
-		int nC = c + dc[idx];
+        if (!apenasVazio || !temPlanta) {
+            listaL[total] = l;
+            listaC[total] = c + 1;
+            total++;
+        }
+    }
 
-		if (nL >= 0 && nL < linhas && nC >= 0 && nC < colunas) {
-			return &conjunto[nL][nC];
-		}
-	}
-	return nullptr;
+    // se não encontrou ninguem, retorna nulo
+    if (total == 0) return nullptr;
+
+    // sorteia um index entre 0 e (total - 1)
+    int sorteado = rand() % total;
+
+    int linhaEscolhida = listaL[sorteado];
+    int colunaEscolhida = listaC[sorteado];
+
+    return &conjunto[linhaEscolhida][colunaEscolhida];
 }
 
 bool Jardim::removerPlanta(int l, int c) {

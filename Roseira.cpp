@@ -61,11 +61,17 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
+void Roseira::passaTempo()
+{
+
+}
+
+
 void Roseira::multiplica(Jardim * j, int posLinha, int posColuna)
 {
     if (this->nutrientes > Settings::Roseira::multiplica_nutrientes_maior) {
 
-        Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna);
+        Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, true);
 
         if (vizinho != nullptr) {
             int aguaPai = this->agua;
@@ -86,9 +92,13 @@ void Roseira::multiplica(Jardim * j, int posLinha, int posColuna)
 
 void Roseira::morre()
 {
-	solo_hosp->setAguaSolo(aguaAbsorvida/2, "ganhar");
-	agua = 0;
-	solo_hosp->setNutriSolo(nutriAbsorvidos/2, "ganhar");
+	if (solo_hosp != nullptr) {
+		int devolverNutri = this->nutrientes / 2;
+		int devolverAgua = this->agua / 2;
+
+		solo_hosp->setNutriSolo(devolverNutri, "ganhar");
+		solo_hosp->setAguaSolo(devolverAgua, "ganhar");
+	}
 }
 string Roseira::mostrarDetalhes() const {
 	std::ostringstream oss;
@@ -98,4 +108,15 @@ string Roseira::mostrarDetalhes() const {
 
 	return oss.str();
 }
+
+bool Roseira::estaViva(Jardim* j) const {
+	if (this->agua <= 0 || this->nutrientes <= 0) return false;
+	if (this->nutrientes >= Settings::Roseira::morre_nutrientes_maior) return false;
+	if (j->getVizinhoLivre(posLinha, posColuna, true) == nullptr) {
+		return false;
+	}
+
+	return true;
+}
+
 Roseira::~Roseira(){}

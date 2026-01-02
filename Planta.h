@@ -11,7 +11,7 @@ using namespace std;
 class Planta
 {
 protected:
-	int nutrientes, agua, posLinha, posColuna, instantesAguaAlta, instantesNutriZero, nutriAbsorvidos = 0, aguaAbsorvida = 0;
+	int nutrientes, agua, posLinha, posColuna, instantesAguaAlta, instantesNutriZero, nutriAbsorvidos = 0, aguaAbsorvida = 0, idade;
 	string beleza;
 	char simbolo;
 	Solo *solo_hosp;
@@ -33,6 +33,8 @@ public:
 	virtual void perdeNutri(int posLinha, int posColuna);
 	virtual void multiplica(Jardim * j, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
+	virtual bool estaViva(Jardim* j) const = 0;
+
 	virtual ~Planta();
 	virtual string mostrarDetalhes ()const;
 };

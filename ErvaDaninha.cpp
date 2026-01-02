@@ -45,7 +45,7 @@ void ErvaDaninha::multiplica(Jardim * j, int posLinha, int posColuna)
 		if (this->nutrientes > Settings::ErvaDaninha::multiplica_nutrientes_maior /*&&
 			 this->contadorReproducao >= Settings::ErvaDaninha::multiplica_instantes*/) {
 
-			Solo* vizinho = j->getVizinhoAleatorio(posLinha, posColuna);
+			Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, false);
 
 			if (vizinho != nullptr) {
 				if (vizinho->temPlanta()) {
@@ -73,4 +73,15 @@ string ErvaDaninha::mostrarDetalhes() const {
 
 	return oss.str();
 }
+
+bool ErvaDaninha::estaViva(Jardim* j) const {
+	if (this->idade >= Settings::ErvaDaninha::morre_instantes) return false;
+	return true;
+}
+
+void ErvaDaninha::passaTempo()
+{
+
+}
+
 ErvaDaninha::~ErvaDaninha(){}

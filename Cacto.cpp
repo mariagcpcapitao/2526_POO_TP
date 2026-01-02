@@ -7,51 +7,81 @@
 
 Cacto::Cacto(int linha, int coluna, Solo* s) : Planta(s, aguaCacto, nutriCacto, "neutra", linha, coluna, 'c') {
 	cout<<"plantei c";
+	this->diasComMuitaAgua = 0;
+	this->diasSemNutrientes = 0;
+	this->nutriAbsorvidos = 0;
 }
 
 void Cacto::absorveAgua(int posLinha, int posColuna, int valor = 0)
 {
-	int agua_solo;
-	if (solo_hosp != nullptr)
+	if (valor > 0) {
+		this->agua += valor;
+		return;
+	}
+
+	if (solo_hosp == nullptr) return;
+
+	int agua_solo = solo_hosp->getAguaSolo();
+	if (agua_solo > 0)
 	{
-		// Acessar as propriedades do Solo através do ponteiro:
-		agua_solo = solo_hosp->getAguaSolo();
-		if (agua_solo > 100 && instantesAguaAlta == 3)
-			morre();
-		else if (agua_solo > 0)
-		{
-			agua = agua + agua_solo*0.25;
-			solo_hosp->setAguaSolo(agua_solo*0.25, "perder");
-		}
+		int qtdAbsorver = agua_solo * 0.25;
+		solo_hosp->setAguaSolo(qtdAbsorver, "perder");
+		this->agua += qtdAbsorver;
 	}
 }
 
 void Cacto::absorveNutrientes(int posLinha, int posColuna, int valorNutri)
 {
-	int nutri_solo;
-	if (solo_hosp != nullptr)
+	if (valorNutri > 0) {
+		this->nutrientes += valorNutri;
+		return;
+	}
+
+	if (solo_hosp == nullptr) return;
+
+	int nutri_solo = solo_hosp->getNutriSolo();
+	if (nutri_solo > 0)
 	{
-		nutri_solo = solo_hosp->getNutriSolo();
-		if (nutri_solo == 0 && instantesNutriZero > 3)
-			morre();
-		else if (nutri_solo >= 5)
-		{
-			nutrientes = nutrientes + 5;
-			nutriAbsorvidos += 5;
-			solo_hosp->setNutriSolo(5, "perder");
+		int qtdAbsorver = 5;
+		if (nutri_solo < 5) {
+			qtdAbsorver = nutri_solo;
 		}
+
+		solo_hosp->setNutriSolo(qtdAbsorver, "perder");
+
+		this->nutrientes += qtdAbsorver;
+		this->nutriAbsorvidos += qtdAbsorver;
 	}
 }
 
 void Cacto::perdeAgua(int posLinha, int posColuna){}
 void Cacto::perdeNutri(int posLinha, int posColuna) {}
 
+void Cacto::passaTempo()
+{
+	Planta::passaTempo();
+
+	if (solo_hosp->getAguaSolo() > Settings::Cacto::morre_agua_solo_maior) {
+		diasComMuitaAgua++;
+	} else {
+		diasComMuitaAgua = 0; // reseta se não for consecutivo
+	}
+
+	if (solo_hosp->getNutriSolo() == 0) {
+		diasSemNutrientes++;
+	} else {
+		diasSemNutrientes = 0;
+	}
+
+	if (diasComMuitaAgua >= Settings::Cacto::morre_agua_solo_instantes || diasSemNutrientes > Settings::Cacto::morre_nutrientes_solo_instantes) {
+		morre();
+	}
+}
+
 void Cacto::multiplica(Jardim* j, int posLinha, int posColuna) {
+	if (this->nutrientes > Settings::Cacto::multiplica_nutrientes_maior && this->agua > Settings::Cacto::multiplica_agua_maior) {
 
-	if (this->nutrientes > Settings::Cacto::multiplica_nutrientes_maior &&
-		this->agua > Settings::Cacto::multiplica_agua_maior) {
-
-		Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna);
+		Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, true);
 
 		if (vizinho != nullptr) {
 			int metadeAgua = this->agua / 2;
@@ -61,20 +91,23 @@ void Cacto::multiplica(Jardim* j, int posLinha, int posColuna) {
 			this->nutrientes = metadeNutri;
 
 			Cacto* filho = new Cacto(0, 0, vizinho);
-			filho->absorveAgua(0,0,metadeAgua);
+
+
+			filho->absorveAgua(0, 0, metadeAgua);
 			filho->absorveNutrientes(0, 0, metadeNutri);
 
 			vizinho->setPlanta(filho);
-			// cout << "Cacto se reproduziu\n";
 		}
-		}
+	}
 }
 void Cacto::morre()
 {
 	// deixar no solo os nutrientes absorvidos
-	solo_hosp->setNutriSolo(nutriAbsorvidos, "ganhar");
-	nutrientes = 0; //...redundante
+	if (solo_hosp != nullptr)
+		solo_hosp->setNutriSolo(this->nutriAbsorvidos, "ganhar");
+
 }
+
 string Cacto::mostrarDetalhes() const {
 	std::ostringstream oss;
 
@@ -83,6 +116,13 @@ string Cacto::mostrarDetalhes() const {
 
 	return oss.str();
 }
+
+bool Cacto::estaViva(Jardim* j) const {
+	if (diasComMuitaAgua >= Settings::Cacto::morre_agua_solo_instantes) return false;
+	if (diasSemNutrientes > Settings::Cacto::morre_nutrientes_solo_instantes) return false;
+	return true;
+}
+
 Cacto::~Cacto(){}
 
 
