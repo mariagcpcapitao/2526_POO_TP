@@ -9,7 +9,7 @@ Cacto::Cacto(int linha, int coluna, Solo* s) : Planta(s, aguaCacto, nutriCacto, 
 	cout<<"plantei c";
 }
 
-void Cacto::absorveAgua(int posLinha, int posColuna)
+void Cacto::absorveAgua(int posLinha, int posColuna, int valor = 0)
 {
 	int agua_solo;
 	if (solo_hosp != nullptr)
@@ -26,7 +26,7 @@ void Cacto::absorveAgua(int posLinha, int posColuna)
 	}
 }
 
-void Cacto::absorveNutrientes(int posLinha, int posColuna)
+void Cacto::absorveNutrientes(int posLinha, int posColuna, int valorNutri)
 {
 	int nutri_solo;
 	if (solo_hosp != nullptr)
@@ -46,20 +46,29 @@ void Cacto::absorveNutrientes(int posLinha, int posColuna)
 void Cacto::perdeAgua(int posLinha, int posColuna){}
 void Cacto::perdeNutri(int posLinha, int posColuna) {}
 
-/*void Cacto::multiplica(Jardim & j, int posLinha, int posColuna)
-{
-	if (nutrientes <= 100 || agua <= 50) return;
-	Solo* vizinho = j.getVizinhoLivre(posLinha, posColuna);
+void Cacto::multiplica(Jardim* j, int posLinha, int posColuna) {
 
-	if (vizinho != nullptr) {
-		// Divide os recursos
-		this->nutrientes /= 2;
-		this->agua /= 2;
+	if (this->nutrientes > Settings::Cacto::multiplica_nutrientes_maior &&
+		this->agua > Settings::Cacto::multiplica_agua_maior) {
 
-		// cria o novo cacto
-		vizinho->setPlanta(new Cacto(this->nutrientes, this->agua));
-	}
-}*/
+		Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna);
+
+		if (vizinho != nullptr) {
+			int metadeAgua = this->agua / 2;
+			int metadeNutri = this->nutrientes / 2;
+
+			this->agua = metadeAgua;
+			this->nutrientes = metadeNutri;
+
+			Cacto* filho = new Cacto(0, 0, vizinho);
+			filho->absorveAgua(0,0,metadeAgua);
+			filho->absorveNutrientes(0, 0, metadeNutri);
+
+			vizinho->setPlanta(filho);
+			// cout << "Cacto se reproduziu\n";
+		}
+		}
+}
 void Cacto::morre()
 {
 	// deixar no solo os nutrientes absorvidos

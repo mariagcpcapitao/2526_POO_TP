@@ -27,11 +27,11 @@ public:
 
 	virtual Planta* clone() const = 0;
 	virtual void passaTempo();
-	virtual void absorveAgua(int posLinha, int posColuna);
-	virtual void absorveNutrientes(int posLinha, int posColuna);
+	virtual void absorveAgua(int posLinha, int posColuna, int valor = 0);
+	virtual void absorveNutrientes(int posLinha, int posColuna, int valor = 0);
 	virtual void perdeAgua(int posLinha, int posColuna);
 	virtual void perdeNutri(int posLinha, int posColuna);
-	virtual void multiplica(Jardim & j, int posLinha, int posColuna);
+	virtual void multiplica(Jardim * j, int posLinha, int posColuna);
 	virtual void morre(); // precisa mandar a quantidade de agua e nutri no solo
 	virtual ~Planta();
 	virtual string mostrarDetalhes ()const;

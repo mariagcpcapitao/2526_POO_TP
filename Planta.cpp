@@ -12,11 +12,11 @@ Planta::~Planta(){}
 void Planta::passaTempo() {
 	cout << "planta reage nsei como " << endl;
 }
-void Planta::absorveAgua(int posLinha, int posColuna) {}
-void Planta::absorveNutrientes(int posLinha, int posColuna) {}
+void Planta::absorveAgua(int posLinha, int posColuna, int valor) {}
+void Planta::absorveNutrientes(int posLinha, int posColuna, int valor) {}
 void Planta::perdeAgua(int posLinha, int posColuna){}
 void Planta::perdeNutri(int posLinha, int posColuna) {}
-void Planta::multiplica(Jardim & j, int posLinha, int posColuna) {}
+void Planta::multiplica(Jardim * j, int posLinha, int posColuna) {}
 void Planta::morre() {}
 string Planta::mostrarDetalhes ()const {
 	std::ostringstream oss;

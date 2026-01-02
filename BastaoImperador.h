@@ -11,11 +11,11 @@ class BastaoImperador : public Planta
 {
 public:
 	BastaoImperador(int linha, int coluna, Solo* s);
-	void absorveAgua(int posLinha, int posColuna) override;
-	void absorveNutrientes(int posLinha, int posColuna) override;
+	void absorveAgua(int posLinha, int posColuna, int valor = 0) override;
+	void absorveNutrientes(int posLinha, int posColuna, int valor = 0) override;
 	void perdeAgua(int posLinha, int posColuna) override;
 	void perdeNutri(int posLinha, int posColuna) override;
-	void multiplica(Jardim & j, int posLinha, int posColuna) override;
+	void multiplica(Jardim * j, int posLinha, int posColuna) override;
 	void morre() override; // precisa mandar a quantidade de agua e nutri no solo
 	string mostrarDetalhes()const override;
 	Planta* clone() const override {

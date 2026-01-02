@@ -9,7 +9,7 @@
 ErvaDaninha::ErvaDaninha(int linha, int coluna, Solo* s) : Planta(s, Settings::ErvaDaninha::inicial_agua, Settings::ErvaDaninha::inicial_nutrientes, "feia", linha, coluna, 'e') {
 	cout<<"plantei ed";
 }
-void ErvaDaninha::absorveAgua(int posLinha, int posColuna)
+void ErvaDaninha::absorveAgua(int posLinha, int posColuna, int valor)
 {
 	if (solo_hosp != nullptr)
 	{
@@ -22,7 +22,7 @@ void ErvaDaninha::absorveAgua(int posLinha, int posColuna)
 		}
 	}
 }
-void ErvaDaninha::absorveNutrientes(int posLinha, int posColuna)
+void ErvaDaninha::absorveNutrientes(int posLinha, int posColuna, int valor)
 {
 	if (solo_hosp != nullptr)
 	{
@@ -37,7 +37,33 @@ void ErvaDaninha::absorveNutrientes(int posLinha, int posColuna)
 }
 void ErvaDaninha::perdeAgua(int posLinha, int posColuna){}
 void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
-void ErvaDaninha::multiplica(Jardim & j, int posLinha, int posColuna){}
+void ErvaDaninha::multiplica(Jardim * j, int posLinha, int posColuna)
+{
+	// no passatempo incrementar o contadorReproducao++;
+	// this->contadorReproducao++;
+
+		if (this->nutrientes > Settings::ErvaDaninha::multiplica_nutrientes_maior /*&&
+			 this->contadorReproducao >= Settings::ErvaDaninha::multiplica_instantes*/) {
+
+			Solo* vizinho = j->getVizinhoAleatorio(posLinha, posColuna);
+
+			if (vizinho != nullptr) {
+				if (vizinho->temPlanta()) {
+					delete vizinho->getPlanta();
+					vizinho->setPlanta(nullptr);
+				}
+				ErvaDaninha* novaErva = new ErvaDaninha(0, 0, vizinho);
+
+				novaErva->absorveAgua(0, 0, Settings::ErvaDaninha::inicial_agua);       // 5
+				novaErva->absorveNutrientes(0, 0, Settings::ErvaDaninha::inicial_nutrientes); // 5
+
+
+				// this->contadorReproducao = 0;
+
+				vizinho->setPlanta(novaErva);
+			}
+		}
+}
 void ErvaDaninha::morre(){}
 string ErvaDaninha::mostrarDetalhes() const {
 	std::ostringstream oss;

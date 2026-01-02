@@ -133,6 +133,9 @@ void Jardim::atualizarJardim() {
 				Planta* p = s.getPlanta();
 				p->absorveAgua(i, j);
 				p->absorveNutrientes(i, j);
+
+				p->passaTempo();
+				p->multiplica(this, i, j); //this é o jardim
 			}
 
 			if (s.temJardineiro()) {
@@ -240,6 +243,23 @@ Solo* Jardim::getVizinhoLivre(int l, int c) {
 		}
 	}
 
+	return nullptr;
+}
+
+Solo* Jardim::getVizinhoAleatorio(int l, int c) { //pra erva daninha
+	int dl[] = {-1, 1, 0, 0};
+	int dc[] = {0, 0, -1, 1};
+	int inicio = rand() % 4;
+
+	for (int i = 0; i < 4; i++) {
+		int idx = (inicio + i) % 4;
+		int nL = l + dl[idx];
+		int nC = c + dc[idx];
+
+		if (nL >= 0 && nL < linhas && nC >= 0 && nC < colunas) {
+			return &conjunto[nL][nC];
+		}
+	}
 	return nullptr;
 }
 

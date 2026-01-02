@@ -9,7 +9,7 @@
 Roseira::Roseira(Solo* s, int linha, int coluna) : Planta(s, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r') {
 	cout<<"plantei r";
 }
-void Roseira::absorveAgua(int posLinha, int posColuna)
+void Roseira::absorveAgua(int posLinha, int posColuna, int valor)
 {
 	if (solo_hosp != nullptr)
 	{
@@ -22,7 +22,7 @@ void Roseira::absorveAgua(int posLinha, int posColuna)
 		}
 	}
 }
-void Roseira::absorveNutrientes(int posLinha, int posColuna)
+void Roseira::absorveNutrientes(int posLinha, int posColuna, int valor)
 {
 	if (solo_hosp != nullptr)
 	{
@@ -61,24 +61,29 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
-void Roseira::multiplica(Jardim & j, int posLinha, int posColuna)
+void Roseira::multiplica(Jardim * j, int posLinha, int posColuna)
 {
-	if (this->nutrientes <= 100) {
-		return;
-	}
+    if (this->nutrientes > Settings::Roseira::multiplica_nutrientes_maior) {
 
-	Solo* vizinho = j.getVizinhoLivre(posLinha, posColuna);
+        Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna);
 
-	if (vizinho != nullptr) {
+        if (vizinho != nullptr) {
+            int aguaPai = this->agua;
+            int aguaFilho = aguaPai * Settings::Roseira::nova_agua_percentagem / 100; // 50%
 
-		int metadeAgua = this->agua / 2;
+            this->nutrientes = Settings::Roseira::original_nutrientes;
+            this->agua = aguaPai * Settings::Roseira::original_agua_percentagem / 100; // 50%
 
-		vizinho->setPlanta(new Roseira(vizinho, 25, metadeAgua));
+            Roseira* filha = new Roseira(vizinho, 0, 0);
+            filha->absorveNutrientes(0, 0, Settings::Roseira::nova_nutrientes); // 25
+            filha->absorveAgua(0,0, aguaFilho);
 
-		this->nutrientes = 100;
-		this->agua = metadeAgua;
-	}
+            vizinho->setPlanta(filha);
+            // cout << "Roseira reproduziu-se!\n";
+        }
+    }
 }
+
 void Roseira::morre()
 {
 	solo_hosp->setAguaSolo(aguaAbsorvida/2, "ganhar");

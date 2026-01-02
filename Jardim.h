@@ -18,6 +18,7 @@ public:
 	void atualizarJardim();
 	Solo & getSolo(int linha, int coluna);
 	Solo* getVizinhoLivre(int l, int c);
+	Solo* getVizinhoAleatorio(int l, int c); // pra erva daninha q cresce em cima da planta
 	Jardineiro* getJardineiro() const { return jardineiro; }
 	bool posicionarJardineiro(int l, int c, Jardineiro* j);
 	void removerJardineiro();
