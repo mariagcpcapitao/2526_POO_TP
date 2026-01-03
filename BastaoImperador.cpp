@@ -43,43 +43,25 @@ void BastaoImperador::perdeNutri(int posLinha, int posColuna)
 }
 void BastaoImperador::multiplica(Jardim* j, int posLinha, int posColuna)
 {
-    if (j == nullptr) return;
+	if (j == nullptr) return;
+	if (this->nutrientes <= multiplica_nutrientes_maior) return;
 
-    if (this->nutrientes <= multiplica_nutrientes_maior) return;
+	Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, true);
 
-	// vizinhos possiveis
-    int dL[] = {-1, 1, 0, 0};
-    int dC[] = {0, 0, -1, 1};
+	if (vizinho != nullptr) {
 
-    int inicio = rand() % 4;
+		int aguaFilho = this->agua * (nova_agua_percentagem / 100.0);
 
-    for (int i = 0; i < 4; i++) {
-        int idx = (inicio + i) % 4;
+		this->agua -= aguaFilho;
+		this->nutrientes = original_nutrientes;
 
-        int vizL = posLinha + dL[idx];
-        int vizC = posColuna + dC[idx];
+		BastaoImperador* filho = new BastaoImperador(0, 0, vizinho);
 
-        if (vizL >= 0 && vizL < j->getLinhas() && vizC >= 0 && vizC < j->getColunas()) {
+		filho->agua = aguaFilho;
+		filho->nutrientes = nova_nutrientes;
 
-            if (!j->getSolo(vizL, vizC).temPlanta()) {
-
-                if (j->adicionarPlanta(vizL, vizC, 'X')) {
-                    int aguaFilho = this->agua * (nova_agua_percentagem / 100.0);
-                    this->agua -= aguaFilho;
-
-                    this->nutrientes = original_nutrientes;
-
-                    Planta* filho = j->getSolo(vizL, vizC).getPlanta();
-
-                    // dynamic_cast para garantir que acessamos o atributo 'agua' corretamente
-                    if (BastaoImperador* bFilho = dynamic_cast<BastaoImperador*>(filho)) {
-                        bFilho->agua = aguaFilho; //filho herda a água do pai
-                    }
-                	return;
-                }
-            }
-        }
-    }
+		vizinho->setPlanta(filho);
+	}
 }
 void BastaoImperador::morre()
 {

@@ -131,9 +131,14 @@ void Jardim::atualizarJardim() {
 
 			if (s.temPlanta()) {
 				Planta* p = s.getPlanta();
+
+				if (p->getIdade() == 0) {
+					continue;
+				}
+
 				p->absorveAgua(i, j);
 				p->absorveNutrientes(i, j);
-				p->passaTempo();
+				// p->passaTempo();
 
 				if (!p->estaViva(this)) {
 					p->morre();
@@ -155,7 +160,9 @@ void Jardim::atualizarJardim() {
 			}
 		}
 	}
+	this->atualiza();
 }
+
 Solo & Jardim::getSolo(int linha, int coluna) {
 	return conjunto[linha][coluna];
 }

@@ -39,11 +39,8 @@ void ErvaDaninha::perdeAgua(int posLinha, int posColuna){}
 void ErvaDaninha::perdeNutri(int posLinha, int posColuna) {}
 void ErvaDaninha::multiplica(Jardim * j, int posLinha, int posColuna)
 {
-	// no passatempo incrementar o contadorReproducao++;
-	// this->contadorReproducao++;
-
-		if (this->nutrientes > Settings::ErvaDaninha::multiplica_nutrientes_maior /*&&
-			 this->contadorReproducao >= Settings::ErvaDaninha::multiplica_instantes*/) {
+		if (this->nutrientes > Settings::ErvaDaninha::multiplica_nutrientes_maior &&
+			 this->contadorReproducao >= Settings::ErvaDaninha::multiplica_instantes) {
 
 			Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, false);
 
@@ -54,11 +51,10 @@ void ErvaDaninha::multiplica(Jardim * j, int posLinha, int posColuna)
 				}
 				ErvaDaninha* novaErva = new ErvaDaninha(0, 0, vizinho);
 
-				novaErva->absorveAgua(0, 0, Settings::ErvaDaninha::inicial_agua);       // 5
-				novaErva->absorveNutrientes(0, 0, Settings::ErvaDaninha::inicial_nutrientes); // 5
+				novaErva->absorveAgua(0, 0, Settings::ErvaDaninha::inicial_agua);
+				novaErva->absorveNutrientes(0, 0, Settings::ErvaDaninha::inicial_nutrientes);
 
-
-				// this->contadorReproducao = 0;
+				this->contadorReproducao = 0;
 
 				vizinho->setPlanta(novaErva);
 			}

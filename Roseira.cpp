@@ -70,25 +70,27 @@ void Roseira::passaTempo() {
 
 void Roseira::multiplica(Jardim * j, int posLinha, int posColuna)
 {
-    if (this->nutrientes > Settings::Roseira::multiplica_nutrientes_maior) {
+	if (this->nutrientes > Settings::Roseira::multiplica_nutrientes_maior) {
 
-        Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, true);
+		Solo* vizinho = j->getVizinhoLivre(posLinha, posColuna, true);
 
-        if (vizinho != nullptr) {
-            int aguaPai = this->agua;
-            int aguaFilho = aguaPai * Settings::Roseira::nova_agua_percentagem / 100; // 50%
+		if (vizinho != nullptr) {
 
-            this->nutrientes = Settings::Roseira::original_nutrientes;
-            this->agua = aguaPai * Settings::Roseira::original_agua_percentagem / 100; // 50%
+			int aguaAtual = this->agua;
+			int aguaParaFilho = aguaAtual * Settings::Roseira::nova_agua_percentagem / 100;
+			int aguaParaPai = aguaAtual - aguaParaFilho;
 
-            Roseira* filha = new Roseira(vizinho, 0, 0);
-            filha->absorveNutrientes(0, 0, Settings::Roseira::nova_nutrientes); // 25
-            filha->absorveAgua(0,0, aguaFilho);
+			this->nutrientes = Settings::Roseira::original_nutrientes;
+			this->agua = aguaParaPai;
 
-            vizinho->setPlanta(filha);
-            // cout << "Roseira reproduziu-se!\n";
-        }
-    }
+			Roseira* filha = new Roseira(vizinho, 0, 0);
+
+			filha->nutrientes = Settings::Roseira::nova_nutrientes;
+			filha->agua = aguaParaFilho;
+
+			vizinho->setPlanta(filha);
+		}
+	}
 }
 
 void Roseira::morre()

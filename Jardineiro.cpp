@@ -42,6 +42,7 @@ void Jardineiro::usarFerramenta(Solo& s) {
 		return;
 	}
 	ferramentaNaMao->usar(s);
+
 }
 bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;

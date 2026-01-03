@@ -46,7 +46,7 @@ void Simulador::avanca(int n) {
 
     for (int i = 0; i < n; ++i) {
         j->resetTurno();
-        jardimAtual->atualiza();
+        jardimAtual->atualizarJardim();
         j->atualizaFerramentas();
         Solo& s = jardimAtual->getSolo(j->getLinha(), j->getColuna());
         j->usarFerramenta(s);

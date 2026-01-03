@@ -88,9 +88,8 @@ void Cacto::multiplica(Jardim* j, int posLinha, int posColuna) {
 
 			Cacto* filho = new Cacto(0, 0, vizinho);
 
-
-			filho->absorveAgua(0, 0, metadeAgua);
-			filho->absorveNutrientes(0, 0, metadeNutri);
+			filho->agua = metadeAgua;
+			filho->nutrientes = metadeNutri;
 
 			vizinho->setPlanta(filho);
 		}

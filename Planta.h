@@ -24,6 +24,7 @@ public:
 	int setPosLinha();
 	int setPosColuna();
 	string getBeleza() const;
+	int getIdade() const{return idade;}
 
 	virtual Planta* clone() const = 0;
 	virtual void passaTempo();
