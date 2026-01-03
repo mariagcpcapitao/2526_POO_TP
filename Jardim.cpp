@@ -199,7 +199,7 @@ void Jardim::mostraJardim() const {
 }
 bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
 	if (l < 0 || l >= linhas || c < 0 || c >= colunas) {
-		cout<<"Fora dos limtes\n";
+		cout<<"Fora dos limtes\n" << endl;
 		return false;
 	}
 	removerJardineiro();
@@ -209,7 +209,7 @@ bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
 	j->setPosicao(l, c);
 
 	if (s.temFerramenta()) {
-		cout<<"encontrei uma ferramenta\n";
+		cout<<"Encontrei uma ferramenta\n" << endl;
 		j->adicionarFerramenta(s.getFerramenta());
 		s.setFerramenta(nullptr);
 		colocarFerramentaAleatoria();
@@ -381,7 +381,7 @@ string Jardim::lArea() const {
 	return oss.str();
 }
 string Jardim::lSolo(int l,int c,int r) const {
-	cout<<"entrei no jardim";
+	cout<<"entrei no jardim" << endl;
 
 	std::ostringstream oss;
 	for (int i = l - r; i <= l + r; i++) {
@@ -399,7 +399,7 @@ string Jardim::lSolo(int l,int c,int r) const {
 }
 bool Jardim::removeJardineiro(int l, int c) {
 	if (l >= 0 && l < linhas && c >= 0 && c < colunas) {
-		cout<<"jardim removeu";
+		cout<<"jardim removeu" << endl;
 		conjunto[l][c].setJardineiro(nullptr);
 		this->jardineiro = nullptr;
 		return true;

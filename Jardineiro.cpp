@@ -53,7 +53,7 @@ bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;
 
 	if (movEfetuados == Settings::Jardineiro::max_movimentos) {
-		cout<<"Neste turno ja me movimentei 10 vezes, estou cansado\n";
+		cout<<"Neste turno ja me movimentei 10 vezes, estou cansado\n" << endl;
 		return false;
 	}
 
@@ -76,7 +76,7 @@ bool Jardineiro::mover(char direcao, Jardim* jardim) {
 }
 bool Jardineiro::sai(Jardim* jardim) {
 	if (jardim == nullptr || !noJardim) {
-		std::cout << "Erro: O jardineiro ja esta fora do jardim.\n";
+		std::cout << "Erro: O jardineiro ja esta fora do jardim.\n" << endl;
 		return false;
 	}
 	if (jardim->removeJardineiro(posLinha, posColuna)) {
@@ -84,7 +84,7 @@ bool Jardineiro::sai(Jardim* jardim) {
 		setPosicao(-1,-1);
 
 
-		std::cout << "Jardineiro: Saia com sucesso. Ferramentas guardadas na mochila.\n";
+		std::cout << "Jardineiro: Saia com sucesso. Ferramentas guardadas na mochila.\n" << endl;
 		return true;
 	}
 
