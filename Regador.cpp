@@ -15,12 +15,13 @@ Regador::~Regador()
 
 void Regador::usar(Solo& s)
 {
-
-	capacidade = capacidade - dose;
-	if (capacidade <= 0)
-		cout << "Acabou a agua. Regador descartado";
-	else
-		cout << "A regar as plantas. Agua restante: " << capacidade << "ml" << endl;
+	if (capacidade >= dose) {
+		capacidade = capacidade - dose;
+		s.setAguaSolo(dose, "ganhar");
+		cout << "Regou o solo (+" << dose << " agua). Restante: " << capacidade << endl;
+	} else {
+		cout << "Regador vazio." << endl;
+	}
 }
 string Regador::mostrarDetalhes() const {
 	std::ostringstream oss;

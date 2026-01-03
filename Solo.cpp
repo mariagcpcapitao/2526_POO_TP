@@ -103,6 +103,13 @@ Solo & Solo::getSolo(int l, int c) {
 	return *this;
 }
 
+void Solo::removerPlanta() {
+	if (this->planta != nullptr) {
+		delete this->planta;
+		this->planta = nullptr;
+	}
+}
+
 
 std::string Solo::mostrarDetalhes() const {
 	std::ostringstream oss;

@@ -61,9 +61,10 @@ void Roseira::perdeNutri(int posLinha, int posColuna)
 			solo_hosp->setNutriSolo(5, "ganhar");
 	}
 }
-void Roseira::passaTempo()
-{
-
+void Roseira::passaTempo() {
+	Planta::passaTempo();
+	this->perdeAgua(0,0);
+	this->perdeNutri(0,0);
 }
 
 
@@ -110,12 +111,14 @@ string Roseira::mostrarDetalhes() const {
 }
 
 bool Roseira::estaViva(Jardim* j) const {
-	if (this->agua <= 0 || this->nutrientes <= 0) return false;
-	if (this->nutrientes >= Settings::Roseira::morre_nutrientes_maior) return false;
+	if (agua <= 0 || nutrientes <= 0) return false;
+	if (nutrientes >= Settings::Roseira::morre_nutrientes_maior) return false;
+
+	// Regra: Cercada por vizinhos
+	// Se getVizinhoLivre retornar nullptr, é porque estão todos ocupados
 	if (j->getVizinhoLivre(posLinha, posColuna, true) == nullptr) {
 		return false;
 	}
-
 	return true;
 }
 

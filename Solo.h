@@ -38,6 +38,8 @@ public:
 	bool temPlanta() const;
 	bool temFerramenta() const;
 	bool temJardineiro() const;
+
+	void removerPlanta();
 	Solo& operator=(const Solo& outro);
 
 	~Solo();

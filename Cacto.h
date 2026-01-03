@@ -13,6 +13,8 @@ class Cacto : public Planta
 	int nutriCacto = 1;
 	int diasComMuitaAgua;
 	int diasSemNutrientes;
+	int contAguaAlta = 0;
+	int contSemNutri = 0;
 public:
 	Cacto(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna, int valor) override;

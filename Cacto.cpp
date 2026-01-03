@@ -61,21 +61,17 @@ void Cacto::passaTempo()
 {
 	Planta::passaTempo();
 
-	if (solo_hosp->getAguaSolo() > Settings::Cacto::morre_agua_solo_maior) {
-		diasComMuitaAgua++;
-	} else {
-		diasComMuitaAgua = 0; // reseta se não for consecutivo
-	}
+	// verifica agua alta
+	if (solo_hosp->getAguaSolo() > Settings::Cacto::morre_agua_solo_maior)
+		contAguaAlta++;
+	else
+		contAguaAlta = 0;
 
-	if (solo_hosp->getNutriSolo() == 0) {
-		diasSemNutrientes++;
-	} else {
-		diasSemNutrientes = 0;
-	}
-
-	if (diasComMuitaAgua >= Settings::Cacto::morre_agua_solo_instantes || diasSemNutrientes > Settings::Cacto::morre_nutrientes_solo_instantes) {
-		morre();
-	}
+	// verifica nutrientes zero
+	if (solo_hosp->getNutriSolo() < Settings::Cacto::morre_nutrientes_solo_menor)
+		contSemNutri++;
+	else
+		contSemNutri = 0;
 }
 
 void Cacto::multiplica(Jardim* j, int posLinha, int posColuna) {
@@ -118,8 +114,8 @@ string Cacto::mostrarDetalhes() const {
 }
 
 bool Cacto::estaViva(Jardim* j) const {
-	if (diasComMuitaAgua >= Settings::Cacto::morre_agua_solo_instantes) return false;
-	if (diasSemNutrientes > Settings::Cacto::morre_nutrientes_solo_instantes) return false;
+	if (contAguaAlta >= Settings::Cacto::morre_agua_solo_instantes) return false;
+	if (contSemNutri > Settings::Cacto::morre_nutrientes_solo_instantes) return false;
 	return true;
 }
 

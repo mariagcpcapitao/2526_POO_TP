@@ -9,12 +9,85 @@
 BastaoImperador::BastaoImperador(int linha, int coluna, Solo* s) : Planta(s, inicial_agua, inicial_nutrientes, "bonita", linha, coluna, 'x') {
 	cout<<"plantei bi";
 }
-void BastaoImperador::absorveAgua(int posLinha, int posColuna, int valor){}
-void BastaoImperador::absorveNutrientes(int posLinha, int posColuna, int valor) {}
-void BastaoImperador::perdeAgua(int posLinha, int posColuna){}
-void BastaoImperador::perdeNutri(int posLinha, int posColuna) {}
-void BastaoImperador::multiplica(Jardim * j, int posLinha, int posColuna){}
-void BastaoImperador::morre(){}
+void BastaoImperador::absorveAgua(int posLinha, int posColuna, int valor)
+{
+	if (solo_hosp == nullptr) return;
+	int aguaDisponivel = solo_hosp->getAguaSolo();
+
+	int aAbsorver = (aguaDisponivel >= absorcao_agua) ? absorcao_agua : aguaDisponivel;
+
+	if (aAbsorver > 0) {
+		solo_hosp->setAguaSolo(aAbsorver, "perder");
+		this->agua += aAbsorver;
+	}
+}
+void BastaoImperador::absorveNutrientes(int posLinha, int posColuna, int valor)
+{
+	if (solo_hosp == nullptr) return;
+
+	int nutriDisponivel = solo_hosp->getNutriSolo();
+	int aAbsorver = (nutriDisponivel >= absorcao_nutrientes) ? absorcao_nutrientes : nutriDisponivel;
+
+	if (aAbsorver > 0) {
+		solo_hosp->setNutriSolo(aAbsorver, "perder");
+		this->nutrientes += aAbsorver;
+	}
+}
+void BastaoImperador::perdeAgua(int posLinha, int posColuna)
+{
+	this->agua -= perda_agua;
+}
+void BastaoImperador::perdeNutri(int posLinha, int posColuna)
+{
+	this->nutrientes -= perda_nutrientes;
+}
+void BastaoImperador::multiplica(Jardim* j, int posLinha, int posColuna)
+{
+    if (j == nullptr) return;
+
+    if (this->nutrientes <= multiplica_nutrientes_maior) return;
+
+	// vizinhos possiveis
+    int dL[] = {-1, 1, 0, 0};
+    int dC[] = {0, 0, -1, 1};
+
+    int inicio = rand() % 4;
+
+    for (int i = 0; i < 4; i++) {
+        int idx = (inicio + i) % 4;
+
+        int vizL = posLinha + dL[idx];
+        int vizC = posColuna + dC[idx];
+
+        if (vizL >= 0 && vizL < j->getLinhas() && vizC >= 0 && vizC < j->getColunas()) {
+
+            if (!j->getSolo(vizL, vizC).temPlanta()) {
+
+                if (j->adicionarPlanta(vizL, vizC, 'X')) {
+                    int aguaFilho = this->agua * (nova_agua_percentagem / 100.0);
+                    this->agua -= aguaFilho;
+
+                    this->nutrientes = original_nutrientes;
+
+                    Planta* filho = j->getSolo(vizL, vizC).getPlanta();
+
+                    // dynamic_cast para garantir que acessamos o atributo 'agua' corretamente
+                    if (BastaoImperador* bFilho = dynamic_cast<BastaoImperador*>(filho)) {
+                        bFilho->agua = aguaFilho; //filho herda a água do pai
+                    }
+                	return;
+                }
+            }
+        }
+    }
+}
+void BastaoImperador::morre()
+{
+	if (solo_hosp != nullptr) {
+		solo_hosp->setAguaSolo(this->agua, "ganhar");
+		solo_hosp->setNutriSolo(this->nutrientes, "ganhar");
+	}
+}
 string BastaoImperador::mostrarDetalhes() const {
 	std::ostringstream oss;
 
@@ -25,7 +98,31 @@ string BastaoImperador::mostrarDetalhes() const {
 }
 void BastaoImperador::passaTempo()
 {
+	Planta::passaTempo();
 
+	perdeAgua(posLinha, posColuna);
+	perdeNutri(posLinha, posColuna);
+
+	absorveAgua(posLinha, posColuna);
+	absorveNutrientes(posLinha, posColuna);
 }
-bool BastaoImperador::estaViva(Jardim* j)const {}
+bool BastaoImperador::estaViva(Jardim* j)const
+{
+	if (this->agua < morre_agua_menor) {
+		cout << "Bastao do Imperador morreu de sede." << endl;
+		return false;
+	}
+
+	if (this->nutrientes < morre_nutrientes_menor) {
+		cout << "Bastao do Imperador morreu de falta de nutrientes." << endl;
+		return false;
+	}
+
+	if (this->nutrientes > morre_nutrientes_maior) {
+		cout << "Bastao do Imperador morreu intoxicado por excesso de nutrientes" << endl;
+		return false;
+	}
+
+	return true;
+}
 BastaoImperador::~BastaoImperador(){}

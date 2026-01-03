@@ -81,7 +81,8 @@ bool ErvaDaninha::estaViva(Jardim* j) const {
 
 void ErvaDaninha::passaTempo()
 {
-
+	Planta::passaTempo();
+	this->contadorReproducao++;
 }
 
 ErvaDaninha::~ErvaDaninha(){}

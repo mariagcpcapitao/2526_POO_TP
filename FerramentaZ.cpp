@@ -5,7 +5,18 @@
 #include "FerramentaZ.h"
 
 FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z'){}
-void FerramentaZ::usar(Solo& s){}
+void FerramentaZ::usar(Solo& s) {
+    if (s.temPlanta()) {
+        s.removerPlanta();
+        cout << "Usou as luvas para arrancar a planta do solo." << endl;
+
+        this->durabilidade -= 5;
+    } else {
+        cout << "Nao ha planta para arrancar aqui." << endl;
+    }
+    if (this->durabilidade < 0) this->durabilidade = 0;
+}
+
 FerramentaZ::~FerramentaZ(){}
 string FerramentaZ::mostrarDetalhes() const {
     std::ostringstream oss;

@@ -10,9 +10,14 @@ Adubo::~Adubo(){}
 
 void Adubo::usar(Solo& s)
 {
-	capacidade = capacidade - dose;
-	if (capacidade <= 0)
-		cout << "Acabou o adubo. Nao e possivel usar mais";
+	if (capacidade >= dose) {
+		capacidade = capacidade - dose;
+		s.setNutriSolo(dose, "ganhar");
+
+		cout << "Adubou o solo (+" << dose << " nutri). Restante: " << capacidade << endl;
+	} else {
+		cout << "Saco de adubo vazio." << endl;
+	}
 }
 string Adubo::mostrarDetalhes() const {
 	std::ostringstream oss;

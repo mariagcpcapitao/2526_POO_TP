@@ -9,7 +9,7 @@
 
 class ErvaDaninha : public Planta
 {
-	int contadorReproducao;
+	int contadorReproducao = 0;
 public:
 	ErvaDaninha(int linha, int coluna, Solo* s);
 	void absorveAgua(int posLinha, int posColuna, int valor = 0) override;
