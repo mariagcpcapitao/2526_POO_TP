@@ -10,7 +10,7 @@ Planta::Planta(Solo *solo, int agua, int nutrientes, string beleza, int posLinha
 }
 Planta::~Planta(){}
 void Planta::passaTempo() {
-	cout << "planta reage diferente " << endl;
+	// cout << "planta reage diferente " << endl;
 	this->idade++; // Todas as plantas envelhecem
 }
 void Planta::absorveAgua(int posLinha, int posColuna, int valor) {}

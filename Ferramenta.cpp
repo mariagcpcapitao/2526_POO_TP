@@ -6,7 +6,7 @@ Ferramenta::Ferramenta(const string &nome, const char &simbolo) : nomeFerr(nome)
 }
 Ferramenta::~Ferramenta(){}
 void Ferramenta::deteriora() {
-	cout<<"Ferramenta a deteriorar "<<endl;
+	// cout<<"Ferramenta a deteriorar "<<endl;
 }
 string Ferramenta::mostrarDetalhes ()const {
 	std::ostringstream oss;
