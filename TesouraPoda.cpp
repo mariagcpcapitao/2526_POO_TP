@@ -34,7 +34,7 @@ string TesouraPoda::mostrarDetalhes() const {
 	string estado;
 
 	if (durabilidade >= 95) {
-		estado = "Lamina de aço cromado, corte cirurgico";
+		estado = "Lamina de aco cromado, corte cirurgico";
 	// } else if (durabilidade >= 75) {
 	// 	estado = "Bem afiada, cumpre a funcao";
 	// } else if (durabilidade >= 50) {

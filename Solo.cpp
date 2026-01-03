@@ -24,11 +24,16 @@ void Solo::setNutriSolo(double valor, string acao)
 		   );
 		return;
 	}
+	if (nutriSolo <= 0)
+	{
+		nutriSolo = 0;
+		cout << "Solo sem nutrientes" << endl;
+		return;
+	}
 	if (valor != -1 && acao == "perder")
 		nutriSolo = nutriSolo - valor;
 	else if (valor != -1 && acao == "ganhar")
 		nutriSolo = nutriSolo + valor;
-	// if (nutriSolo <= 0){} ...completar
 
 }
 void Solo::setAguaSolo(double valor, string acao)
@@ -41,12 +46,16 @@ void Solo::setAguaSolo(double valor, string acao)
 		);
 		return;
 	}
+	if (aguaSolo <= 0)
+	{
+		aguaSolo = 0;
+		cout << "Solo desidratado" << endl;
+		return;
+	}
 	if (valor != -1 && acao == "perder")
 		aguaSolo = aguaSolo - valor;
 	if (valor != -1 && acao == "ganhar")
 		aguaSolo = aguaSolo + valor;
-
-	// if (aguaSolo <= 0){} ...completar
 }
 
 void Solo::setPlanta(Planta* p)

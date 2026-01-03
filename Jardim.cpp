@@ -143,7 +143,6 @@ void Jardim::atualizarJardim() {
 					s.setPlanta(nullptr);
 					continue;
 				}
-
 				p->multiplica(this, i, j);
 			}
 
