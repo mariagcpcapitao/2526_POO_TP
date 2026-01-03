@@ -31,6 +31,9 @@ public:
 	virtual ~Ferramenta();
 	virtual string mostrarDetalhes ()const;
 	virtual Ferramenta* clone() const = 0;
+	virtual bool deveDescartar() const {
+		return durabilidade <= 0;
+	}
 private:
 	void setId();
 };

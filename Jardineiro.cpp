@@ -42,7 +42,12 @@ void Jardineiro::usarFerramenta(Solo& s) {
 		return;
 	}
 	ferramentaNaMao->usar(s);
+	if (ferramentaNaMao->deveDescartar()) {
+		cout << "O jardineiro largou " << ferramentaNaMao->getNome() << " pois acabou." << endl;
 
+		delete ferramentaNaMao;
+		ferramentaNaMao = nullptr;
+	}
 }
 bool Jardineiro::mover(char direcao, Jardim* jardim) {
 	if (jardim == nullptr) return false;

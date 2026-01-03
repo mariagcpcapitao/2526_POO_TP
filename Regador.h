@@ -20,6 +20,9 @@ public:
 	Ferramenta* clone() const {
 		return new Regador(*this);
 	}
+	bool deveDescartar() const override {
+		return this->capacidade <= 0;
+	}
 };
 
 

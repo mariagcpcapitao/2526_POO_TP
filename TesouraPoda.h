@@ -18,6 +18,9 @@ public:
 	Ferramenta* clone() const {
 		return new TesouraPoda(*this);
 	}
+	bool deveDescartar() const override {
+		return false;
+	}
 };
 
 

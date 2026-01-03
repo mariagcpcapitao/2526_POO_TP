@@ -4,7 +4,10 @@
 
 #include "FerramentaZ.h"
 
-FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z'){}
+FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z')
+{
+    this->durabilidade = 100;
+}
 void FerramentaZ::usar(Solo& s) {
     if (s.temPlanta()) {
         s.removerPlanta();
