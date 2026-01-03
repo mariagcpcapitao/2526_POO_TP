@@ -84,7 +84,7 @@ bool Jardineiro::sai(Jardim* jardim) {
 		setPosicao(-1,-1);
 
 
-		std::cout << "Jardineiro: Saia com sucesso. Ferramentas guardadas na mochila.\n" << endl;
+		//std::cout << " Sai com sucesso. Ferramentas guardadas .\n" << endl;
 		return true;
 	}
 
@@ -157,12 +157,12 @@ bool Jardineiro::pegaFerramenta(int id) {
 			ferramentaNaMao = *it;
 			inventario.erase(it);
 
-			std::cout << "Ferramenta (ID: " << id << ") agora esta na tua mao." << std::endl;
+			std::cout << "Ferramenta ID: " << id << " agora esta na tua mao." << std::endl;
 			return true;
 		}
 	}
 
-	std::cout << "Erro: Nao transportas nenhuma ferramenta com o ID " << id << "." << std::endl;
+	std::cout << " Nao transportas nenhuma ferramenta com o ID " << id << "." << std::endl;
 	return false;
 }
 string Jardineiro::listarFerramentas() const {

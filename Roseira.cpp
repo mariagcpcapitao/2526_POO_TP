@@ -7,7 +7,6 @@
 #include "Solo.h"
 
 Roseira::Roseira(Solo* s, int linha, int coluna) : Planta(s, Settings::Roseira::inicial_agua, Settings::Roseira::inicial_nutrientes, "bonita", linha, coluna, 'r') {
-	cout<<"plantei r";
 }
 void Roseira::absorveAgua(int posLinha, int posColuna, int valor)
 {

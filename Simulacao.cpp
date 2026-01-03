@@ -14,8 +14,6 @@
 Simulador::Simulador() {
     jardimAtual=nullptr;
     j = new Jardineiro();
-
-
 }
 void Simulador::setJardim(Jardim* nj) {
     if (jardimAtual != nullptr) {
@@ -186,7 +184,6 @@ void Simulador::executaLArea() {
     cout<<jardimAtual->lArea();
 }
 void Simulador::executaLSolo(int l, int c, int r) {
-    cout<<"entrei no simulaador";
     if (jardimAtual == nullptr) return;
     cout<<jardimAtual->lSolo(l,c,r);
 }

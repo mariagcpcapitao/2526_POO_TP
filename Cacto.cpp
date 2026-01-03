@@ -6,7 +6,6 @@
 #include "Solo.h"
 
 Cacto::Cacto(int linha, int coluna, Solo* s) : Planta(s, aguaCacto, nutriCacto, "neutra", linha, coluna, 'c') {
-	cout<<"plantei c";
 	this->diasComMuitaAgua = 0;
 	this->diasSemNutrientes = 0;
 	this->nutriAbsorvidos = 0;

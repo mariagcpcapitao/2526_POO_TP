@@ -6,7 +6,7 @@
 #include "Settings.h"
 #include "Utilidades.h"
 
-Solo::Solo() : planta(nullptr), ferramenta(nullptr), jardineiro(nullptr)
+Solo::Solo()
 {
 
 	setNutriSolo();
@@ -26,7 +26,7 @@ void Solo::setNutriSolo(double valor, string acao)
 	}
 	if (valor != -1 && acao == "perder")
 		nutriSolo = nutriSolo - valor;
-	if (valor != -1 && acao == "ganhar")
+	else if (valor != -1 && acao == "ganhar")
 		nutriSolo = nutriSolo + valor;
 	// if (nutriSolo <= 0){} ...completar
 

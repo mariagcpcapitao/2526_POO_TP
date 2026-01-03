@@ -7,7 +7,6 @@
 #include "Settings.h"
 
 ErvaDaninha::ErvaDaninha(int linha, int coluna, Solo* s) : Planta(s, Settings::ErvaDaninha::inicial_agua, Settings::ErvaDaninha::inicial_nutrientes, "feia", linha, coluna, 'e') {
-	cout<<"plantei ed";
 }
 void ErvaDaninha::absorveAgua(int posLinha, int posColuna, int valor)
 {

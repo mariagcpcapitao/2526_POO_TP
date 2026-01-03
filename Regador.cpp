@@ -6,7 +6,6 @@
 
 Regador::Regador() : Ferramenta("Regador", 'g')
 {
-	cout << "Regador " <<  id_ferramenta << " com capacidade de: " << capacidade << " unidades de agua " << endl;
 }
 Regador::~Regador()
 {

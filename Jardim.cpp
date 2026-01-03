@@ -25,7 +25,6 @@ Jardim::Jardim(int l, int c) : linhas(l), colunas(c), conjunto(nullptr)
 	int numFerrInicial=3;
 	if (l*c<3)
 		numFerrInicial=l*c;
-	cout << "Construindo Jardim " << linhas << " por " << colunas << endl;
 	conjunto = new Solo*[linhas];
 	for (int i = 0; i < linhas; i++)
 		conjunto[i] = new Solo[colunas];
@@ -75,7 +74,6 @@ Jardim::Jardim(const Jardim& outro) {
 	} catch (const std::bad_alloc& e) {
 		std::cout << "Falha ao alocar memoria para copia: "
 				  << e.what() << std::endl;
-		// Limpar o que foi alocado parcialmente
 		if (this->conjunto != nullptr) {
 			for (int i = 0; i < linhas && this->conjunto[i] != nullptr; i++) {
 				delete[] this->conjunto[i];
@@ -138,7 +136,6 @@ void Jardim::atualizarJardim() {
 
 				p->absorveAgua(i, j);
 				p->absorveNutrientes(i, j);
-				// p->passaTempo();
 
 				if (!p->estaViva(this)) {
 					p->morre();
@@ -147,7 +144,7 @@ void Jardim::atualizarJardim() {
 					continue;
 				}
 
-				p->multiplica(this, i, j); //this é o jardim
+				p->multiplica(this, i, j);
 			}
 
 			if (s.temJardineiro()) {
@@ -169,7 +166,7 @@ Solo & Jardim::getSolo(int linha, int coluna) {
 
 void Jardim::mostraJardim() const {
 	if (conjunto == nullptr) {
-		cout << "ERRO: conjunto é nullptr!" << endl;
+		cout << "jardim nullptr" << endl;
 		return;
 	}
 
@@ -209,7 +206,7 @@ bool Jardim::posicionarJardineiro(int l, int c, Jardineiro* j) {
 	j->setPosicao(l, c);
 
 	if (s.temFerramenta()) {
-		cout<<"Encontrei uma ferramenta\n" << endl;
+		cout<<"Encontrei uma ferramenta aqui\n" << endl;
 		j->adicionarFerramenta(s.getFerramenta());
 		s.setFerramenta(nullptr);
 		colocarFerramentaAleatoria();
@@ -381,7 +378,6 @@ string Jardim::lArea() const {
 	return oss.str();
 }
 string Jardim::lSolo(int l,int c,int r) const {
-	cout<<"entrei no jardim" << endl;
 
 	std::ostringstream oss;
 	for (int i = l - r; i <= l + r; i++) {
@@ -399,7 +395,6 @@ string Jardim::lSolo(int l,int c,int r) const {
 }
 bool Jardim::removeJardineiro(int l, int c) {
 	if (l >= 0 && l < linhas && c >= 0 && c < colunas) {
-		cout<<"jardim removeu" << endl;
 		conjunto[l][c].setJardineiro(nullptr);
 		this->jardineiro = nullptr;
 		return true;

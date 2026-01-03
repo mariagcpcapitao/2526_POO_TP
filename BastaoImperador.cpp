@@ -7,7 +7,6 @@
 
 
 BastaoImperador::BastaoImperador(int linha, int coluna, Solo* s) : Planta(s, inicial_agua, inicial_nutrientes, "bonita", linha, coluna, 'x') {
-	cout<<"plantei bi";
 }
 void BastaoImperador::absorveAgua(int posLinha, int posColuna, int valor)
 {
