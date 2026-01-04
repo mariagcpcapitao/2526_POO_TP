@@ -4,17 +4,28 @@
 
 #include "FerramentaZ.h"
 
+#include "Planta.h"
+
 FerramentaZ::FerramentaZ() : Ferramenta("Luvas", 'z')
 {
     this->durabilidade = 100;
 }
 void FerramentaZ::usar(Solo& s) {
     if (s.temPlanta()) {
-        s.removerPlanta();
-        cout << "Usou as luvas para arrancar a planta do solo." << endl;
+        if (s.getPlanta()->getSimbolo() == 'e')
+        {
+            s.removerPlanta();
+            cout << "Usou as luvas para arrancar a erva daninha do solo." << endl;
 
-        this->durabilidade -= 5;
-    } else {
+            this->durabilidade -= 5;
+        }
+        else
+        {
+            cout << "As luvas so servem para arrancar Ervas Daninhas" << endl;
+        }
+    }
+    else
+    {
         cout << "Nao ha planta para arrancar aqui." << endl;
     }
     if (this->durabilidade < 0) this->durabilidade = 0;
