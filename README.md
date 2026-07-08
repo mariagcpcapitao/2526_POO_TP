@@ -1,4 +1,4 @@
-# Simulação de Jardim — POO
+# Simulação de Jardim - POO
 
 Trabalho prático da unidade curricular **Programação Orientada a Objetos (POO)**, em C++.
 
